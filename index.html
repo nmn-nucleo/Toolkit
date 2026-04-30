@@ -108,9 +108,9 @@
       --t-4xl: 70px;
 
       /* Fluid type */
-      --t-4xl-fluid: clamp(42px, 8vw, 96px);
-      --t-3xl-fluid: clamp(36px, 5.5vw, 64px);
-      --t-2xl-fluid: clamp(28px, 4vw, 48px);
+      --t-4xl-fluid: clamp(38px, 6.5vw, 70px);
+      --t-3xl-fluid: clamp(32px, 5vw, 52px);
+      --t-2xl-fluid: clamp(26px, 3.5vw, 38px);
       --t-xl-fluid: clamp(22px, 3vw, 36px);
       --t-lg-fluid: clamp(18px, 2.5vw, 26px);
 
@@ -327,7 +327,7 @@
   <nav role="tablist" aria-label="Abas do toolkit">
     <button class="nb active" role="tab" aria-selected="true" data-tab="comece" onclick="pg('comece',this)"><span class="ico">▶</span> Comece aqui</button>
     <button class="nb" role="tab" aria-selected="false" data-tab="metodo" onclick="pg('metodo',this)"><span class="ico">◇</span> O Metodo</button>
-    <button class="nb" role="tab" aria-selected="false" data-tab="oficio" onclick="pg('oficio',this)"><span class="ico">✦</span> Oficio</button>
+    <button class="nb" role="tab" aria-selected="false" data-tab="oficio" onclick="pg('oficio',this)"><span class="ico">✦</span> Pratica</button>
     <div class="nav-sep"></div>
     <button class="nb" role="tab" aria-selected="false" data-tab="stack" onclick="pg('stack',this)"><span class="ico">⚡</span> Stack</button>
     <button class="nb" role="tab" aria-selected="false" data-tab="skills" onclick="pg('skills',this)"><span class="ico">⚙</span> Skills</button>
@@ -1171,7 +1171,7 @@
 <div class="W">
   <div class="reveal">
     <div class="ey">Pratica, nao teoria — aplique no proximo prompt</div>
-    <h2 class="DH">Conhecer a ferramenta<br>nao e saber operar.<br><em>Saber operar e oficio.</em></h2>
+    <h2 class="DH">A pratica diaria de<br><em>operar agentes de IA</em></h2>
     <p class="dl">A Aba 2 te deu o <strong>metodo</strong> (global vs local, contexto enxuto). Esta aba te da o <strong>oficio</strong>: como escrever prompt que funciona, quando usar qual abordagem, que erros custam dinheiro, e a rotina que separa quem entrega de quem reclama. Tudo agnostico de ferramenta. Os principios aqui sobrevivem a qualquer release de Claude Code, Codex ou o que vier depois.</p>
   </div>
 
@@ -6449,7 +6449,7 @@ function doSearch(q){
   if(q.length<2){res.innerHTML='';return}
   var pages=document.querySelectorAll('.page');
   var matches=[];
-  var tabNames={comece:'Comece aqui',metodo:'O Metodo',oficio:'Oficio',stack:'Stack',skills:'Skills',avancado:'Avancado',setup:'Setup',cola:'Cola & Dicas',custos:'Custos & Planos'};
+  var tabNames={comece:'Comece aqui',metodo:'O Metodo',oficio:'Pratica',stack:'Stack',skills:'Skills',avancado:'Avancado',setup:'Setup',cola:'Cola & Dicas',custos:'Custos & Planos'};
   pages.forEach(function(p){
     var tab=p.id.replace('page-','');
     var text=p.textContent;
