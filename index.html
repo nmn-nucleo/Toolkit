@@ -737,7 +737,406 @@
     <div class="sec-spacer"></div>
 
   </div>
-  <div id="page-metodo" class="page" role="tabpanel"></div>
+  <div id="page-metodo" class="page" role="tabpanel">
+    <div class="W2">
+
+      <!-- ─── INTRO ─────────────────────────────────────────────── -->
+      <div class="reveal">
+        <div class="ey">Contexto Global vs Local</div>
+        <h2 class="DH">Contexto Global vs Local:<br><em>a virgula que separa</em></h2>
+        <p class="dl">Tem uma coisa que ninguem te ensina nos tutoriais de Claude Code, Codex ou Cursor. Nao esta na documentacao oficial, nao aparece nos cursos do YouTube, nao esta nos posts virais do Twitter. E essa coisa, sozinha, e a diferenca entre seu agente "funcionar mais ou menos" e seu agente "ler sua mente".</p>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+      <!-- ─── A VIRGULA QUE MUDA TUDO ───────────────────────────── -->
+      <div class="reveal">
+        <div class="sh">A virgula que muda tudo</div>
+        <p style="font-size:var(--t-b);color:var(--t2);line-height:1.7;margin-bottom:var(--s4)">E entender que <strong style="color:var(--t1)">o agente le seu sistema de arquivos como contexto</strong> — e que existe um global e um local, e que voce decide o que vai onde.</p>
+        <p style="font-size:var(--t-b);color:var(--t2);line-height:1.7;margin-bottom:var(--s4)">Quem nao entende isso fica preso no que a gente chama de "Globalzao": uma pasta inchada com 30+ skills carregadas em todo projeto, IA lenta, contexto confuso, alucinacao constante. Ela "se perde". Voce reclama. Tenta de novo. Continua baguncado.</p>
+        <p style="font-size:var(--t-b);color:var(--t1);line-height:1.7;font-weight:500">Quem entende isso resolve em uma tarde.</p>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+      <!-- ─── PRINCIPIO ──────────────────────────────────────────── -->
+      <div class="reveal">
+        <div class="sh">O principio (em uma frase)</div>
+        <blockquote style="background:var(--aubg);border-left:3px solid var(--au);border-radius:var(--r-md);padding:var(--s5) var(--s6);margin:var(--s4) 0">
+          <p style="font-family:var(--f-display);font-size:var(--t-lg);font-weight:700;color:var(--t1);line-height:1.5">Global e leve. Local e especifico. Os dois se combinam quando voce roda no projeto.</p>
+        </blockquote>
+        <p style="font-size:var(--t-sm);color:var(--t3);margin-top:var(--s3)">Memoriza. Tatua. E o coracao do metodo.</p>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+      <!-- ─── COZINHA + MOCHILA ──────────────────────────────────── -->
+      <div class="reveal">
+        <div class="sh">O modelo mental: cozinha + mochila</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Pensa em duas coisas:</p>
+        <div class="g2" style="margin-bottom:var(--s5)">
+          <div class="card" style="border-top:3px solid var(--au)">
+            <div class="ey" style="margin-bottom:var(--s3)">Sua cozinha (global)</div>
+            <p style="font-size:var(--t-sm);color:var(--t2);line-height:1.7">Aquilo que voce sempre tem disponivel, todo dia, em todo prato: sal, pimenta, azeite, panela basica, faca afiada. E pequeno, e fundamental, e voce nao quer ficar sem.</p>
+          </div>
+          <div class="card" style="border-top:3px solid var(--cdx)">
+            <div class="ey" style="color:var(--cdx);margin-bottom:var(--s3)">Sua mochila (local)</div>
+            <p style="font-size:var(--t-sm);color:var(--t2);line-height:1.7">O que voce leva pra uma situacao especifica: piquenique no parque, viagem de fim de semana, reuniao no cliente. Cada mochila tem coisa diferente. Voce nao leva a cozinha inteira pro piquenique.</p>
+          </div>
+        </div>
+        <div class="cmp">
+          <div class="cmp-bad">
+            <div class="cmp-h">Erro classico</div>
+            <p class="cmp-b">Transformar a cozinha em mochila. Coloca tudo no global "porque pode precisar". Resultado: a cada projeto novo, o agente carrega panela de pressao, espremedor, processador, liquidificador, batedeira... e nem comecou a fazer o sanduiche.</p>
+          </div>
+          <div class="cmp-good">
+            <div class="cmp-h">Metodo certo</div>
+            <p class="cmp-b">Cozinha tem o basico universal. Mochila tem o especifico do dia. Quando voce esta cozinhando, os dois se combinam — voce usa o sal da cozinha junto com o pao da mochila.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+      <!-- ─── ONDE CADA COISA MORA ───────────────────────────────── -->
+      <div class="reveal">
+        <div class="sh">Onde cada coisa mora (caminhos reais)</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Esse e o ponto onde a maioria dos tutoriais falha em explicar. Aqui vai o mapa:</p>
+
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cc);margin-bottom:var(--s3)">Claude Code</div>
+        <div style="overflow-x:auto;margin-bottom:var(--s6)">
+          <table class="mt">
+            <thead>
+              <tr>
+                <th>Escopo</th>
+                <th>Caminho</th>
+                <th>Conteudo tipico</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span style="color:var(--t1);font-weight:500">Global</span></td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">~/.claude/</code> <span style="color:var(--t4);font-size:var(--t-xs)">(Mac/Linux)</span></td>
+                <td>Skills universais, MCP servers globais, settings.json global, CLAUDE.md global</td>
+              </tr>
+              <tr>
+                <td><span style="color:var(--t1);font-weight:500">Global</span></td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">C:\Users\&lt;voce&gt;\.claude\</code> <span style="color:var(--t4);font-size:var(--t-xs)">(Windows)</span></td>
+                <td>Mesmo que acima</td>
+              </tr>
+              <tr>
+                <td><span style="color:var(--t1);font-weight:500">Local</span></td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">&lt;seu-projeto&gt;/.claude/</code></td>
+                <td>Skills especificas do projeto, CLAUDE.md do projeto, agentes customizados, hooks</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s3)">Codex</div>
+        <div style="overflow-x:auto;margin-bottom:var(--s5)">
+          <table class="mt">
+            <thead>
+              <tr>
+                <th>Escopo</th>
+                <th>Caminho</th>
+                <th>Conteudo tipico</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span style="color:var(--t1);font-weight:500">Global</span></td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">~/.codex/config.toml</code></td>
+                <td>Configuracao global (modelo padrao, sandbox, agentes, MCP)</td>
+              </tr>
+              <tr>
+                <td><span style="color:var(--t1);font-weight:500">Global</span></td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">~/.codex/AGENTS.md</code></td>
+                <td>Instrucoes universais ao agente</td>
+              </tr>
+              <tr>
+                <td><span style="color:var(--t1);font-weight:500">Local</span></td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">&lt;seu-projeto&gt;/AGENTS.md</code></td>
+                <td>Instrucoes especificas do projeto</td>
+              </tr>
+              <tr>
+                <td><span style="color:var(--t1);font-weight:500">Local</span></td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">&lt;seu-projeto&gt;/.agents/skills/</code></td>
+                <td>Skills especificas do projeto</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="font-size:var(--t-sm);color:var(--t2);background:var(--bg3);border:1px solid var(--b1);border-radius:var(--r-md);padding:var(--s4)">O <strong style="color:var(--t1)">conceito</strong> e identico nos dois. O nome do arquivo muda. A logica nao. Quem aprende a pensar em camadas global/local domina <strong style="color:var(--au)">qualquer</strong> agente atual e futuro.</p>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+      <!-- ─── O QUE VAI ONDE ────────────────────────────────────── -->
+      <div class="reveal">
+        <div class="sh">O que vai onde (a regra pratica)</div>
+        <div class="g2" style="margin-top:var(--s4)">
+          <div class="card" style="border-top:3px solid var(--au)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s4)">Vai no GLOBAL (sua cozinha)</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s5)">
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--au);flex-shrink:0">→</span> Skills que voce usa em todo ou quase todo projeto (ex: commits, lint basico)</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--au);flex-shrink:0">→</span> Preferencias pessoais (idioma de resposta, tom, estilo de codigo)</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--au);flex-shrink:0">→</span> MCP servers universais (Filesystem, Memory, GitHub se voce usa em tudo)</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--au);flex-shrink:0">→</span> Configuracoes de modelo padrao (versao, reasoning level, etc)</li>
+            </ul>
+            <p style="font-size:var(--t-xs);font-family:var(--f-mono);color:var(--au);background:var(--aubg);border-radius:var(--r-sm);padding:var(--s3) var(--s4)">Regra de ouro: se voce nao usa em pelo menos 80% dos projetos, nao vai no global.</p>
+          </div>
+          <div class="card" style="border-top:3px solid var(--cdx)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s4)">Vai no LOCAL (sua mochila)</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s5)">
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx);flex-shrink:0">→</span> Instrucoes do projeto (CLAUDE.md ou AGENTS.md com stack, convencoes, decisoes)</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx);flex-shrink:0">→</span> Skills especificas (analise de planilha, design system, parser de log)</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx);flex-shrink:0">→</span> MCP servers relevantes (banco de dados desse projeto, API especifica desse cliente)</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx);flex-shrink:0">→</span> Agentes customizados e hooks que so fazem sentido aqui</li>
+            </ul>
+            <p style="font-size:var(--t-xs);font-family:var(--f-mono);color:var(--cdx);background:var(--cdx-bg);border-radius:var(--r-sm);padding:var(--s3) var(--s4)">Regra de ouro: tudo que e contexto, regra ou ferramenta especifica desse projeto vai aqui.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+      <!-- ─── COMO OS DOIS SE COMBINAM ──────────────────────────── -->
+      <div class="reveal">
+        <div class="sh">Como os dois se combinam</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Quando voce abre um agente dentro de um projeto, ele:</p>
+        <div class="steps">
+          <div class="step">
+            <div class="snum" style="background:var(--aubg);color:var(--au);border:1px solid rgba(217,168,50,.3)">1</div>
+            <div>
+              <div class="stool">Le primeiro o global (sua cozinha)</div>
+              <div class="sdesc">Carrega o basico universal — preferencias, skills comuns, configuracoes padrao.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="snum" style="background:var(--aubg);color:var(--au);border:1px solid rgba(217,168,50,.3)">2</div>
+            <div>
+              <div class="stool">Le depois o local (sua mochila)</div>
+              <div class="sdesc">Carrega o especifico do projeto — instrucoes, skills dedicadas, MCP do projeto.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="snum" style="background:var(--aubg);color:var(--au);border:1px solid rgba(217,168,50,.3)">3</div>
+            <div>
+              <div class="stool">Combina os dois num contexto unificado</div>
+              <div class="sdesc">Em caso de conflito: <strong style="color:var(--t1)">local ganha</strong>. O projeto sempre sobrescreve o global — e mais especifico, mais informado, mais recente sobre o que voce esta fazendo agora.</div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-top:var(--s5);background:var(--bg3);border:1px solid var(--b1);border-radius:var(--r-md);padding:var(--s4)">Exemplo: padrao global "responda em portugues" + projeto especifico "responda em ingles porque a documentacao e internacional". Os dois convivem em paz. Local vence.</p>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+      <!-- ─── ANTI-PADRAO: O GLOBALZAO ──────────────────────────── -->
+      <div class="reveal">
+        <div class="sh">O anti-padrao: o "Globalzao"</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Aqui esta o erro mais comum, que voce provavelmente esta cometendo agora se nunca pensou nisso:</p>
+        <div class="code" style="margin-bottom:var(--s5)">
+          <div class="code-body"><span class="ch">~/.claude/</span>
+<span class="cc">├── skills/</span>
+<span class="cr">│   ├── analise-csv/</span>
+<span class="cr">│   ├── design-system-cliente-A/</span>
+<span class="cr">│   ├── parser-log-projeto-B/</span>
+<span class="cr">│   ├── prompts-marketing/</span>
+<span class="cr">│   ├── tributario-brasileiro/</span>
+<span class="cr">│   ├── automacao-blockchain/</span>
+<span class="cr">│   ├── revisor-juridico/</span>
+<span class="cr">│   ├── ... (mais 23 skills)</span>
+<span class="cr">└── CLAUDE.md</span> <span class="cm">(com 800 linhas)</span></div>
+          <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+        </div>
+
+        <div class="sh" style="font-size:var(--t-b);margin-bottom:var(--s3)">Sintomas que voce esta no Globalzao:</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s5)">
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2);align-items:flex-start"><span style="color:var(--err);flex-shrink:0">✗</span> O agente demora pra comecar a responder</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2);align-items:flex-start"><span style="color:var(--err);flex-shrink:0">✗</span> Voce sente que ele "se perde" no meio de uma tarefa</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2);align-items:flex-start"><span style="color:var(--err);flex-shrink:0">✗</span> Ele faz coisa que voce nao pediu (puxando contexto de outro projeto)</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2);align-items:flex-start"><span style="color:var(--err);flex-shrink:0">✗</span> Ele esquece o que estavam fazendo no meio da sessao</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2);align-items:flex-start"><span style="color:var(--err);flex-shrink:0">✗</span> Voce acha que e "alucinacao do modelo" — na verdade e contexto inchado</li>
+        </ul>
+
+        <div class="card" style="border:1px solid var(--err-b);background:var(--err-bg)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--err);margin-bottom:var(--s3)">O custo real</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);line-height:1.7;margin-bottom:var(--s2)">Cada token de contexto carregado e token gasto antes do trabalho comecar. Se seu global tem 30 skills carregadas, voce comeca cada sessao com talvez 50 mil tokens consumidos so de "se preparar". Multiplica isso por todas as sessoes do mes.</p>
+          <p style="font-size:var(--t-sm);color:var(--t2);line-height:1.7">E pior — agente com contexto inchado <strong style="color:var(--err)">toma decisao pior</strong>. Ele tem que escolher dentre muito mais possibilidades, distrai com conteudo irrelevante, mistura padroes de projeto A com projeto B.</p>
+        </div>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+      <!-- ─── PADRAO CERTO ───────────────────────────────────────── -->
+      <div class="reveal">
+        <div class="sh">O padrao certo: enxuto + especifico</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Compara com isso:</p>
+        <div class="code" style="margin-bottom:var(--s5)">
+          <div class="code-body"><span class="ch">~/.claude/</span>                          <span class="cm">← cozinha enxuta</span>
+<span class="cc">├── skills/</span>
+<span class="cg">│   ├── git-workflow/</span>               <span class="cm">(uso em todo projeto)</span>
+<span class="cg">│   ├── commit-message/</span>             <span class="cm">(uso em todo projeto)</span>
+<span class="cg">│   └── code-review-basico/</span>         <span class="cm">(uso em todo projeto)</span>
+<span class="cg">└── CLAUDE.md</span>                       <span class="cm">(40 linhas: idioma, tom, principios gerais)</span>
+
+<span class="ch">projeto-blue-analytics/.claude/</span>     <span class="cm">← mochila do dia</span>
+<span class="cc">├── skills/</span>
+<span class="cg">│   ├── duckdb-query/</span>
+<span class="cg">│   ├── analise-cnpj/</span>
+<span class="cg">│   └── dashboard-html/</span>
+<span class="cc">├── agents/</span>
+<span class="cg">│   └── analista-comercial/</span>
+<span class="cg">└── CLAUDE.md</span>                       <span class="cm">(decisoes arquiteturais desse projeto)</span></div>
+          <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+        </div>
+
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">3 skills no global. 3 skills no local. Total: 6 skills no contexto dessa sessao — todas relevantes.</p>
+
+        <div class="g4">
+          <div class="card" style="background:var(--ok-bg);border-color:var(--ok-b);text-align:center">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xl);font-weight:700;color:var(--ok);margin-bottom:var(--s2)">5x</div>
+            <div style="font-size:var(--t-xs);color:var(--t2)">menos tokens consumidos antes do trabalho comecar</div>
+          </div>
+          <div class="card" style="background:var(--ok-bg);border-color:var(--ok-b);text-align:center">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xl);font-weight:700;color:var(--ok);margin-bottom:var(--s2)">foco</div>
+            <div style="font-size:var(--t-xs);color:var(--t2)">agente com menos opcoes decide melhor</div>
+          </div>
+          <div class="card" style="background:var(--ok-bg);border-color:var(--ok-b);text-align:center">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xl);font-weight:700;color:var(--ok);margin-bottom:var(--s2)">auto</div>
+            <div style="font-size:var(--t-xs);color:var(--t2)">trocar de projeto = trocar de contexto automaticamente</div>
+          </div>
+          <div class="card" style="background:var(--ok-bg);border-color:var(--ok-b);text-align:center">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xl);font-weight:700;color:var(--ok);margin-bottom:var(--s2)">trivial</div>
+            <div style="font-size:var(--t-xs);color:var(--t2)">onboarding de outra pessoa e simples — a pasta ja tem tudo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+      <!-- ─── CRIANDO PROJETO DO ZERO ───────────────────────────── -->
+      <div class="reveal">
+        <div class="sh">Aplicado: criando um novo projeto do zero</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Aqui o passo a passo concreto, valendo pra Claude Code <strong style="color:var(--t1)">e</strong> Codex:</p>
+        <div class="code">
+          <div class="code-body"><span class="cm"># 1. Cria a pasta do projeto</span>
+<span class="cg">mkdir</span> meu-projeto-novo
+<span class="cg">cd</span> meu-projeto-novo
+
+<span class="cm"># 2. Abre o agente nessa pasta</span>
+<span class="cg">claude</span>              <span class="cm"># ou: codex</span>
+
+<span class="cm"># 3. O agente ja le seu global automaticamente.</span>
+<span class="cm">#    Voce nao precisa fazer nada — a cozinha sempre esta disponivel.</span>
+
+<span class="cm"># 4. Cria a estrutura local do projeto</span>
+<span class="cg">mkdir -p</span> .claude/skills    <span class="cm"># pra Claude Code</span>
+<span class="cm"># ou</span>
+<span class="cg">mkdir -p</span> .agents/skills    <span class="cm"># pra Codex</span>
+
+<span class="cm"># 5. Adiciona o arquivo de instrucoes do projeto</span>
+<span class="cg">touch</span> CLAUDE.md            <span class="cm"># pra Claude Code</span>
+<span class="cm"># ou</span>
+<span class="cg">touch</span> AGENTS.md            <span class="cm"># pra Codex</span>
+
+<span class="cm"># 6. Comeca a trabalhar. O agente combina global + local automaticamente.</span></div>
+          <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+        </div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-top:var(--s4)">E so isso. Nao tem ritual magico, nao tem configuracao escondida. A "virgula" toda esta em entender que esses dois lugares existem e que voce decide o que vai em cada um.</p>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+      <!-- ─── POR QUE VALE PRA QUALQUER FERRAMENTA ─────────────── -->
+      <div class="reveal">
+        <div class="sh">Por que isso vale pra qualquer ferramenta</div>
+        <p style="font-size:var(--t-b);color:var(--t2);line-height:1.7;margin-bottom:var(--s4)">Voce reparou que tudo que esta acima vale igual pra Claude Code e Codex? Nao e coincidencia.</p>
+        <p style="font-size:var(--t-b);color:var(--t2);line-height:1.7;margin-bottom:var(--s4)">O modelo de <strong style="color:var(--t1)">camadas de contexto (global no usuario + local no projeto)</strong> virou padrao da industria de agentes em 2026. Cursor segue. Aider segue. Codex segue. Claude Code segue. As proximas ferramentas vao seguir tambem — porque e o jeito que faz sentido pra IA operar em codigo.</p>
+        <p style="font-size:var(--t-b);color:var(--t1);line-height:1.7;font-weight:500">Quando voce aprende esse modelo, voce nao esta aprendendo um truque de uma ferramenta especifica. Voce esta aprendendo a operar agentes — e essa habilidade e portavel. E o que torna o metodo eterno enquanto as ferramentas sao temporarias.</p>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+      <!-- ─── OS TRES TESTES ────────────────────────────────────── -->
+      <div class="reveal">
+        <div class="sh">Os tres testes (voce esta na rota certa?)</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Faz esses tres testes agora no seu setup atual:</p>
+        <div class="g3" style="gap:var(--s4)">
+          <div class="card" style="border-top:3px solid var(--au)">
+            <div style="font-family:var(--f-mono);font-size:28px;font-weight:700;color:var(--au);margin-bottom:var(--s3)">1</div>
+            <div class="sh" style="margin-bottom:var(--s2)">O peso da cozinha</div>
+            <p style="font-size:var(--t-sm);color:var(--t2);line-height:1.6">Abre seu agente em uma pasta vazia (sem nada no local). Quanto tempo ele leva pra responder a primeira mensagem? Se demora notavelmente — sua cozinha esta entupida. Tem skill global que devia ser local.</p>
+          </div>
+          <div class="card" style="border-top:3px solid var(--au)">
+            <div style="font-family:var(--f-mono);font-size:28px;font-weight:700;color:var(--au);margin-bottom:var(--s3)">2</div>
+            <div class="sh" style="margin-bottom:var(--s2)">A troca de mochila</div>
+            <p style="font-size:var(--t-sm);color:var(--t2);line-height:1.6">Vai pro projeto A. Pergunta: "qual o stack desse projeto?" Vai pro projeto B. Mesma pergunta. As respostas sao <strong style="color:var(--t1)">diferentes e especificas</strong>? Se nao — voce nao tem mochila por projeto. Esta tudo no global.</p>
+          </div>
+          <div class="card" style="border-top:3px solid var(--au)">
+            <div style="font-family:var(--f-mono);font-size:28px;font-weight:700;color:var(--au);margin-bottom:var(--s3)">3</div>
+            <div class="sh" style="margin-bottom:var(--s2)">O teste do explicador</div>
+            <p style="font-size:var(--t-sm);color:var(--t2);line-height:1.6">Em 30 segundos, sem olhar arquivo, voce consegue dizer: o que tem no seu global? O que tem no local desse projeto? O que voce colocou em qual e por que? Se nao consegue — esta na hora de organizar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+      <!-- ─── RESUMO ─────────────────────────────────────────────── -->
+      <div class="reveal">
+        <div style="background:var(--aubg);border:1px solid rgba(217,168,50,.2);border-radius:var(--r-lg);padding:var(--s7) var(--s6)">
+          <div class="ey" style="margin-bottom:var(--s4)">Resumo (cole na parede)</div>
+          <p style="font-size:var(--t-md);color:var(--t2);line-height:1.8;margin-bottom:var(--s3)">Trate o agente como um sistema de arquivos.</p>
+          <p style="font-size:var(--t-md);color:var(--t1);line-height:1.8;font-weight:600;margin-bottom:var(--s3)">Pasta global = mochila do dia a dia. <span style="font-weight:400;color:var(--t2)">Esta sempre com voce. Pequena, essencial, basica.</span></p>
+          <p style="font-size:var(--t-md);color:var(--t1);line-height:1.8;font-weight:600;margin-bottom:var(--s3)">Pasta do projeto = mesa de trabalho. <span style="font-weight:400;color:var(--t2)">So aparece quando voce senta pra trabalhar nesse projeto. Tem tudo desse trabalho ali.</span></p>
+          <p style="font-size:var(--t-md);color:var(--t2);line-height:1.8;margin-bottom:var(--s3)">Os dois somam quando voce senta pra trabalhar. Local sobrescreve global em conflito. Cozinha + mochila = refeicao.</p>
+          <p style="font-size:var(--t-md);color:var(--au);line-height:1.8;font-weight:600">Aprende esse modelo. Aplica. Voce vira profissional.</p>
+        </div>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+      <!-- ─── O QUE VEM DEPOIS ──────────────────────────────────── -->
+      <div class="reveal">
+        <div class="sh">O que vem depois</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Agora que voce entendeu <strong style="color:var(--t1)">onde</strong> o contexto vive, as proximas ideias do metodo se encaixam naturalmente:</p>
+        <div class="g2" style="margin-bottom:var(--s5)">
+          <div class="card" style="cursor:pointer" onclick="pg('oficio',document.querySelector('[data-tab=oficio]'))">
+            <div class="ey" style="margin-bottom:var(--s2)">Oficio</div>
+            <div class="sh" style="margin-bottom:var(--s2)">SDD (Spec-Driven Development)</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Como escrever a spec que vai no CLAUDE.md/AGENTS.md local. Nada e codado sem spec validada.</p>
+            <div style="margin-top:var(--s4);font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au)">Ver aba Oficio →</div>
+          </div>
+          <div class="card" style="cursor:pointer" onclick="pg('avancado',document.querySelector('[data-tab=avancado]'))">
+            <div class="ey" style="margin-bottom:var(--s2)">Avancado</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Subagents</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Como dividir tarefas grandes em sub-sessoes com contexto proprio. Sem entender global vs local, nao funciona direito.</p>
+            <div style="margin-top:var(--s4);font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au)">Ver aba Avancado →</div>
+          </div>
+          <div class="card" style="cursor:pointer" onclick="pg('oficio',document.querySelector('[data-tab=oficio]'))">
+            <div class="ey" style="margin-bottom:var(--s2)">Oficio</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Commits atomicos</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Como manter o local limpo e o historico legivel. Git workflow que funciona com agente.</p>
+            <div style="margin-top:var(--s4);font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au)">Ver aba Oficio →</div>
+          </div>
+          <div class="card" style="cursor:pointer" onclick="pg('oficio',document.querySelector('[data-tab=oficio]'))">
+            <div class="ey" style="margin-bottom:var(--s2)">Oficio</div>
+            <div class="sh" style="margin-bottom:var(--s2)">TDD com IA</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Como o teste local virou parte do contexto. Cada um se sustenta no global vs local.</p>
+            <div style="margin-top:var(--s4);font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au)">Ver aba Oficio →</div>
+          </div>
+        </div>
+        <p style="font-size:var(--t-sm);color:var(--t3);font-style:italic">Cada um desses se sustenta no que voce acabou de aprender. Sem entender global vs local, eles nao funcionam direito. Com isso entendido, todos eles funcionam melhor. E sempre, em qualquer ferramenta.</p>
+      </div>
+
+      <div class="sec-spacer"></div>
+
+    </div>
+  </div>
   <div id="page-oficio" class="page" role="tabpanel"></div>
   <div id="page-stack" class="page" role="tabpanel"></div>
   <div id="page-skills" class="page" role="tabpanel"></div>
