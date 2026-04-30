@@ -302,5 +302,192 @@
   </style>
 </head>
 <body>
+<a href="#main" class="skip" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:200;background:var(--au);color:var(--bg0);padding:8px 16px;font-size:14px;border-radius:0 0 8px 0" onfocus="this.style.cssText='position:fixed;left:0;top:0;z-index:200;background:var(--au);color:var(--bg0);padding:8px 16px;font-size:14px;border-radius:0 0 8px 0'" onblur="this.style.cssText='position:absolute;left:-9999px'">Pular para conteudo</a>
+
+<header>
+  <div class="logo" onclick="pg('comece',document.querySelector('[data-tab=comece]'))">Get It <span>Easy</span></div>
+  <nav role="tablist" aria-label="Abas do toolkit">
+    <button class="nb active" role="tab" aria-selected="true" data-tab="comece" onclick="pg('comece',this)"><span class="ico">▶</span> Comece aqui</button>
+    <button class="nb" role="tab" aria-selected="false" data-tab="metodo" onclick="pg('metodo',this)"><span class="ico">◇</span> O Metodo</button>
+    <button class="nb" role="tab" aria-selected="false" data-tab="oficio" onclick="pg('oficio',this)"><span class="ico">✦</span> Oficio</button>
+    <div class="nav-sep"></div>
+    <button class="nb" role="tab" aria-selected="false" data-tab="stack" onclick="pg('stack',this)"><span class="ico">⚡</span> Stack</button>
+    <button class="nb" role="tab" aria-selected="false" data-tab="skills" onclick="pg('skills',this)"><span class="ico">⚙</span> Skills</button>
+    <button class="nb" role="tab" aria-selected="false" data-tab="avancado" onclick="pg('avancado',this)"><span class="ico">◆</span> Avancado</button>
+    <div class="nav-sep"></div>
+    <button class="nb" role="tab" aria-selected="false" data-tab="setup" onclick="pg('setup',this)"><span class="ico">☰</span> Setup</button>
+    <button class="nb" role="tab" aria-selected="false" data-tab="cola" onclick="pg('cola',this)"><span class="ico">⌘</span> Cola &amp; Dicas</button>
+    <button class="nb" role="tab" aria-selected="false" data-tab="custos" onclick="pg('custos',this)"><span class="ico">$</span> Custos</button>
+  </nav>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>107+ skills documentadas</span><span>5 ferramentas cobertas</span><span>Claude Code + Codex lado a lado</span><span>Padrao aberto SKILL.md</span><span>Quiz personalizado em 5 min</span><span>PT-BR nativo, sem traducao</span><span>9 abas de conteudo</span><span>Zero dependencias</span>
+    <span>107+ skills documentadas</span><span>5 ferramentas cobertas</span><span>Claude Code + Codex lado a lado</span><span>Padrao aberto SKILL.md</span><span>Quiz personalizado em 5 min</span><span>PT-BR nativo, sem traducao</span><span>9 abas de conteudo</span><span>Zero dependencias</span>
+  </div>
+</div>
+
+<main id="main">
+  <div id="page-comece" class="page active" role="tabpanel">
+    <div class="hero">
+      <div class="hero-orb hero-orb-cc"></div>
+      <div class="hero-orb hero-orb-cdx"></div>
+      <div class="hero-orb hero-orb-au"></div>
+      <div class="hero-content">
+        <div class="ey">Metodo + comunidade + personalizacao em portugues</div>
+        <h1 class="DH">Desenvolva como uma<br><em>Big Tech</em> estando solo</h1>
+        <p class="hero-lead">Em 2026 o problema nao e escolher entre Claude Code, Codex ou Cursor. O problema e que ninguem te ensinou a pensar com agentes de IA.</p>
+        <button class="hero-cta" onclick="pg('setup',document.querySelector('[data-tab=setup]'))">Faco o quiz &rarr;</button>
+        <p class="hero-proof">Construido em portugues, testado com clientes reais, agnostico de ferramenta.</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="hero-stat-num" data-count="107">0</div><div class="hero-stat-label">skills</div></div>
+          <div class="hero-stat"><div class="hero-stat-num" data-count="5">0</div><div class="hero-stat-label">ferramentas</div></div>
+          <div class="hero-stat"><div class="hero-stat-num" data-count="2">0</div><div class="hero-stat-label">padroes abertos</div></div>
+          <div class="hero-stat"><div class="hero-stat-num" data-count="9">0</div><div class="hero-stat-label">abas</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="page-metodo" class="page" role="tabpanel"></div>
+  <div id="page-oficio" class="page" role="tabpanel"></div>
+  <div id="page-stack" class="page" role="tabpanel"></div>
+  <div id="page-skills" class="page" role="tabpanel"></div>
+  <div id="page-avancado" class="page" role="tabpanel"></div>
+  <div id="page-setup" class="page" role="tabpanel"></div>
+  <div id="page-cola" class="page" role="tabpanel"></div>
+  <div id="page-custos" class="page" role="tabpanel"></div>
+</main>
+
+<div class="search-overlay" id="search-overlay" onclick="if(event.target===this)closeSearch()">
+  <div class="search-box">
+    <input class="search-input" id="search-input" type="text" placeholder="Buscar no toolkit..." oninput="doSearch(this.value)" autocomplete="off">
+    <div class="search-results" id="search-results"></div>
+    <div class="search-hint">Esc pra fechar · Enter pra navegar</div>
+  </div>
+</div>
+
+<script>
+/* ========== NAVIGATION ========== */
+function pg(id,btn){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.nb').forEach(function(b){b.classList.remove('active');b.setAttribute('aria-selected','false')});
+  document.getElementById('page-'+id).classList.add('active');
+  btn.classList.add('active');btn.setAttribute('aria-selected','true');
+  window.scrollTo(0,0);
+  location.hash=id;
+  initReveals();
+}
+
+/* Arrow key nav */
+document.querySelectorAll('[role="tablist"]').forEach(function(tl){
+  tl.addEventListener('keydown',function(e){
+    if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+    var tabs=Array.from(tl.querySelectorAll('[role="tab"]'));
+    var idx=tabs.indexOf(document.activeElement);
+    if(idx<0)return;
+    e.preventDefault();
+    if(e.key==='ArrowRight')idx=(idx+1)%tabs.length;
+    else idx=(idx-1+tabs.length)%tabs.length;
+    tabs[idx].focus();tabs[idx].click();
+  });
+});
+
+/* Hash routing */
+window.addEventListener('hashchange',function(){
+  var h=location.hash.replace('#','');
+  var btn=document.querySelector('[data-tab="'+h+'"]');
+  if(btn&&!btn.classList.contains('active'))pg(h,btn);
+});
+(function(){
+  var h=location.hash.replace('#','');
+  if(h){var btn=document.querySelector('[data-tab="'+h+'"]');if(btn)pg(h,btn);}
+})();
+
+/* ========== ANIMATED COUNTERS ========== */
+var counterObserver=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(!entry.isIntersecting)return;
+    var el=entry.target;
+    var target=parseInt(el.getAttribute('data-count'));
+    var suffix=target>100?'+':'';
+    var duration=800;
+    var start=performance.now();
+    function tick(now){
+      var progress=Math.min((now-start)/duration,1);
+      var eased=1-Math.pow(1-progress,3);
+      el.textContent=Math.floor(eased*target)+suffix;
+      if(progress<1)requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    counterObserver.unobserve(el);
+  });
+},{threshold:0.5});
+document.querySelectorAll('[data-count]').forEach(function(el){counterObserver.observe(el)});
+
+/* ========== SCROLL REVEAL ========== */
+var revealObserver=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target)}
+  });
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+function initReveals(){document.querySelectorAll('.reveal:not(.visible)').forEach(function(el){revealObserver.observe(el)})}
+initReveals();
+
+/* ========== CLIPBOARD ========== */
+function copyToClipboard(text){
+  if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+  var ta=document.createElement('textarea');
+  ta.value=text;ta.style.cssText='position:fixed;left:-9999px';
+  document.body.appendChild(ta);ta.select();document.execCommand('copy');
+  document.body.removeChild(ta);return Promise.resolve();
+}
+function cpCode(btn){
+  var block=btn.closest('.code');
+  var text=block.querySelector('.code-body')?block.querySelector('.code-body').textContent:block.textContent.replace('Copiar','').trim();
+  copyToClipboard(text).then(function(){
+    btn.textContent='Copiado!';btn.style.color='var(--spc)';
+    setTimeout(function(){btn.textContent='Copiar';btn.style.color=''},2000);
+  });
+}
+
+/* ========== FAQ TOGGLE ========== */
+function tf(el){el.closest('.fi').classList.toggle('open')}
+
+/* ========== SEARCH ========== */
+function openSearch(){
+  document.getElementById('search-overlay').classList.add('open');
+  document.getElementById('search-input').value='';
+  document.getElementById('search-results').innerHTML='';
+  setTimeout(function(){document.getElementById('search-input').focus()},50);
+}
+function closeSearch(){document.getElementById('search-overlay').classList.remove('open')}
+document.addEventListener('keydown',function(e){
+  if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openSearch()}
+  if(e.key==='Escape')closeSearch();
+});
+function doSearch(q){
+  var res=document.getElementById('search-results');
+  if(q.length<2){res.innerHTML='';return}
+  var pages=document.querySelectorAll('.page');
+  var matches=[];
+  var tabNames={comece:'Comece aqui',metodo:'O Metodo',oficio:'Oficio',stack:'Stack',skills:'Skills',avancado:'Avancado',setup:'Setup',cola:'Cola & Dicas',custos:'Custos & Planos'};
+  pages.forEach(function(p){
+    var tab=p.id.replace('page-','');
+    var text=p.textContent;
+    var idx=text.toLowerCase().indexOf(q.toLowerCase());
+    if(idx>-1){
+      var start=Math.max(0,idx-40);
+      var preview=text.substring(start,idx+q.length+60).trim();
+      if(start>0)preview='...'+preview;
+      matches.push({tab:tab,tabName:tabNames[tab]||tab,preview:preview});
+    }
+  });
+  if(matches.length===0){res.innerHTML='<div class="search-empty">Nenhum resultado</div>';return}
+  res.innerHTML=matches.slice(0,8).map(function(m){
+    return '<div class="search-result" onclick="closeSearch();pg(\''+m.tab+'\',document.querySelector(\'[data-tab='+m.tab+']\'))"><div class="search-result-tab">'+m.tabName+'</div><div class="search-result-text">'+m.preview+'</div></div>';
+  }).join('');
+}
+</script>
 </body>
 </html>
