@@ -308,6 +308,15 @@
       .page.active{animation:none}
       .ticker-track{animation:none}
     }
+    @media print{
+      header,.ticker,.search-overlay,.hero-orb,.nb,.nav-sep{display:none!important}
+      .page{display:block!important;page-break-after:always}
+      .fi .fa{max-height:none!important;padding:8px 16px!important}
+      body{background:#fff;color:#000;font-size:12px}
+      .card,.code{border:1px solid #ccc;break-inside:avoid}
+      .DH,.sh{color:#000}
+      .code{background:#f5f5f5;color:#333}
+    }
   </style>
 </head>
 <body>
@@ -5126,7 +5135,522 @@ function resetQuiz() {
 }
 </script>
 </div>
-  <div id="page-cola" class="page" role="tabpanel"></div>
+  <div id="page-cola" class="page" role="tabpanel">
+
+    <!-- ─── INTRO ──────────────────────────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Referencia rapida — atalhos, comandos, fluxos</div>
+        <h2 class="DH">Tudo que voce esquece,<br><em>num lugar so.</em></h2>
+        <p class="dl">Esta aba e <strong style="color:var(--t1)">referencia, nao tutorial</strong>. Voce nao le do inicio ao fim — voce procura. Comandos em grid, fluxos de referencia, regras em uma linha, e 18 dicas pro testadas em projeto real. Tudo com equivalente Claude Code <strong style="color:var(--t1)">e</strong> Codex lado a lado, porque o oficio e o mesmo.</p>
+        <button class="quiz-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+      </div>
+    </div>
+
+    <!-- ─── SECAO 1 — Setup completo ──────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 1</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s2)">Setup completo</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Do zero ao primeiro projeto em ~5 minutos.</p>
+
+        <div class="sh" style="margin-bottom:var(--s3)">Pre-requisitos universais</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Verifique o que ja esta instalado:</p>
+        <div class="code" style="margin-bottom:var(--s5)">
+          <div class="code-body"><span class="cm"># Node.js (LTS)</span>
+node --version    <span class="cm"># esperado: v20+ ou v22+</span>
+
+<span class="cm"># Python 3.11+</span>
+python --version  <span class="cm"># ou: python3 --version</span>
+
+<span class="cm"># Git</span>
+git --version     <span class="cm"># esperado: 2.40+</span></div>
+          <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+        </div>
+
+        <div class="sh" style="margin-bottom:var(--s3)">Se algum faltar — instale por sistema operacional</div>
+        <div style="overflow-x:auto;margin-bottom:var(--s6)">
+          <table class="mt">
+            <thead>
+              <tr><th></th><th>macOS</th><th>Windows</th><th>Linux (Debian/Ubuntu)</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color:var(--t1)">Node.js</strong></td>
+                <td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">brew install node</code></td>
+                <td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">winget install OpenJS.NodeJS</code></td>
+                <td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">sudo apt install nodejs npm</code></td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Python</strong></td>
+                <td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">brew install python</code></td>
+                <td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">winget install Python.Python.3</code></td>
+                <td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">sudo apt install python3 python3-pip</code></td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Git</strong></td>
+                <td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">brew install git</code></td>
+                <td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">winget install Git.Git</code></td>
+                <td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">sudo apt install git</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sh" style="margin-bottom:var(--s3)">Instalar agente</div>
+        <div class="code" style="margin-bottom:var(--s5)">
+          <div class="code-body"><span class="cm"># Claude Code</span>
+npm install -g @anthropic-ai/claude-code
+
+<span class="cm"># OU Codex</span>
+npm install -g @openai/codex</div>
+          <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+        </div>
+
+        <div class="sh" style="margin-bottom:var(--s3)">Configurar Git (uma vez so)</div>
+        <div class="code" style="margin-bottom:var(--s5)">
+          <div class="code-body">git config --global user.name <span class="cg">"Seu Nome"</span>
+git config --global user.email <span class="cg">"voce@email.com"</span>
+git config --global init.defaultBranch main
+
+<span class="cm"># SSH pra GitHub (recomendado)</span>
+ssh-keygen -t ed25519 -C <span class="cg">"voce@email.com"</span>
+<span class="cm"># Adiciona ~/.ssh/id_ed25519.pub no github.com/settings/keys</span></div>
+          <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+        </div>
+
+        <div class="sh" style="margin-bottom:var(--s3)">Primeiro projeto (template universal)</div>
+        <div class="code" style="margin-bottom:var(--s5)">
+          <div class="code-body">mkdir meu-projeto && cd meu-projeto
+git init
+git remote add origin git@github.com:voce/meu-projeto.git
+
+<span class="cm"># Estrutura local pro agente</span>
+mkdir -p .claude/skills    <span class="cm"># ou .agents/skills pra Codex</span>
+touch CLAUDE.md            <span class="cm"># ou AGENTS.md</span>
+
+<span class="cm"># Abre o agente</span>
+claude                     <span class="cm"># ou: codex</span>
+
+<span class="cm"># Primeiro commit</span>
+git add .
+git commit -m <span class="cg">"feat: estrutura inicial"</span>
+git push -u origin main</div>
+          <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+        </div>
+        <div class="card" style="border-left:3px solid var(--ok);margin-bottom:var(--s7)">
+          <p style="font-size:var(--t-sm);color:var(--t2);margin:0"><strong style="color:var(--ok)">Pronto.</strong> Voce tem ambiente funcional em ~5 minutos.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SECAO 2 — Comandos essenciais ─────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 2</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s2)">Comandos essenciais</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Tabela mestre — funcao a funcao, comando equivalente nos dois agentes.</p>
+
+        <div style="overflow-x:auto;margin-bottom:var(--s6)">
+          <table class="mt">
+            <thead>
+              <tr>
+                <th>Funcao</th>
+                <th style="color:var(--cc)">Claude Code</th>
+                <th style="color:var(--cdx)">Codex</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="3" style="background:var(--bg2);color:var(--t3);font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;padding:var(--s2) var(--s4)">Sessao</td></tr>
+              <tr><td>Abrir agente</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">claude</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">codex</code></td></tr>
+              <tr><td>Abrir com instrucao</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">claude --instructions &lt;arquivo&gt;</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">codex --profile &lt;perfil&gt;</code></td></tr>
+              <tr><td>Sair</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">Ctrl+D ou /exit</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">Ctrl+D ou /exit</code></td></tr>
+              <tr><td>Limpar tela</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">Ctrl+L</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">Ctrl+L</code></td></tr>
+              <tr><td>Limpar contexto</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">/clear</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">/clear</code></td></tr>
+              <tr><td>Ver historico</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">/history</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">/history</code></td></tr>
+              <tr><td>Continuar sessao anterior</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">claude --resume</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">codex --resume</code></td></tr>
+
+              <tr><td colspan="3" style="background:var(--bg2);color:var(--t3);font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;padding:var(--s2) var(--s4)">Aprovacao e seguranca</td></tr>
+              <tr><td>Pular permissoes (cuidado)</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--err)">--dangerously-skip-permissions</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--err)">--full-auto</code></td></tr>
+              <tr><td>Modo planejamento</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">Plan Mode (toggle)</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">--profile plan</code></td></tr>
+              <tr><td>Sandbox restrito</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">Hooks PreToolUse</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">--sandbox untrusted</code></td></tr>
+              <tr><td>Sandbox liberado</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">(default)</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">--sandbox never</code></td></tr>
+
+              <tr><td colspan="3" style="background:var(--bg2);color:var(--t3);font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;padding:var(--s2) var(--s4)">Skills e plugins</td></tr>
+              <tr><td>Listar skills carregadas</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">(em tempo real)</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">/skills</code></td></tr>
+              <tr><td>Invocar skill explicitamente</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">$nome-skill</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">$nome-skill</code></td></tr>
+              <tr><td>Instalar plugin</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">cloud code install &lt;nome&gt;</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">codex install &lt;nome&gt;</code></td></tr>
+              <tr><td>Atualizar plugins</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">cloud code reload-plugins</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">codex update-plugins</code></td></tr>
+
+              <tr><td colspan="3" style="background:var(--bg2);color:var(--t3);font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;padding:var(--s2) var(--s4)">Subagents</td></tr>
+              <tr><td>Criar subagent</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">(Agent Teams via CLAUDE.md)</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">codex cloud delegate "tarefa"</code></td></tr>
+              <tr><td>Status de subagents</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">(em sessao)</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">codex cloud status</code></td></tr>
+              <tr><td>Revisar resultado</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">(em sessao)</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">codex cloud review &lt;branch&gt;</code></td></tr>
+
+              <tr><td colspan="3" style="background:var(--bg2);color:var(--t3);font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;padding:var(--s2) var(--s4)">Modos de profundidade</td></tr>
+              <tr><td>Pensar pouco</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">/effort low</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">reasoning = "low" (config)</code></td></tr>
+              <tr><td>Pensar medio</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">/effort medium</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">reasoning = "medium"</code></td></tr>
+              <tr><td>Pensar muito</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">/effort high ou "think hard"</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">reasoning = "high"</code></td></tr>
+              <tr><td>Pensar profundamente</td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cc)">"think harder" / "ultrathink"</code></td><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--cdx)">(max ja e high)</code></td></tr>
+
+              <tr><td colspan="3" style="background:var(--bg2);color:var(--t3);font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;padding:var(--s2) var(--s4)">Atalhos de teclado (universais)</td></tr>
+              <tr><td>Limpa a tela</td><td colspan="2"><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">Ctrl+L</code></td></tr>
+              <tr><td>Sai do agente</td><td colspan="2"><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">Ctrl+D</code></td></tr>
+              <tr><td>Cancela operacao atual</td><td colspan="2"><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">Ctrl+C</code></td></tr>
+              <tr><td>Cancela tool em execucao</td><td colspan="2"><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">Esc Esc</code></td></tr>
+              <tr><td>Historico de prompts</td><td colspan="2"><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">Setas ↑↓</code></td></tr>
+              <tr><td>Auto-complete em paths</td><td colspan="2"><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">Tab</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SECAO 3 — Fluxos de referencia ────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 3</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s2)">3 fluxos de referencia</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Voce esta no meio de uma tarefa e quer lembrar como executa um fluxo. Estes 3 cobrem 80% dos casos.</p>
+
+        <!-- Fluxo A — Bug fix urgente -->
+        <div class="card" style="margin-bottom:var(--s4)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--err);margin-bottom:var(--s3);text-transform:uppercase;letter-spacing:.1em">Fluxo A — Bug fix urgente</div>
+          <div class="flow" style="margin-bottom:var(--s4)">
+            <div class="fb" style="color:var(--t2)">/clear</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--t2)">Diagnostico</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--t2)">Questiona</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--t2)">Fix minimo</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--t2)">Testa</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--ok)">Commit</div>
+          </div>
+          <ol style="font-size:var(--t-sm);color:var(--t2);padding-left:var(--s5);display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s4)">
+            <li><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">/clear</code> (limpa contexto)</li>
+            <li>Le CLAUDE.md/AGENTS.md (mental)</li>
+            <li>Prompt: contexto + sintoma + reproducao + restricoes (nao expandir escopo)</li>
+            <li>Recebe diagnostico → questiona (nao aceita primeira hipotese)</li>
+            <li>Aplica fix minimo</li>
+            <li>Roda teste manual + automatico</li>
+            <li>Commit atomico: <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">"fix: &lt;descricao curta&gt;"</code></li>
+            <li>Push + deploy</li>
+            <li>Documenta no PR/issue: causa raiz + fix + teste</li>
+          </ol>
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--warn)">Tempo medio: 30-90 min. Mais que isso, suspeita de causa raiz mais profunda.</div>
+        </div>
+
+        <!-- Fluxo B — Feature nova -->
+        <div class="card" style="margin-bottom:var(--s4)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsd);margin-bottom:var(--s3);text-transform:uppercase;letter-spacing:.1em">Fluxo B — Feature nova (pequena ou media)</div>
+          <div class="flow" style="margin-bottom:var(--s4)">
+            <div class="fb" style="color:var(--t2)">Escopo</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--t2)">Spec</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--t2)">Plano</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--t2)">Aprova</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--t2)">Commits</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--ok)">PR</div>
+          </div>
+          <ol style="font-size:var(--t-sm);color:var(--t2);padding-left:var(--s5);display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s4)">
+            <li>Define escopo em 2-3 linhas</li>
+            <li>Se &gt; 2h: cria spec curta (Spec-Kit <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">/spec new</code>)</li>
+            <li>Le CLAUDE.md/AGENTS.md (atualizou recentemente?)</li>
+            <li>Prompt com 4 pilares: contexto + objetivo + restricoes + formato</li>
+            <li>Pede plano antes de codigo</li>
+            <li>Aprova plano (ou ajusta)</li>
+            <li>Implementa em commits pequenos</li>
+            <li>Roda testes apos cada commit</li>
+            <li>Push + abre PR</li>
+            <li>Auto-review (se configurado em CI)</li>
+          </ol>
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--warn)">Tempo medio: 1-4h.</div>
+        </div>
+
+        <!-- Fluxo C — Onboarding -->
+        <div class="card" style="margin-bottom:var(--s7)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--cdx);margin-bottom:var(--s3);text-transform:uppercase;letter-spacing:.1em">Fluxo C — Onboarding em projeto desconhecido</div>
+          <div class="flow" style="margin-bottom:var(--s4)">
+            <div class="fb" style="color:var(--t2)">Clone</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--t2)">README</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--t2)">Mapa mental</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--t2)">Top-10 arquivos</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--t2)">Roda local</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--ok)">Hello world</div>
+          </div>
+          <ol style="font-size:var(--t-sm);color:var(--t2);padding-left:var(--s5);display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s4)">
+            <li>Clone do repo</li>
+            <li>Le README.md</li>
+            <li>Abre agente na pasta</li>
+            <li>Prompt: "gere mapa mental do projeto" — pontos de entrada, modulos, fluxos, top-10 arquivos pra ler primeiro</li>
+            <li>Le os top-10 (na ordem)</li>
+            <li>Roda projeto local (npm install, configurar .env, etc.)</li>
+            <li>Faz pequena alteracao "hello world" pra validar setup</li>
+            <li>Commit + push pra branch propria</li>
+          </ol>
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--warn)">Tempo medio: 1-2h. Depois disso, voce esta produtivo.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SECAO 4 — 8 regras em uma linha ───────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 4</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s2)">8 regras em uma linha</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Cola na parede. Releia antes de abrir o agente.</p>
+        <div class="g4" style="margin-bottom:var(--s7)">
+          <div class="card" style="border-left:3px solid var(--au);display:flex;align-items:flex-start;gap:var(--s3)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-2xl);font-weight:700;color:var(--au);opacity:.4;line-height:1;flex-shrink:0">1</div>
+            <div style="font-size:var(--t-sm);color:var(--t1);font-weight:500;line-height:1.5">Contexto primeiro, prompt depois.</div>
+          </div>
+          <div class="card" style="border-left:3px solid var(--gsd);display:flex;align-items:flex-start;gap:var(--s3)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-2xl);font-weight:700;color:var(--gsd);opacity:.4;line-height:1;flex-shrink:0">2</div>
+            <div style="font-size:var(--t-sm);color:var(--t1);font-weight:500;line-height:1.5">Pequeno antes de grande.</div>
+          </div>
+          <div class="card" style="border-left:3px solid var(--spc);display:flex;align-items:flex-start;gap:var(--s3)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-2xl);font-weight:700;color:var(--spc);opacity:.4;line-height:1;flex-shrink:0">3</div>
+            <div style="font-size:var(--t-sm);color:var(--t1);font-weight:500;line-height:1.5">Local sobrescreve global.</div>
+          </div>
+          <div class="card" style="border-left:3px solid var(--cdx);display:flex;align-items:flex-start;gap:var(--s3)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-2xl);font-weight:700;color:var(--cdx);opacity:.4;line-height:1;flex-shrink:0">4</div>
+            <div style="font-size:var(--t-sm);color:var(--t1);font-weight:500;line-height:1.5">Testar antes de confiar.</div>
+          </div>
+          <div class="card" style="border-left:3px solid var(--ok);display:flex;align-items:flex-start;gap:var(--s3)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-2xl);font-weight:700;color:var(--ok);opacity:.4;line-height:1;flex-shrink:0">5</div>
+            <div style="font-size:var(--t-sm);color:var(--t1);font-weight:500;line-height:1.5">Commit atomico (uma mudanca = um commit).</div>
+          </div>
+          <div class="card" style="border-left:3px solid var(--cc);display:flex;align-items:flex-start;gap:var(--s3)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-2xl);font-weight:700;color:var(--cc);opacity:.4;line-height:1;flex-shrink:0">6</div>
+            <div style="font-size:var(--t-sm);color:var(--t1);font-weight:500;line-height:1.5">Re-spec antes de re-codar.</div>
+          </div>
+          <div class="card" style="border-left:3px solid var(--gsp);display:flex;align-items:flex-start;gap:var(--s3)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-2xl);font-weight:700;color:var(--gsp);opacity:.4;line-height:1;flex-shrink:0">7</div>
+            <div style="font-size:var(--t-sm);color:var(--t1);font-weight:500;line-height:1.5">Skill repete; prompt nao.</div>
+          </div>
+          <div class="card" style="border-left:3px solid var(--warn);display:flex;align-items:flex-start;gap:var(--s3)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-2xl);font-weight:700;color:var(--warn);opacity:.4;line-height:1;flex-shrink:0">8</div>
+            <div style="font-size:var(--t-sm);color:var(--t1);font-weight:500;line-height:1.5">Quando suspeitar de alucinacao, valida.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SECAO 5 — 18 Dicas Pro ────────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 5</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s2)">18 dicas pro</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Testadas em projeto real. Organizadas por tema.</p>
+
+        <!-- Categoria 1 — Velocidade -->
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:var(--s4)">Categoria 1 — Velocidade</div>
+
+        <div class="card" style="border-left:3px solid var(--err);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--err);margin-bottom:var(--s2)">PERMISSOES · Dica 1</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Pular permissoes em ambientes confiaveis</div>
+          <div style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Quando voce trabalha em sandbox/Docker isolado, repetir aprovacao a cada comando vira atrito desnecessario. <strong style="color:var(--err)">Nunca</strong> use em maquina pessoal com dados sensiveis.</div>
+          <div class="code" style="margin-top:var(--s3)">
+            <div class="code-body"><span class="cm"># Claude Code</span>
+claude --dangerously-skip-permissions
+
+<span class="cm"># Codex</span>
+codex --full-auto</div>
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+          </div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--err);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--err);margin-bottom:var(--s2)">PERMISSOES · Dica 2</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Alias pra nao digitar toda vez</div>
+          <div style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Se voce trabalha sempre em ambiente isolado, um alias reduz o atrito sem abrir mao da intencao explicita.</div>
+          <div class="code" style="margin-top:var(--s3)">
+            <div class="code-body">alias cc='claude --dangerously-skip-permissions'</div>
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+          </div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--au);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);margin-bottom:var(--s2)">NAVEGACAO · Dica 3</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Esc Esc pra cancelar tool em execucao</div>
+          <div style="font-size:var(--t-sm);color:var(--t2)">Agente comecou a fazer algo errado e voce quer parar <strong style="color:var(--t1)">sem matar a sessao</strong>? Aperta Esc duas vezes — cancela so a tool atual, mantem o contexto inteiro.</div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--spc);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--spc);margin-bottom:var(--s2)">FLUXO · Dica 4</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Bash inline em prompt</div>
+          <div style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Voce nao precisa explicar "roda isso e me diz o resultado." Cola o comando entre crases — o agente entende que e pra executar.</div>
+          <div class="code" style="margin-top:var(--s3)">
+            <div class="code-body">Roda `npm test` e analisa as falhas.</div>
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+          </div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--spc);margin-bottom:var(--s6)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--spc);margin-bottom:var(--s2)">FLUXO · Dica 5</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Feedback loops (uma mudanca → testa → ajusta)</div>
+          <div style="font-size:var(--t-sm);color:var(--t2)">Em vez de "implementa tudo", peca: "implementa passo 1, mostra resultado, espera meu OK, segue pro 2." Reduz retrabalho, voce mantem controle, bug aparece cedo e custa pouco pra corrigir.</div>
+        </div>
+
+        <!-- Categoria 2 — Qualidade -->
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:var(--s4)">Categoria 2 — Qualidade</div>
+
+        <div class="card" style="border-left:3px solid var(--cc);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--cc);margin-bottom:var(--s2)">MODELO · Dica 6</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Plan Mode antes de execucao (Claude Code)</div>
+          <div style="font-size:var(--t-sm);color:var(--t2)">Pra qualquer tarefa nao-trivial, ativa Plan Mode primeiro. Custo: 1 prompt extra. Beneficio: voce pega abordagem errada antes de gastar token implementando.</div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--cdx);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--cdx);margin-bottom:var(--s2)">MODELO · Dica 7</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Think modes pra problemas complexos</div>
+          <div style="font-size:var(--t-sm);color:var(--t2)">Quando o problema e dificil de verdade, sinaliza profundidade: <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">"think"</code> → basico, <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">"think hard"</code> → estruturado, <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">"think harder" / "ultrathink"</code> → analise profunda. Custo: mais token. Beneficio: melhor solucao.</div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--cdx);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--cdx);margin-bottom:var(--s2)">MODELO · Dica 8</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Auto-review com agente diferente</div>
+          <div style="font-size:var(--t-sm);color:var(--t2)">Combo poderoso: <strong style="color:var(--cc)">Claude escreve, Codex revisa</strong> (ou vice-versa). Custo dobra, mas pega 53-80% mais bugs que solo. Vale pra projeto pago/critico.</div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--cdx);margin-bottom:var(--s6)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--cdx);margin-bottom:var(--s2)">MODELO · Dica 9</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">/effort pra controlar profundidade (Claude Code)</div>
+          <div style="font-size:var(--t-sm);color:var(--t2)"><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">/effort low</code> — tarefa simples, otimiza pra rapido/barato. <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">/effort medium</code> — default, equilibrado. <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">/effort high</code> — problema dificil, otimiza pra qualidade.</div>
+        </div>
+
+        <!-- Categoria 3 — Contexto -->
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:var(--s4)">Categoria 3 — Contexto</div>
+
+        <div class="card" style="border-left:3px solid var(--spc);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--spc);margin-bottom:var(--s2)">FLUXO · Dica 10</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">/clear entre tarefas independentes</div>
+          <div style="font-size:var(--t-sm);color:var(--t2)">Sessao acumula contexto. Tarefa 1 polui contexto da Tarefa 2 (que nao tem nada a ver). <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">/clear</code> ou Ctrl+L resolve. <strong style="color:var(--t1)">Regra pratica:</strong> terminou tarefa? Limpa antes da proxima.</div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--gsd);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsd);margin-bottom:var(--s2)">CONTEXTO · Dica 11</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">CLAUDE.md/AGENTS.md curto e direto</div>
+          <div style="font-size:var(--t-sm);color:var(--t2)">Maximo 300 linhas. Mais que isso, voce esta colocando documentacao no lugar de briefing. Documentacao vai em <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">/docs/</code>.</div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--gsd);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsd);margin-bottom:var(--s2)">CONTEXTO · Dica 12</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Limpar global periodicamente</div>
+          <div style="font-size:var(--t-sm);color:var(--t2)">Toda 2-3 meses, audita seu <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">~/.claude/skills/</code> ou <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">~/.codex/skills/</code>. Skill que voce nao usou em 3 meses vai pro cemiterio.</div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--gsd);margin-bottom:var(--s6)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsd);margin-bottom:var(--s2)">CONTEXTO · Dica 13</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Subagent pra pesquisa pesada</div>
+          <div style="font-size:var(--t-sm);color:var(--t2)">Em vez de o agente principal ler 50 arquivos (e poluir contexto), delega: "Subagent: leia /docs e me retorne resumo das decisoes arquiteturais." Volta com 200 tokens em vez de 50k.</div>
+        </div>
+
+        <!-- Categoria 4 — Integracao -->
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:var(--s4)">Categoria 4 — Integracao</div>
+
+        <div class="card" style="border-left:3px solid var(--gsp);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);margin-bottom:var(--s2)">AVANCADO · Dica 14</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">LSP plugins (Claude Code)</div>
+          <div style="font-size:var(--t-sm);color:var(--t2)">Conecta o agente ao Language Server do seu editor. O agente "ve" os mesmos erros e sugestoes que voce ve no VS Code/JetBrains. Reduz alucinacao em codigo tipado.</div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--gsp);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);margin-bottom:var(--s2)">AVANCADO · Dica 15</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">GitHub App (Claude Code)</div>
+          <div style="font-size:var(--t-sm);color:var(--t2)">Em vez de PAT (Personal Access Token), instala GitHub App da Anthropic. Vantagens: permissoes granulares por repo, audit trail de acoes do agente, token rotativo automatico.</div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--gsp);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);margin-bottom:var(--s2)">AVANCADO · Dica 16</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Docker pra ambientes de risco</div>
+          <div style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Quando experimenta com codigo nao-confiavel ou pacote novo, roda o agente dentro de Docker. Isolamento completo, "blast radius" zero.</div>
+          <div class="code" style="margin-top:var(--s3)">
+            <div class="code-body">docker run -it --rm -v $(pwd):/workspace node:22 bash
+<span class="cm"># Dentro do container:</span>
+npm install -g @anthropic-ai/claude-code
+claude</div>
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+          </div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--gsp);margin-bottom:var(--s6)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);margin-bottom:var(--s2)">AVANCADO · Dica 17</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Worktrees pra trabalhar em paralelo</div>
+          <div style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Voce pode ter <strong style="color:var(--t1)">multiplas branches checkout simultaneamente</strong> com <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">git worktree</code>. Cada worktree e uma pasta separada, com agente proprio. Codex Cloud trabalha em worktrees automaticos.</div>
+          <div class="code" style="margin-top:var(--s3)">
+            <div class="code-body">git worktree add ../meu-projeto-feature feature-branch
+cd ../meu-projeto-feature
+claude  <span class="cm"># agente nessa branch sem afetar a principal</span></div>
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+          </div>
+        </div>
+
+        <!-- Categoria 5 — Experimentos avancados -->
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:var(--s4)">Categoria 5 — Experimentos avancados</div>
+
+        <div class="card" style="border-left:3px solid var(--gsp);margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);margin-bottom:var(--s2)">AVANCADO · Dica 18a</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Browser interno (Codex desktop)</div>
+          <div style="font-size:var(--t-sm);color:var(--t2)">Codex desktop tem <strong style="color:var(--t1)">browser embarcado</strong>. Voce nao precisa alt-tab pra checar resultado de uma URL — agente abre internamente, le, retorna. Reduz contexto e fricao.</div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--gsp);margin-bottom:var(--s7)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);margin-bottom:var(--s2)">AVANCADO · Dica 18b</div>
+          <div style="font-size:var(--t-md);font-weight:500;color:var(--t1);margin-bottom:var(--s2)">Cloud workers pra refactor paralelo</div>
+          <div style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Tem 30 endpoints pra atualizar do mesmo jeito? Em vez de fazer um por um, delega 10 ao mesmo tempo no Codex Cloud. Containers paralelos, voce revisa todos os PRs no fim do dia.</div>
+          <div class="code" style="margin-top:var(--s3)">
+            <div class="code-body">codex cloud delegate <span class="cg">"atualiza endpoint /users com novo padrao"</span> --branch users
+codex cloud delegate <span class="cg">"atualiza endpoint /posts com novo padrao"</span> --branch posts
+codex cloud delegate <span class="cg">"atualiza endpoint /comments com novo padrao"</span> --branch comments
+<span class="cm"># ... 7 mais</span></div>
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── CTA FINAL ──────────────────────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="card" style="background:var(--aubg);border:1px solid rgba(217,168,50,.22);text-align:center;padding:var(--s8) var(--s6)">
+          <div class="ey" style="justify-content:center;display:block">Voce viu a cola. Aplica.</div>
+          <div style="font-family:var(--f-display);font-weight:700;font-size:var(--t-xl);color:var(--t1);margin-bottom:var(--s6)">Onde ir agora?</div>
+          <div class="g4" style="text-align:left;max-width:800px;margin:0 auto">
+            <div class="card" style="cursor:pointer" onclick="pg('metodo',document.querySelector('[onclick*=metodo]'))">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);margin-bottom:var(--s2)">Aba 2</div>
+              <div style="font-size:var(--t-sm);font-weight:500;color:var(--t1)">Quer dominar o metodo completo?</div>
+            </div>
+            <div class="card" style="cursor:pointer" onclick="pg('avancado',document.querySelector('[onclick*=avancado]'))">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);margin-bottom:var(--s2)">Aba 6</div>
+              <div style="font-size:var(--t-sm);font-weight:500;color:var(--t1)">Quer ferramentas avancadas?</div>
+            </div>
+            <div class="card" style="cursor:pointer" onclick="pg('quiz',document.querySelector('[onclick*=quiz]'))">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--cdx);margin-bottom:var(--s2)">Aba 7</div>
+              <div style="font-size:var(--t-sm);font-weight:500;color:var(--t1)">Quer setup automatico?</div>
+            </div>
+            <div class="card" style="cursor:pointer" onclick="pg('custos',document.querySelector('[onclick*=custos]'))">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--spc);margin-bottom:var(--s2)">Aba 9</div>
+              <div style="font-size:var(--t-sm);font-weight:500;color:var(--t1)">Quer ver custos e planos?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
   <div id="page-custos" class="page" role="tabpanel">
 <style>
 .custos-badge-cc{background:var(--cc-bg);color:var(--cc);border:1px solid var(--cc-b);font-family:var(--f-mono);font-size:var(--t-xs);padding:2px 8px;border-radius:4px}
