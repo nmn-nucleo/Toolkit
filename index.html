@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get It Easy — Desenvolva como uma Big Tech estando solo</title>
+  <meta name="description" content="Get It Easy — Desenvolva como uma Big Tech estando solo">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ─── Reset ─────────────────────────────────────────────── */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    img,svg{display:block;max-width:100%}
+    button{font:inherit;cursor:pointer}
+    a{text-decoration:none}
+
+    /* ─── Design Tokens ──────────────────────────────────────── */
+    :root {
+      /* Backgrounds */
+      --bg0: #09090d;
+      --bg1: #0e0f14;
+      --bg2: #141620;
+      --bg3: #1c1e28;
+      --bg4: #24263280;
+
+      /* Text */
+      --t1: #f0ede6;
+      --t2: #b0ada6;
+      --t3: #969390;
+      --t4: #454340;
+
+      /* Ouro accent */
+      --au: #d9a832;
+      --au1: #f5cf6a;
+      --au3: #b88420;
+      --aubg: rgba(217,168,50,.07);
+
+      /* Tool: GSD */
+      --gsd: #7c6aff;
+      --gsd-bg: rgba(124,106,255,.07);
+      --gsd-b: rgba(124,106,255,.22);
+
+      /* Tool: GSP */
+      --gsp: #e8527a;
+      --gsp-bg: rgba(232,82,122,.07);
+      --gsp-b: rgba(232,82,122,.22);
+
+      /* Tool: Superpowers */
+      --spc: #2dbf8a;
+      --spc-bg: rgba(45,191,138,.07);
+      --spc-b: rgba(45,191,138,.22);
+
+      /* Tool: SUP */
+      --sup: #e8a84b;
+      --sup-bg: rgba(232,168,75,.07);
+      --sup-b: rgba(232,168,75,.22);
+
+      /* Tool: OPC */
+      --opc: #4ba8e8;
+      --opc-bg: rgba(75,168,232,.07);
+      --opc-b: rgba(75,168,232,.22);
+
+      /* Harness: Claude Code */
+      --cc: #d4775c;
+      --cc-bg: rgba(212,119,92,.07);
+      --cc-b: rgba(212,119,92,.22);
+
+      /* Harness: CDX */
+      --cdx: #46b5c9;
+      --cdx-bg: rgba(70,181,201,.07);
+      --cdx-b: rgba(70,181,201,.22);
+
+      /* Semantic: Error */
+      --err: #e24b4a;
+      --err-bg: rgba(226,75,74,.07);
+      --err-b: rgba(226,75,74,.2);
+
+      /* Semantic: OK */
+      --ok: #2dbf8a;
+      --ok-bg: rgba(45,191,138,.07);
+      --ok-b: rgba(45,191,138,.2);
+
+      /* Semantic: Warning */
+      --warn: #e8a84b;
+
+      /* Borders */
+      --b1: rgba(255,255,255,.05);
+      --b2: rgba(255,255,255,.09);
+      --b3: rgba(255,255,255,.15);
+
+      /* Fonts */
+      --f-display: 'Syne', sans-serif;
+      --f-body: 'DM Sans', sans-serif;
+      --f-mono: 'JetBrains Mono', monospace;
+
+      /* Type scale */
+      --t-xs: 10.5px;
+      --t-sm: 13px;
+      --t-b: 15px;
+      --t-md: 17px;
+      --t-lg: 22px;
+      --t-xl: 28px;
+      --t-2xl: 38px;
+      --t-3xl: 52px;
+      --t-4xl: 70px;
+
+      /* Fluid type */
+      --t-4xl-fluid: clamp(42px, 8vw, 96px);
+      --t-3xl-fluid: clamp(36px, 5.5vw, 64px);
+      --t-2xl-fluid: clamp(28px, 4vw, 48px);
+      --t-xl-fluid: clamp(22px, 3vw, 36px);
+      --t-lg-fluid: clamp(18px, 2.5vw, 26px);
+
+      /* Spacing (8pt grid) */
+      --s1: 4px;
+      --s2: 8px;
+      --s3: 12px;
+      --s4: 16px;
+      --s5: 24px;
+      --s6: 32px;
+      --s7: 48px;
+      --s8: 64px;
+      --s9: 96px;
+      --s10: 128px;
+      --s11: 160px;
+      --s12: 200px;
+
+      /* Border radii */
+      --r-sm: 6px;
+      --r-md: 10px;
+      --r-lg: 14px;
+      --r-xl: 20px;
+
+      /* Animation */
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur-fast: 120ms;
+      --dur-base: 200ms;
+      --dur-slow: 350ms;
+      --dur-entrance: 600ms;
+      --dur-stagger: 80ms;
+    }
+
+    /* ─── Body base ──────────────────────────────────────────── */
+    body {
+      font-family: var(--f-body);
+      font-size: var(--t-b);
+      color: var(--t2);
+      background: var(--bg1);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+<body>
+</body>
+</html>
