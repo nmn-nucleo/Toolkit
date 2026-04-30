@@ -1918,7 +1918,707 @@ function loadChecks(){
 loadChecks();
 </script>
 </div>
-  <div id="page-stack" class="page" role="tabpanel"></div>
+  <div id="page-stack" class="page" role="tabpanel">
+
+    <!-- ─── INTRO ───────────────────────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Stack 2026 — atualizado mensalmente</div>
+        <h2 class="DH">A stack certa nao tem<br><em>time. Tem objetivo.</em></h2>
+        <p class="dl">A guerra Claude Code vs Codex e besteira. Os dois sao bons. Eles convergem release a release. A pergunta certa nao e "qual e melhor" — e <strong style="color:var(--t1)">"qual ferramenta resolve o que voce precisa fazer hoje"</strong>. Essa aba mapeia a stack inteira por objetivo, mostra como cada ferramenta se posiciona, e te da um guia de decisao adulto. Sem fanboyice.</p>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 1: Panorama 2026 ──────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 1</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">O panorama 2026</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Em 2026, a stack de agentes de IA pra desenvolvimento se organiza em tres camadas:</p>
+        <div class="g3">
+
+          <div class="card" style="padding:var(--s5);border-top:3px solid var(--au)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.12em;color:var(--au);margin-bottom:var(--s3)">Camada 1</div>
+            <div class="sh" style="margin-bottom:var(--s3)">Os harnesses principais</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Sao os "corpos" que executam a IA na sua maquina. Os dois dominantes: <strong style="color:var(--cc)">Claude Code</strong> (Anthropic) e <strong style="color:var(--cdx)">Codex</strong> (OpenAI). Ambos sao multi-surface (terminal, IDE, desktop, nuvem). Ambos suportam skills, MCP, AGENTS.md/CLAUDE.md, subagents. <strong style="color:var(--t1)">Sao mais parecidos do que diferentes.</strong></p>
+          </div>
+
+          <div class="card" style="padding:var(--s5);border-top:3px solid var(--b2)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.12em;color:var(--t3);margin-bottom:var(--s3)">Camada 2</div>
+            <div class="sh" style="margin-bottom:var(--s3)">As ferramentas auxiliares</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Sao add-ons que rodam em cima dos harnesses, ampliando capacidade. Aqui mora <strong style="color:var(--gsd)">GSD</strong> (gerencia de projeto), <strong style="color:var(--spc)">Spec-Kit</strong> (spec-driven dev), <strong style="color:var(--sup)">Superpowers</strong> (plugin de wrappers), <strong style="color:var(--gsp)">GSP</strong> (design system), <strong style="color:var(--opc)">OpenCode</strong> (CLI alternativo open-source).</p>
+          </div>
+
+          <div class="card" style="padding:var(--s5);border-top:3px solid var(--b2)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.12em;color:var(--t3);margin-bottom:var(--s3)">Camada 3</div>
+            <div class="sh" style="margin-bottom:var(--s3)">Os surfaces</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Como voce interage com tudo: terminal, VS Code, JetBrains, desktop apps, web. Cada harness aparece em multiplas surfaces. Voce <strong style="color:var(--t1)">nao precisa escolher uma ferramenta e casar com ela.</strong> O metodo aqui ensina a usar a stack certa pra cada tarefa.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 2: Os dois harnesses ──────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 2</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">Os dois harnesses principais</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Mesma estrutura. Mesmo peso visual. Filosofias diferentes.</p>
+        <div class="g2" style="align-items:stretch">
+
+          <!-- Claude Code card -->
+          <div class="card" style="border-top:3px solid var(--cc);background:var(--cc-bg);padding:var(--s6);display:flex;flex-direction:column;gap:var(--s4)">
+            <div>
+              <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s3)">
+                <span class="sh" style="margin-bottom:0;color:var(--cc)">Claude Code</span>
+                <span class="badge" style="background:var(--cc-bg);color:var(--cc);border:1px solid var(--cc-b)">Anthropic</span>
+              </div>
+              <div style="font-size:var(--t-xs);font-family:var(--f-mono);color:var(--t3);line-height:1.8">
+                Lancamento: maio 2025 (GA)<br>
+                Modelo padrao: Claude Opus 4.7 (Max), Sonnet 4.6 (Pro)<br>
+                Janela de contexto: 1M tokens (Opus 4.7)
+              </div>
+            </div>
+
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cc);margin-bottom:var(--s2)">Surfaces disponiveis</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s1)">
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cc)">›</span> CLI no terminal (principal)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cc)">›</span> Extensao VS Code</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cc)">›</span> Extensao JetBrains (beta)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cc)">›</span> Cowork — desktop app (gerenciamento por pasta)</li>
+              </ul>
+            </div>
+
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cc);margin-bottom:var(--s2)">Filosofia</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Local-first, customizacao granular. Tudo roda na sua maquina. <strong style="color:var(--t1)">26 hooks programaveis</strong> dao controle fino sobre o que o agente pode/nao pode fazer. Curva de aprendizado maior, teto de organizacao mais alto.</p>
+            </div>
+
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cc);margin-bottom:var(--s2)">Brilha em</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s1)">
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cc)">✓</span> Codigo frontend (React, UI)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cc)">✓</span> Refactor complexo com dependencias</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cc)">✓</span> Workflows com regras organizacionais (hooks)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cc)">✓</span> Computer Use (controlar browser, interagir com GUI)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cc)">✓</span> Output minucioso e bem estruturado (vence 67% das avaliacoes cegas)</li>
+              </ul>
+            </div>
+
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cc);margin-bottom:var(--s2)">Custo</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Consome 3-4x mais tokens que Codex em tarefas equivalentes — output mais detalhado, mas mais caro por tarefa.</p>
+            </div>
+
+            <div style="background:var(--bg0);border:1px solid var(--cc-b);border-radius:var(--r-md);padding:var(--s3) var(--s4)">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--cc);margin-bottom:4px">CONFIGURACAO</div>
+              <code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t2)">CLAUDE.md</code><span style="font-size:var(--t-xs);color:var(--t3)"> no projeto + </span><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t2)">~/.claude/</code><span style="font-size:var(--t-xs);color:var(--t3)"> global</span>
+            </div>
+          </div>
+
+          <!-- Codex card -->
+          <div class="card" style="border-top:3px solid var(--cdx);background:var(--cdx-bg);padding:var(--s6);display:flex;flex-direction:column;gap:var(--s4)">
+            <div>
+              <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s3)">
+                <span class="sh" style="margin-bottom:0;color:var(--cdx)">Codex</span>
+                <span class="badge" style="background:var(--cdx-bg);color:var(--cdx);border:1px solid var(--cdx-b)">OpenAI</span>
+              </div>
+              <div style="font-size:var(--t-xs);font-family:var(--f-mono);color:var(--t3);line-height:1.8">
+                Lancamento: maio 2025 (preview), out 2025 (GA)<br>
+                Modelo padrao: GPT-5.4 (~1M context, 128K output)<br>
+                Janela de contexto: 1.05M tokens
+              </div>
+            </div>
+
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s2)">Surfaces disponiveis</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s1)">
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx)">›</span> CLI no terminal (open source, Rust)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx)">›</span> Extensao IDE (VS Code, Cursor, Windsurf)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx)">›</span> Codex desktop app (macOS/Windows — UI muito polida)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx)">›</span> Codex Cloud (sandboxes paralelos via ChatGPT)</li>
+              </ul>
+            </div>
+
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s2)">Filosofia</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Sandbox kernel-level, configuracao simples. <strong style="color:var(--t1)">Tres modos de aprovacao</strong> (untrusted, on-request, never) cobrem a maioria dos casos. Curva menor, "out of the box" forte. Cloud-native pra paralelismo.</p>
+            </div>
+
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s2)">Brilha em</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s1)">
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx)">✓</span> Tarefas terminal-nativas (DevOps, scripts, sysadmin)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx)">✓</span> Tarefas paralelas (Codex Cloud roda multiplas em containers separados)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx)">✓</span> Eficiencia de tokens (2-4x menos que Claude pra resultado comparavel)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx)">✓</span> Onboarding rapido — equipe nova produz no mesmo dia</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx)">✓</span> Code review — o reviewer agent automatico pega bugs sutis bem</li>
+              </ul>
+            </div>
+
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s2)">Custo</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Mais barato por tarefa. Plano ChatGPT Plus ($20/mo) ja inclui uso decente.</p>
+            </div>
+
+            <div style="background:var(--bg0);border:1px solid var(--cdx-b);border-radius:var(--r-md);padding:var(--s3) var(--s4)">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--cdx);margin-bottom:4px">CONFIGURACAO</div>
+              <code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t2)">AGENTS.md</code><span style="font-size:var(--t-xs);color:var(--t3)"> no projeto + </span><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t2)">~/.codex/config.toml</code><span style="font-size:var(--t-xs);color:var(--t3)"> global</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 3: Comparativo ─────────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 3</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">Comparativo arquitetural honesto</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Sem ganhador. Filosofias diferentes, ambas validas.</p>
+        <div style="overflow-x:auto">
+          <table class="mt">
+            <thead>
+              <tr>
+                <th>Dimensao</th>
+                <th style="color:var(--cc)">Claude Code</th>
+                <th style="color:var(--cdx)">Codex</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color:var(--t1)">Modelo de seguranca</strong></td>
+                <td>Hooks programaveis (26 eventos lifecycle)</td>
+                <td>Sandbox kernel-level (Seatbelt/Landlock/seccomp)</td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Configuracao</strong></td>
+                <td>Camadas hierarquicas (5 niveis: system → user → project → directory → flag)</td>
+                <td>Profiles explicitos via <code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">--profile</code></td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Granularidade</strong></td>
+                <td>Alta (cada hook customizavel)</td>
+                <td>Baixa (3 modos cobrem tudo)</td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Padrao de instrucao</strong></td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--cc)">CLAUDE.md</code> (especifico Anthropic)</td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--cdx)">AGENTS.md</code> (padrao aberto, lido por Codex/Cursor/Aider)</td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Skills</strong></td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t3)">.claude/skills/SKILL.md</code></td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t3)">.agents/skills/SKILL.md</code> (mesmo formato)</td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Multi-agente</strong></td>
+                <td>Agent Teams (compartilham task list, coordenam)</td>
+                <td>Cloud workers (isolados, paralelos)</td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Computer Use</strong></td>
+                <td>Maduro (browser, GUI, fluxo completo)</td>
+                <td>Limitado (foco em codigo + terminal)</td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Open source</strong></td>
+                <td>Nao (proprietario)</td>
+                <td>Sim (Rust, github.com/openai/codex)</td>
+              </tr>
+              <tr style="background:var(--aubg)">
+                <td><strong style="color:var(--t1)">Nuvem nativa</strong></td>
+                <td>Limitada (Cowork e desktop)</td>
+                <td>Forte (Codex Cloud, sandboxes paralelos)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:var(--s5);padding:var(--s5);background:var(--aubg);border:1px solid rgba(217,168,50,.15);border-radius:var(--r-lg)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s3)">Traducao em linguagem humana</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)"><strong style="color:var(--cc)">Claude Code</strong> te da limites mais flexiveis com controle mais detalhado. Bom pra time que vai investir em customizar.</p>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)"><strong style="color:var(--cdx)">Codex</strong> te da limites mais rigidos com controle mais simples. Bom pra time que quer sair produzindo rapido.</p>
+          <p style="font-size:var(--t-sm);color:var(--t1);font-weight:500">Nenhum e melhor universalmente. Depende do que voce esta fazendo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 4: Stack por objetivo ──────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 4 — A secao central</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">Stack organizada por objetivo</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Sai do formato "ferramenta-por-ferramenta". Organizado por <strong style="color:var(--t1)">o que voce quer fazer</strong>.</p>
+        <div class="faq">
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">01</span> Quero um agente base rodando no terminal</span><span class="ficon">+</span></button>
+            <div class="fa">
+              <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Opcoes:</strong> Claude Code <strong>ou</strong> Codex CLI</p>
+              <p>Comeca com <strong style="color:var(--cdx)">Codex</strong> se valoriza zero curva de aprendizado; <strong style="color:var(--cc)">Claude Code</strong> se quer customizar de saida. Voce pode usar os dois — eles nao se atrapalham.</p>
+            </div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">02</span> Quero gerenciar projeto e tarefas dentro do agente</span><span class="ficon">+</span></button>
+            <div class="fa">
+              <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Ferramenta:</strong> <strong style="color:var(--gsd)">GSD</strong></p>
+              <p>Cobertura atual: Claude Code (nao tem equivalente direto pra Codex ainda — voce pode portar manualmente as skills).</p>
+            </div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">03</span> Quero rigor de Spec-Driven Development</span><span class="ficon">+</span></button>
+            <div class="fa">
+              <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Ferramenta:</strong> <strong style="color:var(--spc)">Spec-Kit</strong></p>
+              <p>Cobertura: funciona em Claude Code e Codex (skills sao portaveis).</p>
+            </div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">04</span> Quero atalhos e wrappers pra agilizar tudo</span><span class="ficon">+</span></button>
+            <div class="fa">
+              <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Ferramenta:</strong> <strong style="color:var(--sup)">Superpowers</strong> (plugin)</p>
+              <p>Cobertura atual: Claude Code (e o ecossistema mais maduro).</p>
+            </div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">05</span> Quero design system pronto pra UI/branding</span><span class="ficon">+</span></button>
+            <div class="fa">
+              <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Ferramenta:</strong> <strong style="color:var(--gsp)">GSP</strong> (Get Sheet Pretty)</p>
+              <p>Cobertura: Claude Code primariamente; algumas skills funcionam em Codex.</p>
+            </div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">06</span> Quero CLI alternativo open-source</span><span class="ficon">+</span></button>
+            <div class="fa">
+              <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Ferramenta:</strong> <strong style="color:var(--opc)">OpenCode</strong></p>
+              <p>Quando faz sentido: voce quer rodar modelo proprio (LLaMA, Qwen, DeepSeek) ou tem requisitos de auditoria total do codigo.</p>
+            </div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">07</span> Quero revisar codigo antes de commitar</span><span class="ficon">+</span></button>
+            <div class="fa">
+              <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Opcoes:</strong></p>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s3)">
+                <li style="display:flex;gap:var(--s2)"><span style="color:var(--cdx)">›</span> Codex tem reviewer agent automatico (auto-review mode) — roda em segundo plano, pega bugs antes de aprovar</li>
+                <li style="display:flex;gap:var(--s2)"><span style="color:var(--cc)">›</span> Claude Code permite hooks <code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">PreToolUse</code> que invocam revisao customizada</li>
+              </ul>
+              <p><strong style="color:var(--t1)">Combo poderoso:</strong> usar um agente pra escrever, outro pra revisar (Claude escreve + Codex revisa, ou vice-versa). Pega 53-80% mais bugs que solo.</p>
+            </div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">08</span> Quero rodar tarefas em paralelo na nuvem</span><span class="ficon">+</span></button>
+            <div class="fa">
+              <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Opcoes:</strong></p>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+                <li style="display:flex;gap:var(--s2)"><span style="color:var(--cdx)">›</span> <span><strong style="color:var(--cdx)">Codex Cloud:</strong> containers isolados, agentes nao se falam, tarefas independentes em paralelo. Ideal pra greenfield (novas features sem dependencia entre si).</span></li>
+                <li style="display:flex;gap:var(--s2)"><span style="color:var(--cc)">›</span> <span><strong style="color:var(--cc)">Claude Agent Teams:</strong> sub-agentes coordenados, compartilham task list, dependencias rastreadas. Ideal pra refactor grande com sub-tarefas dependentes.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">09</span> Quero economizar token e tempo</span><span class="ficon">+</span></button>
+            <div class="fa">
+              <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Caminho:</strong> Codex CLI + skills bem organizadas + global enxuto.</p>
+              <p>Em benchmarks reais (clonagem de Figma): Codex usou 1.5M tokens, Claude usou 6.2M na mesma tarefa.</p>
+            </div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">10</span> Quero output mais minucioso e bem estruturado</span><span class="ficon">+</span></button>
+            <div class="fa">
+              <p><strong style="color:var(--t1)">Caminho:</strong> Claude Code (Sonnet 4.6 ou Opus 4.7) com CLAUDE.md detalhado.</p>
+            </div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">11</span> Quero entender o que ferramentas fazem por baixo dos panos</span><span class="ficon">+</span></button>
+            <div class="fa">
+              <p><strong style="color:var(--t1)">Caminho:</strong> OpenCode + estudar o codigo Rust do Codex (open source).</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 5: Ferramentas auxiliares ─────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 5</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">Cada ferramenta auxiliar, em detalhe</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Problema que resolve, solucao, quando usar e quando nao usar.</p>
+        <div style="display:flex;flex-direction:column;gap:var(--s4)">
+
+          <!-- GSD -->
+          <div class="card" style="border-top:3px solid var(--gsd);padding:var(--s6)">
+            <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4);flex-wrap:wrap">
+              <span class="sh" style="margin-bottom:0;color:var(--gsd)">GSD — Get Shit Done</span>
+              <span class="badge" style="background:var(--gsd-bg);color:var(--gsd);border:1px solid var(--gsd-b)">Repositorio de skills</span>
+              <span class="badge" style="background:var(--cc-bg);color:var(--cc);border:1px solid var(--cc-b)">Claude Code</span>
+            </div>
+            <div class="cmp" style="margin-bottom:var(--s4)">
+              <div class="cmp-bad">
+                <div class="cmp-h">Problema</div>
+                <div class="cmp-b">Projetos sem rotina ficam caoticos. Voce abre o agente, esquece o que estava fazendo, perde contexto entre sessoes, nao tem padrao de tarefa.</div>
+              </div>
+              <div class="cmp-good">
+                <div class="cmp-h">Solucao</div>
+                <div class="cmp-b">GSD adiciona skills de gerencia de tarefa (criar, listar, mover, concluir), branch sync, status do projeto, daily review. Vira o "scrum interno" do agente.</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--s3)">
+              <p style="font-size:var(--t-sm);color:var(--t2)">6 comandos principais: ver <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('skills',document.querySelector('[data-tab=skills]'))">Aba 5 — Skills &rarr;</button></p>
+              <a href="#" style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsd);text-decoration:none;border:1px solid var(--gsd-b);border-radius:var(--r-sm);padding:4px 12px">GitHub do GSD &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Spec-Kit -->
+          <div class="card" style="border-top:3px solid var(--spc);padding:var(--s6)">
+            <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4);flex-wrap:wrap">
+              <span class="sh" style="margin-bottom:0;color:var(--spc)">Spec-Kit</span>
+              <span class="badge" style="background:var(--spc-bg);color:var(--spc);border:1px solid var(--spc-b)">Repositorio de skills</span>
+              <span class="badge" style="background:var(--cc-bg);color:var(--cc);border:1px solid var(--cc-b)">Claude Code</span>
+              <span class="badge" style="background:var(--cdx-bg);color:var(--cdx);border:1px solid var(--cdx-b)">Codex</span>
+            </div>
+            <div class="cmp" style="margin-bottom:var(--s4)">
+              <div class="cmp-bad">
+                <div class="cmp-h">Problema</div>
+                <div class="cmp-b">Voce pede "constroi X" e o agente entrega Y, porque a especificacao mental nunca virou texto.</div>
+              </div>
+              <div class="cmp-good">
+                <div class="cmp-h">Solucao</div>
+                <div class="cmp-b">Spec-Kit forca um fluxo de spec antes do codigo. Skills pra: gerar spec a partir de ideia, validar spec, expandir em RFs/RNFs, transformar em tarefas. Reduz drasticamente retrabalho.</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--s3)">
+              <p style="font-size:var(--t-sm);color:var(--t2)">5 comandos principais: ver <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('skills',document.querySelector('[data-tab=skills]'))">Aba 5 &rarr;</button></p>
+              <a href="#" style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--spc);text-decoration:none;border:1px solid var(--spc-b);border-radius:var(--r-sm);padding:4px 12px">GitHub do Spec-Kit &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Superpowers -->
+          <div class="card" style="border-top:3px solid var(--sup);padding:var(--s6)">
+            <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4);flex-wrap:wrap">
+              <span class="sh" style="margin-bottom:0;color:var(--sup)">Superpowers</span>
+              <span class="badge" style="background:var(--sup-bg);color:var(--sup);border:1px solid var(--sup-b)">Plugin</span>
+              <span class="badge" style="background:var(--cc-bg);color:var(--cc);border:1px solid var(--cc-b)">Claude Code</span>
+            </div>
+            <div class="cmp" style="margin-bottom:var(--s4)">
+              <div class="cmp-bad">
+                <div class="cmp-h">Problema</div>
+                <div class="cmp-b">Comandos comuns ficam verbosos. Voce digita "ajuda eu a debugar isso seguindo o padrao X..." de novo e de novo.</div>
+              </div>
+              <div class="cmp-good">
+                <div class="cmp-h">Solucao</div>
+                <div class="cmp-b">Superpowers e um pacote de slash commands prontos (<code style="font-family:var(--f-mono);font-size:11px">/debug</code>, <code style="font-family:var(--f-mono);font-size:11px">/refactor</code>, <code style="font-family:var(--f-mono);font-size:11px">/explain</code>, <code style="font-family:var(--f-mono);font-size:11px">/test</code>, etc.) que encapsulam padroes comuns. Voce digita 2 caracteres, ele expande pro prompt completo.</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--s3)">
+              <p style="font-size:var(--t-sm);color:var(--t2)">7 comandos + install: ver <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('skills',document.querySelector('[data-tab=skills]'))">Aba 5 &rarr;</button></p>
+              <a href="#" style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--sup);text-decoration:none;border:1px solid var(--sup-b);border-radius:var(--r-sm);padding:4px 12px">GitHub do Superpowers &rarr;</a>
+            </div>
+          </div>
+
+          <!-- GSP -->
+          <div class="card" style="border-top:3px solid var(--gsp);padding:var(--s6)">
+            <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4);flex-wrap:wrap">
+              <span class="sh" style="margin-bottom:0;color:var(--gsp)">GSP — Get Sheet Pretty</span>
+              <span class="badge" style="background:var(--gsp-bg);color:var(--gsp);border:1px solid var(--gsp-b)">Repositorio de skills</span>
+              <span class="badge" style="background:var(--cc-bg);color:var(--cc);border:1px solid var(--cc-b)">Claude Code</span>
+            </div>
+            <div class="cmp" style="margin-bottom:var(--s4)">
+              <div class="cmp-bad">
+                <div class="cmp-h">Problema</div>
+                <div class="cmp-b">Designer brasileiro freelancer + cliente que pede "logo, identidade, site, deck, tudo" e voce gasta 80% do tempo em iteracao visual com a IA, perdendo o foco.</div>
+              </div>
+              <div class="cmp-good">
+                <div class="cmp-h">Solucao</div>
+                <div class="cmp-b">GSP e um pipeline de design completo: dual-diamond (descobrir + entregar), 8 fases padronizadas, 20+ comandos especificos (logo, brand, landing, deck, social media, etc). Saida consistente, profissional, em horas em vez de dias.</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--s3)">
+              <p style="font-size:var(--t-sm);color:var(--t2)">Como usar: ver <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('skills',document.querySelector('[data-tab=skills]'))">Aba 5 (sub-secao GSP) &rarr;</button></p>
+              <a href="#" style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);text-decoration:none;border:1px solid var(--gsp-b);border-radius:var(--r-sm);padding:4px 12px">GitHub do GSP &rarr;</a>
+            </div>
+          </div>
+
+          <!-- OpenCode -->
+          <div class="card" style="border-top:3px solid var(--opc);padding:var(--s6)">
+            <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4);flex-wrap:wrap">
+              <span class="sh" style="margin-bottom:0;color:var(--opc)">OpenCode</span>
+              <span class="badge" style="background:var(--opc-bg);color:var(--opc);border:1px solid var(--opc-b)">CLI alternativo</span>
+              <span class="badge b-new">Open Source</span>
+            </div>
+            <div class="cmp" style="margin-bottom:var(--s4)">
+              <div class="cmp-bad">
+                <div class="cmp-h">Problema</div>
+                <div class="cmp-b">Dependencia de empresa unica. Voce quer auditar o codigo do agente, rodar modelo proprio, ou nao confiar dados sensiveis a API externa.</div>
+              </div>
+              <div class="cmp-good">
+                <div class="cmp-h">Solucao</div>
+                <div class="cmp-b">OpenCode e CLI 100% open source que aceita qualquer modelo (Claude API, GPT API, modelos locais via Ollama). Ideal pra ambientes regulados, equipes de seguranca, ou quem so quer entender por baixo dos panos.</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end">
+              <a href="#" style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--opc);text-decoration:none;border:1px solid var(--opc-b);border-radius:var(--r-sm);padding:4px 12px">GitHub do OpenCode &rarr;</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 6: Guia de decisao ─────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 6</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">O guia de decisao</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">9 cenarios. Cada um com recomendacao direta.</p>
+        <div style="display:flex;flex-direction:column;gap:var(--s3)">
+
+          <div class="card" style="padding:var(--s5);display:flex;gap:var(--s4);align-items:flex-start">
+            <div style="font-size:22px;line-height:1;flex-shrink:0">🚀</div>
+            <div>
+              <div class="sh" style="font-size:var(--t-b);margin-bottom:var(--s2)">Voce esta comecando do zero?</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">→ <strong style="color:var(--cdx)">Comeca com Codex.</strong> Barreira menor, desktop app polido, ChatGPT Plus que voce talvez ja tenha cobre uso decente. Quando dominar, experimenta Claude Code pra comparar.</p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);display:flex;gap:var(--s4);align-items:flex-start">
+            <div style="font-size:22px;line-height:1;flex-shrink:0">📈</div>
+            <div>
+              <div class="sh" style="font-size:var(--t-b);margin-bottom:var(--s2)">Voce ja usa um agente e quer subir o nivel?</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">→ <strong style="color:var(--t1)">Aprende o que voce nao usa.</strong> Se ja usa Codex → testa Claude Code pra Computer Use e refactor frontend. Se ja usa Claude Code → testa Codex Cloud pra paralelismo e o reviewer automatico.</p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);display:flex;gap:var(--s4);align-items:flex-start">
+            <div style="font-size:22px;line-height:1;flex-shrink:0">🛡️</div>
+            <div>
+              <div class="sh" style="font-size:var(--t-b);margin-bottom:var(--s2)">Voce trabalha com codigo critico (financeiro, saude, governamental)?</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">→ <strong style="color:var(--cc)">Claude Code com hooks programados.</strong> A granularidade (26 eventos) permite enforcar policies que sandbox simples nao cobre. Configura <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">PreToolUse</code> pra bloquear comandos perigosos.</p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);display:flex;gap:var(--s4);align-items:flex-start">
+            <div style="font-size:22px;line-height:1;flex-shrink:0">👥</div>
+            <div>
+              <div class="sh" style="font-size:var(--t-b);margin-bottom:var(--s2)">Voce trabalha em time pequeno com tarefas independentes?</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">→ <strong style="color:var(--cdx)">Codex Cloud.</strong> Containers paralelos, cada dev delega uma tarefa, todas rodam simultaneamente, voce revisa os PRs no fim do dia.</p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);display:flex;gap:var(--s4);align-items:flex-start">
+            <div style="font-size:22px;line-height:1;flex-shrink:0">🔧</div>
+            <div>
+              <div class="sh" style="font-size:var(--t-b);margin-bottom:var(--s2)">Voce trabalha em refactor grande de codebase legado?</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">→ <strong style="color:var(--cc)">Claude Agent Teams.</strong> Sub-agentes coordenados, cada um pega uma camada do refactor, compartilham task list, dependencias rastreadas.</p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);display:flex;gap:var(--s4);align-items:flex-start">
+            <div style="font-size:22px;line-height:1;flex-shrink:0">💎</div>
+            <div>
+              <div class="sh" style="font-size:var(--t-b);margin-bottom:var(--s2)">Voce quer maximizar qualidade do output a qualquer custo?</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">→ <strong style="color:var(--t1)">Combo Claude + Codex em revisao cruzada.</strong> Um escreve, outro revisa. Pega ate 80% mais bugs que solo. Custo dobra, qualidade tambem.</p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);display:flex;gap:var(--s4);align-items:flex-start">
+            <div style="font-size:22px;line-height:1;flex-shrink:0">🎓</div>
+            <div>
+              <div class="sh" style="font-size:var(--t-b);margin-bottom:var(--s2)">Voce e estudante / hobbyista com orcamento apertado?</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">→ <strong style="color:var(--cdx)">Codex CLI no plano ChatGPT Plus ($20/mo).</strong> Eficiente, paga conta, da conta da maioria das tarefas pessoais.</p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);display:flex;gap:var(--s4);align-items:flex-start">
+            <div style="font-size:22px;line-height:1;flex-shrink:0">⚙️</div>
+            <div>
+              <div class="sh" style="font-size:var(--t-b);margin-bottom:var(--s2)">Voce vai investir tempo em customizar profundamente?</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">→ <strong style="color:var(--cc)">Claude Code.</strong> O teto de customizacao e mais alto. 26 hooks, MCP rico, Cowork pra organizar. Voce sente o investimento depois de 1-2 meses.</p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);display:flex;gap:var(--s4);align-items:flex-start">
+            <div style="font-size:22px;line-height:1;flex-shrink:0">🔓</div>
+            <div>
+              <div class="sh" style="font-size:var(--t-b);margin-bottom:var(--s2)">Voce nao quer depender de empresa unica?</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">→ <strong style="color:var(--opc)">OpenCode + AGENTS.md.</strong> Padrao aberto, codigo auditavel, modelo trocavel. Migra de provider quando quiser sem refazer setup.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 7: Combo recomendado ──────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 7</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s5)">O combo recomendado</div>
+        <div style="background:var(--aubg);border:1px solid rgba(217,168,50,.2);border-radius:var(--r-xl);padding:var(--s7)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.12em;color:var(--au);margin-bottom:var(--s5)">Recomendacao Get It Easy — 2026</div>
+          <div style="display:flex;flex-direction:column;gap:var(--s5)">
+
+            <div style="display:flex;gap:var(--s4);align-items:flex-start">
+              <div style="width:36px;height:36px;border-radius:50%;background:var(--aubg);border:1px solid rgba(217,168,50,.3);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-sm);font-weight:700;color:var(--au);flex-shrink:0">1</div>
+              <div>
+                <div style="font-size:var(--t-md);font-weight:600;color:var(--t1);margin-bottom:4px">So vai instalar uma coisa</div>
+                <p style="font-size:var(--t-sm);color:var(--t2)"><strong style="color:var(--cdx)">Codex</strong> — curva menor, custo menor, da conta da maioria.</p>
+              </div>
+            </div>
+
+            <div style="width:100%;height:1px;background:rgba(217,168,50,.1)"></div>
+
+            <div style="display:flex;gap:var(--s4);align-items:flex-start">
+              <div style="width:36px;height:36px;border-radius:50%;background:var(--aubg);border:1px solid rgba(217,168,50,.3);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-sm);font-weight:700;color:var(--au);flex-shrink:0">2</div>
+              <div>
+                <div style="font-size:var(--t-md);font-weight:600;color:var(--t1);margin-bottom:4px">Vai investir tempo</div>
+                <p style="font-size:var(--t-sm);color:var(--t2)"><strong style="color:var(--cc)">Claude Code</strong> — teto mais alto, melhor pra workflow customizado.</p>
+              </div>
+            </div>
+
+            <div style="width:100%;height:1px;background:rgba(217,168,50,.1)"></div>
+
+            <div style="display:flex;gap:var(--s4);align-items:flex-start">
+              <div style="width:36px;height:36px;border-radius:50%;background:var(--aubg);border:1px solid rgba(217,168,50,.3);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-sm);font-weight:700;color:var(--au);flex-shrink:0">3</div>
+              <div>
+                <div style="font-size:var(--t-md);font-weight:600;color:var(--t1);margin-bottom:4px">Pode investir nos dois</div>
+                <p style="font-size:var(--t-sm);color:var(--t2)"><strong style="color:var(--cc)">Claude Code</strong> + <strong style="color:var(--cdx)">Codex</strong> em revisao cruzada — qualidade subiu, custo dobrou. Vale pra projetos pagos.</p>
+              </div>
+            </div>
+
+          </div>
+          <div style="margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid rgba(217,168,50,.1)">
+            <p style="font-size:var(--t-sm);color:var(--t2)">Em qualquer caso: <strong style="color:var(--gsd)">GSD</strong> + <strong style="color:var(--spc)">Spec-Kit</strong> + <strong style="color:var(--gsp)">GSP</strong> como skills auxiliares portaveis (funcionam em qualquer harness com adaptacao).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 8: O que NAO esta na stack ─────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 8</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">O que NAO esta na stack</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Honestidade sobre escopo. Expande pra entender o por que.</p>
+        <div class="faq">
+          <div class="fi">
+            <button class="fq" onclick="tf(this)" style="background:var(--bg2)"><span style="font-size:var(--t-sm);color:var(--t3)">Por que outras ferramentas nao estao na stack?</span><span class="ficon">+</span></button>
+            <div class="fa" style="max-height:0">
+              <div style="padding:var(--s4) 0;display:flex;flex-direction:column;gap:var(--s4)">
+
+                <div>
+                  <div style="font-family:var(--f-body);font-weight:600;color:var(--t2);margin-bottom:4px">Cursor</div>
+                  <p style="font-size:var(--t-sm);color:var(--t3)">IDE com agente embutido. Funciona bem, mas e outro paradigma (IDE-first em vez de CLI-first). Se voce ja usa Cursor e gosta, fica. Se esta comecando, recomendamos CLI-first porque o controle e maior.</p>
+                </div>
+
+                <div style="height:1px;background:var(--b1)"></div>
+
+                <div>
+                  <div style="font-family:var(--f-body);font-weight:600;color:var(--t2);margin-bottom:4px">Aider</div>
+                  <p style="font-size:var(--t-sm);color:var(--t3)">CLI open source pioneiro. Bom historicamente, mas Codex CLI capturou esse espaco com mais polimento. Mantemos no radar.</p>
+                </div>
+
+                <div style="height:1px;background:var(--b1)"></div>
+
+                <div>
+                  <div style="font-family:var(--f-body);font-weight:600;color:var(--t2);margin-bottom:4px">Replit Agent / Lovable / Bolt</div>
+                  <p style="font-size:var(--t-sm);color:var(--t3)">Agentes web pra prototipo rapido. Otimo pra ideia inicial, ruim pra producao. Nao concorre com Claude Code/Codex — concorre com WordPress.</p>
+                </div>
+
+                <div style="height:1px;background:var(--b1)"></div>
+
+                <div>
+                  <div style="font-family:var(--f-body);font-weight:600;color:var(--t2);margin-bottom:4px">Devin</div>
+                  <p style="font-size:var(--t-sm);color:var(--t3)">Agente autonomo de longa duracao. Promessa grande, execucao ainda inconsistente em 2026. No radar, nao recomendamos como stack principal.</p>
+                </div>
+
+                <div style="height:1px;background:var(--b1)"></div>
+
+                <div>
+                  <div style="font-family:var(--f-body);font-weight:600;color:var(--t2);margin-bottom:4px">GitHub Copilot</div>
+                  <p style="font-size:var(--t-sm);color:var(--t3)">Autocomplete sofisticado. Categoria diferente — voce ainda escreve a maior parte do codigo. Nao e agentic.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── CTA FINAL ─────────────────────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Proximo passo</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s5)">Voce viu a stack. Agora:</div>
+        <div class="g2">
+
+          <div class="card" style="padding:var(--s5);cursor:pointer" onclick="event.preventDefault();pg('setup',document.querySelector('[data-tab=setup]'))">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s2)">Setup automatico</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Aba 7 — Quiz</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Quiz monta sua stack baseada em quem voce e.</p>
+            <div style="margin-top:var(--s3);color:var(--au);font-size:var(--t-sm)">Fazer o quiz &rarr;</div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);cursor:pointer" onclick="event.preventDefault();pg('skills',document.querySelector('[data-tab=skills]'))">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s2)">Entender skills</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Aba 5 — Skills</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Padrao aberto. Funciona em qualquer harness.</p>
+            <div style="margin-top:var(--s3);color:var(--au);font-size:var(--t-sm)">Ver skills &rarr;</div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);cursor:pointer" onclick="event.preventDefault();pg('custos',document.querySelector('[data-tab=custos]'))">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s2)">Comparar custos</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Aba 9 — Custos & Planos</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Custos em R$ por plano, por ferramenta.</p>
+            <div style="margin-top:var(--s3);color:var(--au);font-size:var(--t-sm)">Ver custos &rarr;</div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);cursor:pointer" onclick="event.preventDefault();pg('metodo',document.querySelector('[data-tab=metodo]'))">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s2)">Ver na pratica</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Aba 2 — O Metodo</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">O metodo completo, com exemplos reais.</p>
+            <div style="margin-top:var(--s3);color:var(--au);font-size:var(--t-sm)">Ver o metodo &rarr;</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-spacer"></div>
+
+  </div>
   <div id="page-skills" class="page" role="tabpanel"></div>
   <div id="page-avancado" class="page" role="tabpanel"></div>
   <div id="page-setup" class="page" role="tabpanel"></div>
