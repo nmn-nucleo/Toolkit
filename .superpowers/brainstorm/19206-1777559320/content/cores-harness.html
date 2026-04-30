@@ -1,0 +1,71 @@
+<h2>Cores para os dois harnesses principais</h2>
+<p class="subtitle">Claude Code e Codex precisam de cores proprias, em paridade visual (sem hierarquia). Escolha a dupla que funciona melhor com a paleta existente.</p>
+
+<div style="margin-bottom:24px;padding:16px;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)">
+  <p class="label">PALETA EXISTENTE (referencia)</p>
+  <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+    <div style="width:48px;height:48px;border-radius:6px;background:#d9a832;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:600">Ouro</div>
+    <div style="width:48px;height:48px;border-radius:6px;background:#7c6aff;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:600">GSD</div>
+    <div style="width:48px;height:48px;border-radius:6px;background:#e8527a;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:600">GSP</div>
+    <div style="width:48px;height:48px;border-radius:6px;background:#2dbf8a;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:600">Spec</div>
+    <div style="width:48px;height:48px;border-radius:6px;background:#e8a84b;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:600">Super</div>
+    <div style="width:48px;height:48px;border-radius:6px;background:#4ba8e8;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:600">Open</div>
+  </div>
+</div>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:24px;display:flex;gap:16px;justify-content:center;align-items:center">
+      <div style="width:80px;height:80px;border-radius:12px;background:#e07040;display:flex;align-items:center;justify-content:center;flex-direction:column">
+        <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:0.05em">CLAUDE</span>
+        <span style="font-size:9px;color:rgba(255,255,255,0.7)">CODE</span>
+      </div>
+      <div style="width:80px;height:80px;border-radius:12px;background:#2eb8a6;display:flex;align-items:center;justify-content:center;flex-direction:column">
+        <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:0.05em">CODEX</span>
+        <span style="font-size:9px;color:rgba(255,255,255,0.7)">CLI</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Laranja queimado + Teal</h3>
+      <p><strong>#e07040</strong> (coral quente) + <strong>#2eb8a6</strong> (teal frio). Contraste quente/frio forte. Evoca Anthropic (laranja) vs OpenAI (verde). Risco: laranja conflita levemente com Superpowers ambar (#e8a84b).</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:24px;display:flex;gap:16px;justify-content:center;align-items:center">
+      <div style="width:80px;height:80px;border-radius:12px;background:#d4775c;display:flex;align-items:center;justify-content:center;flex-direction:column">
+        <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:0.05em">CLAUDE</span>
+        <span style="font-size:9px;color:rgba(255,255,255,0.7)">CODE</span>
+      </div>
+      <div style="width:80px;height:80px;border-radius:12px;background:#46b5c9;display:flex;align-items:center;justify-content:center;flex-direction:column">
+        <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:0.05em">CODEX</span>
+        <span style="font-size:9px;color:rgba(255,255,255,0.7)">CLI</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Terracota + Cyan suave</h3>
+      <p><strong>#d4775c</strong> (terracota) + <strong>#46b5c9</strong> (cyan medio). Mais sofisticado, menos vibrante. Zero conflito com cores existentes. Tons mais "tierra" e "agua".</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:24px;display:flex;gap:16px;justify-content:center;align-items:center">
+      <div style="width:80px;height:80px;border-radius:12px;background:#c75d3a;display:flex;align-items:center;justify-content:center;flex-direction:column">
+        <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:0.05em">CLAUDE</span>
+        <span style="font-size:9px;color:rgba(255,255,255,0.7)">CODE</span>
+      </div>
+      <div style="width:80px;height:80px;border-radius:12px;background:#38a89d;display:flex;align-items:center;justify-content:center;flex-direction:column">
+        <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:0.05em">CODEX</span>
+        <span style="font-size:9px;color:rgba(255,255,255,0.7)">CLI</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Ferrugem profundo + Verde petroleo</h3>
+      <p><strong>#c75d3a</strong> (ferrugem) + <strong>#38a89d</strong> (petroleo). Mais escuro, mais sereno. Lembra as cores das marcas originais mas "aplainadas" pro dark theme. Distancia maxima do ambar Superpowers.</p>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:20px;padding:14px;border-radius:8px;background:rgba(217,168,50,0.05);border:1px solid rgba(217,168,50,0.12)">
+  <p style="font-size:13px;color:rgba(240,237,230,0.6);margin:0"><strong style="color:#d9a832">Nota:</strong> Todas as opcoes passam WCAG AA em contraste sobre o fundo #0e0f14. A dupla precisa funcionar lado a lado sem hierarquia visual — nenhuma cor pode "gritar" mais que a outra.</p>
+</div>
