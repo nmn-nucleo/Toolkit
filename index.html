@@ -1137,7 +1137,787 @@
 
     </div>
   </div>
-  <div id="page-oficio" class="page" role="tabpanel"></div>
+  <div id="page-oficio" class="page" role="tabpanel">
+<style>
+.card.checked .check-box{background:var(--au);border-color:var(--au);color:var(--bg0)}
+.card:not(.checked) .check-box{color:transparent}
+.ap-card{background:var(--err-bg);border:1px solid var(--err-b);border-left:3px solid var(--err);border-radius:var(--r-lg);padding:var(--s5);margin-bottom:var(--s4)}
+.cycle-accent-a{border-top:3px solid var(--au)}
+.cycle-accent-b{border-top:3px solid var(--spc)}
+.cycle-accent-c{border-top:3px solid var(--cdx)}
+.cycle-accent-d{border-top:3px solid var(--gsd)}
+.fi.open .fa{max-height:2000px}
+</style>
+
+<!-- ─── INTRO ─────────────────────────────────────────────────── -->
+<div class="W">
+  <div class="reveal">
+    <div class="ey">Pratica, nao teoria — aplique no proximo prompt</div>
+    <h2 class="DH">Conhecer a ferramenta<br>nao e saber operar.<br><em>Saber operar e oficio.</em></h2>
+    <p class="dl">A Aba 2 te deu o <strong>metodo</strong> (global vs local, contexto enxuto). Esta aba te da o <strong>oficio</strong>: como escrever prompt que funciona, quando usar qual abordagem, que erros custam dinheiro, e a rotina que separa quem entrega de quem reclama. Tudo agnostico de ferramenta. Os principios aqui sobrevivem a qualquer release de Claude Code, Codex ou o que vier depois.</p>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── SECAO 1: 4 pilares do prompt ─────────────────────────── -->
+  <div class="reveal">
+    <div class="ey">Secao 1 de 9</div>
+    <h3 class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">Os 4 pilares do bom prompt</h3>
+    <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Todo prompt que funciona consistentemente tem essas 4 partes. Toda vez que voce reclama "a IA nao entendeu", uma delas estava faltando.</p>
+    <div class="g2">
+
+      <!-- Pilar 1: Contexto -->
+      <div class="card" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s2)">Pilar 1</div>
+        <div class="sh" style="margin-bottom:var(--s3)">Contexto</div>
+        <p style="font-size:var(--t-sm);color:var(--t3);font-style:italic;margin-bottom:var(--s4)">"O que o agente precisa saber pra fazer isso?"</p>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Codigo do projeto, stack, convencoes, decisoes anteriores. Pode estar no CLAUDE.md/AGENTS.md (contexto persistente) ou no proprio prompt (contexto da tarefa).</p>
+        <div style="margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--err);margin-bottom:var(--s2)">Exemplo ruim</div>
+          <div style="background:var(--err-bg);border:1px solid var(--err-b);border-radius:var(--r-sm);padding:var(--s3) var(--s4);font-family:var(--f-mono);font-size:12px;color:var(--t2)">Cria um endpoint pra usuario.</div>
+        </div>
+        <div>
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--ok);margin-bottom:var(--s2)">Exemplo bom</div>
+          <div style="background:var(--ok-bg);border:1px solid var(--ok-b);border-radius:var(--r-sm);padding:var(--s3) var(--s4);font-family:var(--f-mono);font-size:12px;color:var(--t2);line-height:1.7">Cria um endpoint pra usuario. Stack: FastAPI + PostgreSQL. Padrao do projeto: validacao com Pydantic, response sempre em JSON com {data, error}. Tabela `users` ja existe com colunas `id, email, name, created_at`.</div>
+        </div>
+      </div>
+
+      <!-- Pilar 2: Objetivo -->
+      <div class="card" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s2)">Pilar 2</div>
+        <div class="sh" style="margin-bottom:var(--s3)">Objetivo</div>
+        <p style="font-size:var(--t-sm);color:var(--t3);font-style:italic;margin-bottom:var(--s4)">"Como sei que terminou bem?"</p>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">O criterio de sucesso. Sem isso, o agente entrega "alguma coisa" e voce avalia subjetivamente.</p>
+        <div style="margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--err);margin-bottom:var(--s2)">Exemplo ruim</div>
+          <div style="background:var(--err-bg);border:1px solid var(--err-b);border-radius:var(--r-sm);padding:var(--s3) var(--s4);font-family:var(--f-mono);font-size:12px;color:var(--t2)">Faz funcionar.</div>
+        </div>
+        <div>
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--ok);margin-bottom:var(--s2)">Exemplo bom</div>
+          <div style="background:var(--ok-bg);border:1px solid var(--ok-b);border-radius:var(--r-sm);padding:var(--s3) var(--s4);font-family:var(--f-mono);font-size:12px;color:var(--t2);line-height:1.7">Sucesso = endpoint POST /users que aceita {email, name}, valida formato de email, salva no banco, retorna {data: {id, email, name}, error: null} em 200 ou {data: null, error: &lt;msg&gt;} em 400.</div>
+        </div>
+      </div>
+
+      <!-- Pilar 3: Restricoes -->
+      <div class="card" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s2)">Pilar 3</div>
+        <div class="sh" style="margin-bottom:var(--s3)">Restricoes</div>
+        <p style="font-size:var(--t-sm);color:var(--t3);font-style:italic;margin-bottom:var(--s4)">"O que NAO fazer?"</p>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Limites do que e aceitavel. Tecnologias proibidas, padroes a evitar, escopo a respeitar.</p>
+        <div style="margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--err);margin-bottom:var(--s2)">Exemplo ruim</div>
+          <div style="background:var(--err-bg);border:1px solid var(--err-b);border-radius:var(--r-sm);padding:var(--s3) var(--s4);font-family:var(--f-mono);font-size:12px;color:var(--t2)">(nao tem — agente pode trazer dependencia nova qualquer)</div>
+        </div>
+        <div>
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--ok);margin-bottom:var(--s2)">Exemplo bom</div>
+          <div style="background:var(--ok-bg);border:1px solid var(--ok-b);border-radius:var(--r-sm);padding:var(--s3) var(--s4);font-family:var(--f-mono);font-size:12px;color:var(--t2);line-height:1.7">Nao adicionar dependencia nova. Nao mudar schema do banco. Nao tocar em outros endpoints. Se precisar de algo que nao existe, pergunta antes.</div>
+        </div>
+      </div>
+
+      <!-- Pilar 4: Formato -->
+      <div class="card" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s2)">Pilar 4</div>
+        <div class="sh" style="margin-bottom:var(--s3)">Formato</div>
+        <p style="font-size:var(--t-sm);color:var(--t3);font-style:italic;margin-bottom:var(--s4)">"Como quero receber a resposta?"</p>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Diff de codigo, explicacao em prosa, lista de passos, JSON estruturado. Sem especificar, voce recebe o formato default da IA — que pode nao ser util.</p>
+        <div style="margin-bottom:var(--s3)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--err);margin-bottom:var(--s2)">Exemplo ruim</div>
+          <div style="background:var(--err-bg);border:1px solid var(--err-b);border-radius:var(--r-sm);padding:var(--s3) var(--s4);font-family:var(--f-mono);font-size:12px;color:var(--t2)">(nao especifica — recebe parede de texto + codigo misturados)</div>
+        </div>
+        <div>
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--ok);margin-bottom:var(--s2)">Exemplo bom</div>
+          <div style="background:var(--ok-bg);border:1px solid var(--ok-b);border-radius:var(--r-sm);padding:var(--s3) var(--s4);font-family:var(--f-mono);font-size:12px;color:var(--t2);line-height:1.7">Entrega: (1) o codigo do endpoint pronto pra colar, (2) os testes pytest, (3) breve explicacao das decisoes que tomou. Nessa ordem. Sem comentarios obvios no codigo.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card" style="margin-top:var(--s5);padding:var(--s5);border-left:3px solid var(--au)">
+      <div class="sh" style="margin-bottom:var(--s2)">Os 4 pilares juntos = prompt que entrega</div>
+      <p style="font-size:var(--t-sm);color:var(--t2)">Quando voce monta os 4 e roda, o agente sabe: o que voce sabe (contexto), o que voce quer (objetivo), o que evitar (restricoes), e como te dar (formato). E entrega.</p>
+    </div>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── SECAO 2: CLAUDE.md / AGENTS.md ───────────────────────── -->
+  <div class="reveal">
+    <div class="ey">Secao 2 de 9</div>
+    <h3 class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">CLAUDE.md e AGENTS.md: o mesmo conteudo, dois nomes</h3>
+    <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Esse e o ponto de equivalencia mais importante do toolkit. Voce escreve <strong>uma vez</strong> e o conteudo serve aos dois ecossistemas com adaptacao minima.</p>
+
+    <div style="overflow-x:auto;margin-bottom:var(--s6)">
+      <table class="mt">
+        <thead>
+          <tr>
+            <th></th>
+            <th>CLAUDE.md (Claude Code)</th>
+            <th>AGENTS.md (Codex, Cursor, Aider)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong style="color:var(--t1)">Localizacao</strong></td><td>&lt;projeto&gt;/CLAUDE.md</td><td>&lt;projeto&gt;/AGENTS.md</td></tr>
+          <tr><td><strong style="color:var(--t1)">Sintaxe</strong></td><td>Markdown</td><td>Markdown</td></tr>
+          <tr><td><strong style="color:var(--t1)">Quem le</strong></td><td>Claude Code</td><td>Codex, Cursor, Aider</td></tr>
+          <tr><td><strong style="color:var(--t1)">Conteudo tipico</strong></td><td>Mesmo</td><td>Mesmo</td></tr>
+          <tr><td><strong style="color:var(--t1)">Tamanho ideal</strong></td><td>100-300 linhas</td><td>100-300 linhas</td></tr>
+          <tr><td><strong style="color:var(--t1)">Hierarquia</strong></td><td>5 camadas (system → user → project → directory → flag)</td><td>Profiles explicitos via --profile</td></tr>
+          <tr><td><strong style="color:var(--t1)">Adocao</strong></td><td>Anthropic only</td><td>Padrao aberto da industria</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sh" style="margin-bottom:var(--s4)">O que vai dentro (igual nos dois)</div>
+    <div class="code" style="margin-bottom:var(--s5)">
+      <div class="code-body"># Nome do Projeto
+
+## Stack
+- Backend: &lt;linguagem + framework&gt;
+- Banco: &lt;tipo + versao&gt;
+- Frontend: &lt;framework&gt;
+- Deploy: &lt;onde&gt;
+
+## Convencoes
+- Padrao de commit: &lt;formato&gt;
+- Branch principal: &lt;nome&gt;
+- Estilo de codigo: &lt;linter/formatter&gt;
+- Padroes de PR: &lt;descricao&gt;
+
+## Decisoes arquiteturais
+- &lt;decisao 1 com racional&gt;
+- &lt;decisao 2 com racional&gt;
+
+## O que NAO fazer
+- Nao instalar dependencia sem perguntar
+- Nao modificar &lt;arquivo critico&gt;
+- Nao tocar em &lt;area sensivel&gt;
+
+## Comandos uteis
+- Rodar: &lt;comando&gt;
+- Testar: &lt;comando&gt;
+- Build: &lt;comando&gt;
+- Deploy: &lt;comando&gt;
+
+## Contexto adicional
+- &lt;links pra docs&gt;
+- &lt;pessoas responsaveis&gt;
+- &lt;historico relevante&gt;</div>
+      <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+    </div>
+
+    <div class="card" style="padding:var(--s5);border-left:3px solid var(--au)">
+      <div class="sh" style="margin-bottom:var(--s2)">A regra</div>
+      <p style="font-size:var(--t-sm);color:var(--t2)">Voce escreve <strong>uma vez</strong> o conteudo. Se o time usa Claude Code, salva como <code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">CLAUDE.md</code>. Se usa Codex/Cursor, salva como <code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">AGENTS.md</code>. Se usa os dois, salva ambos (ou faz symlink). <strong>Nao precisa reescrever pra cada ferramenta.</strong></p>
+    </div>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── SECAO 3: 6 templates de prompt ───────────────────────── -->
+  <div class="reveal">
+    <div class="ey">Secao 3 de 9</div>
+    <h3 class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s2)">Templates de prompt por tarefa</h3>
+    <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">6 templates que funcionam em Claude Code, Codex, Cursor, qualquer agente. Cada um seguindo os 4 pilares.</p>
+    <div class="faq">
+
+      <div class="fi">
+        <button class="fq" onclick="tf(this)" aria-expanded="false">
+          <span>Template 1 — Criar feature nova (greenfield)</span>
+          <span class="ficon" aria-hidden="true">+</span>
+        </button>
+        <div class="fa">
+          <div class="code" style="margin-top:var(--s3)">
+            <div class="code-body">Contexto: [descricao do projeto + stack + arquivo CLAUDE.md/AGENTS.md ja deve estar lido]
+Objetivo: criar [feature X] que [comportamento esperado].
+  Sucesso = [criterio mensuravel].
+Restricoes:
+  - Nao adicionar dependencia nova
+  - Seguir convencao do projeto
+  - [outras restricoes especificas]
+Formato:
+  1. Plano em bullets do que vai fazer (antes de codar)
+  2. Codigo dos arquivos novos/modificados
+  3. Testes
+  4. Resumo final em 3 linhas</div>
+            <button class="cpbtn" onclick="event.stopPropagation();cpCode(this)">Copiar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" onclick="tf(this)" aria-expanded="false">
+          <span>Template 2 — Consertar bug</span>
+          <span class="ficon" aria-hidden="true">+</span>
+        </button>
+        <div class="fa">
+          <div class="code" style="margin-top:var(--s3)">
+            <div class="code-body">Contexto: arquivo [X] tem um bug. Comportamento esperado: [Y]. Comportamento atual: [Z].
+  Reproducao: [passos]. Stack trace: [se tiver].
+Objetivo: identificar a causa raiz e corrigir, sem efeito colateral em outras areas.
+Restricoes:
+  - Nao trocar logica que nao esta diretamente relacionada
+  - Adicionar teste que pega esse bug
+  - Se a causa raiz revelar problema mais profundo, sinaliza mas nao corrige sozinho
+Formato:
+  1. Diagnostico (1 paragrafo: por que esta acontecendo)
+  2. Diff da correcao
+  3. Teste novo
+  4. Risco residual (se houver)</div>
+            <button class="cpbtn" onclick="event.stopPropagation();cpCode(this)">Copiar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" onclick="tf(this)" aria-expanded="false">
+          <span>Template 3 — Revisar codigo</span>
+          <span class="ficon" aria-hidden="true">+</span>
+        </button>
+        <div class="fa">
+          <div class="code" style="margin-top:var(--s3)">
+            <div class="code-body">Contexto: PR/diff a seguir. Padroes do projeto em CLAUDE.md/AGENTS.md.
+Objetivo: revisar como senior reviewer faria.
+  Sucesso = nao deixa passar nada que afete corretude, seguranca, performance ou clareza.
+Restricoes:
+  - Nao reescrever o codigo (so apontar)
+  - Priorizar issues por severidade
+  - Aceitar trade-offs explicitos do autor
+Formato:
+  1. Veredito: APPROVE / REQUEST_CHANGES / COMMENT
+  2. Issues por severidade: BLOCKING / HIGH / MEDIUM / NIT
+  3. Pontos positivos (1-2)</div>
+            <button class="cpbtn" onclick="event.stopPropagation();cpCode(this)">Copiar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" onclick="tf(this)" aria-expanded="false">
+          <span>Template 4 — Refactor de modulo</span>
+          <span class="ficon" aria-hidden="true">+</span>
+        </button>
+        <div class="fa">
+          <div class="code" style="margin-top:var(--s3)">
+            <div class="code-body">Contexto: modulo [X] em [caminho]. Tamanho atual: [linhas].
+  Problema: [duplicacao / acoplamento / complexidade / testabilidade].
+Objetivo: refatorar para [criterio: ex. reduzir duplicacao, isolar responsabilidades, melhorar testabilidade].
+  Sucesso = comportamento publico identico, mas estrutura interna [criterio].
+Restricoes:
+  - Mudancas em pequenos commits, nao um commit gigante
+  - Manter compatibilidade de API publica
+  - Cada commit roda os testes existentes
+Formato:
+  1. Plano de refactor (passos numerados)
+  2. Para cada passo: diff + explicacao
+  3. Validacao final (testes passam? perf nao regrediu?)</div>
+            <button class="cpbtn" onclick="event.stopPropagation();cpCode(this)">Copiar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" onclick="tf(this)" aria-expanded="false">
+          <span>Template 5 — Documentar codigo</span>
+          <span class="ficon" aria-hidden="true">+</span>
+        </button>
+        <div class="fa">
+          <div class="code" style="margin-top:var(--s3)">
+            <div class="code-body">Contexto: arquivo/modulo [X]. Publico-alvo: [dev novo no time / usuario externo / voce daqui 6 meses].
+Objetivo: criar documentacao que faz [persona] entender [aspecto] em [tempo].
+Restricoes:
+  - Nao documentar o obvio
+  - Inclui exemplos rodaveis
+  - Foco em "por que", nao "o que" (o codigo ja diz o que)
+Formato:
+  - Markdown com secoes: Visao geral / Quando usar / Como usar (com exemplo) / Pegadinhas</div>
+            <button class="cpbtn" onclick="event.stopPropagation();cpCode(this)">Copiar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" onclick="tf(this)" aria-expanded="false">
+          <span>Template 6 — Analise de dataset / planilha</span>
+          <span class="ficon" aria-hidden="true">+</span>
+        </button>
+        <div class="fa">
+          <div class="code" style="margin-top:var(--s3)">
+            <div class="code-body">Contexto: dataset em [caminho]. Linhas: [N]. Colunas relevantes: [lista].
+  Origem dos dados: [fonte]. Nivel de confianca: [alta/baixa/incerta].
+Objetivo: responder [pergunta especifica] OU [encontrar padrao em area X].
+Restricoes:
+  - Nao alucinar numero (sempre derivar dos dados)
+  - Sinalizar dados sujos / faltantes
+  - Mostrar metodologia (como chegou no resultado)
+Formato:
+  1. Resposta direta (1-2 linhas)
+  2. Metodo (queries SQL ou codigo Python que rodou)
+  3. Caveats e qualidade dos dados
+  4. Sugestoes de proxima analise (opcional)</div>
+            <button class="cpbtn" onclick="event.stopPropagation();cpCode(this)">Copiar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── SECAO 4: Tabela de decisao ───────────────────────────── -->
+  <div class="reveal">
+    <div class="ey">Secao 4 de 9</div>
+    <h3 class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">Tabela de decisao: que abordagem usar?</h3>
+    <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Quando voce tem uma tarefa, consulta isso pra saber como atacar.</p>
+    <div style="overflow-x:auto">
+      <table class="mt">
+        <thead>
+          <tr>
+            <th>Tipo de tarefa</th>
+            <th>Abordagem</th>
+            <th>Por que</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong style="color:var(--t1)">Pequena e simples (&lt; 30min)</strong></td><td>Prompt direto, sem spec formal</td><td>Overhead nao compensa</td></tr>
+          <tr><td><strong style="color:var(--t1)">Media (30min - 2h)</strong></td><td>Prompt completo com 4 pilares</td><td>Estrutura ajuda</td></tr>
+          <tr><td><strong style="color:var(--t1)">Grande (&gt; 2h)</strong></td><td>SDD (Spec-Driven Dev) primeiro, codigo depois</td><td>Sem spec voce retrabalha</td></tr>
+          <tr><td><strong style="color:var(--t1)">Critica (producao, financeiro, saude)</strong></td><td>Spec + revisao cruzada (2 agentes) + testes</td><td>Erro caro</td></tr>
+          <tr><td><strong style="color:var(--t1)">Repetitiva (faz sempre igual)</strong></td><td>Vira <strong>skill</strong></td><td>Codifica o padrao</td></tr>
+          <tr><td><strong style="color:var(--t1)">Colaborativa (time/cliente)</strong></td><td>CLAUDE.md/AGENTS.md robusto</td><td>Padroniza</td></tr>
+          <tr><td><strong style="color:var(--t1)">Exploratoria (nao sabe como comecar)</strong></td><td>Pede plano primeiro, codigo depois</td><td>Forca pensar antes</td></tr>
+          <tr><td><strong style="color:var(--t1)">Bug em producao urgente</strong></td><td>Diagnostico curto + fix minimo + teste regressao</td><td>Evitar fix piorar</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── SECAO 5: 6 cenarios interativos ──────────────────────── -->
+  <div class="reveal">
+    <div class="ey">Secao 5 de 9</div>
+    <h3 class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">6 cenarios reais — prompt errado vs certo</h3>
+    <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Cards interativos. Selecione um cenario pra ver o prompt completo.</p>
+
+    <div class="g3" style="margin-bottom:var(--s5)">
+      <button class="card" style="cursor:pointer;text-align:left;border:none" onclick="showScenario(0)">
+        <strong style="color:var(--t1);display:block;margin-bottom:4px">Bug em producao</strong>
+        <span style="font-size:var(--t-xs);color:var(--t3)">Urgencia alta, sexta-feira</span>
+      </button>
+      <button class="card" style="cursor:pointer;text-align:left;border:none" onclick="showScenario(1)">
+        <strong style="color:var(--t1);display:block;margin-bottom:4px">Feature nova existente</strong>
+        <span style="font-size:var(--t-xs);color:var(--t3)">Projeto de 8 meses</span>
+      </button>
+      <button class="card" style="cursor:pointer;text-align:left;border:none" onclick="showScenario(2)">
+        <strong style="color:var(--t1);display:block;margin-bottom:4px">Refactor legado</strong>
+        <span style="font-size:var(--t-xs);color:var(--t3)">1.500 linhas, sem testes</span>
+      </button>
+      <button class="card" style="cursor:pointer;text-align:left;border:none" onclick="showScenario(3)">
+        <strong style="color:var(--t1);display:block;margin-bottom:4px">Onboarding desconhecido</strong>
+        <span style="font-size:var(--t-xs);color:var(--t3)">200 arquivos, zero docs</span>
+      </button>
+      <button class="card" style="cursor:pointer;text-align:left;border:none" onclick="showScenario(4)">
+        <strong style="color:var(--t1);display:block;margin-bottom:4px">Migracao de stack</strong>
+        <span style="font-size:var(--t-xs);color:var(--t3)">Express para Fastify</span>
+      </button>
+      <button class="card" style="cursor:pointer;text-align:left;border:none" onclick="showScenario(5)">
+        <strong style="color:var(--t1);display:block;margin-bottom:4px">Tarefa sem inicio</strong>
+        <span style="font-size:var(--t-xs);color:var(--t3)">Sistema de notificacoes</span>
+      </button>
+    </div>
+
+    <div id="scenario-panel" style="background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r-lg);padding:var(--s6);min-height:200px">
+      <p style="color:var(--t4)">Selecione um cenario acima</p>
+    </div>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── SECAO 6: 6 regras de ouro ────────────────────────────── -->
+  <div class="reveal">
+    <div class="ey">Secao 6 de 9</div>
+    <h3 class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s5)">As 6 regras de ouro</h3>
+    <div class="g3">
+
+      <div class="card" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:48px;font-weight:700;color:var(--au);opacity:.4;margin-bottom:var(--s2);line-height:1">1</div>
+        <div class="sh" style="margin-bottom:var(--s2)">Contexto primeiro, prompt depois</div>
+        <p style="font-size:var(--t-sm);color:var(--t2)">Sempre ofereca contexto <strong>antes</strong> de pedir acao. Agente sem contexto preenche lacunas com suposicao — e voce paga em retrabalho.</p>
+      </div>
+
+      <div class="card" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:48px;font-weight:700;color:var(--au);opacity:.4;margin-bottom:var(--s2);line-height:1">2</div>
+        <div class="sh" style="margin-bottom:var(--s2)">Pequeno antes de grande</div>
+        <p style="font-size:var(--t-sm);color:var(--t2)">Quebre tarefa grande em pequenas. Tarefa pequena = prompt focado = resultado certo. Tarefa grande = prompt vago = resultado generico.</p>
+      </div>
+
+      <div class="card" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:48px;font-weight:700;color:var(--au);opacity:.4;margin-bottom:var(--s2);line-height:1">3</div>
+        <div class="sh" style="margin-bottom:var(--s2)">Local sobrescreve global (sempre)</div>
+        <p style="font-size:var(--t-sm);color:var(--t2)">Regras do projeto sempre vencem regras pessoais. Documente isso explicitamente no CLAUDE.md/AGENTS.md do projeto.</p>
+      </div>
+
+      <div class="card" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:48px;font-weight:700;color:var(--au);opacity:.4;margin-bottom:var(--s2);line-height:1">4</div>
+        <div class="sh" style="margin-bottom:var(--s2)">Testar antes de confiar</div>
+        <p style="font-size:var(--t-sm);color:var(--t2)">Nunca aceitar mudanca sem rodar. Mesmo se "parece certo." Especialmente quando "parece certo." Maior parte dos bugs introduzidos por IA passa em revisao de codigo mas falha em runtime.</p>
+      </div>
+
+      <div class="card" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:48px;font-weight:700;color:var(--au);opacity:.4;margin-bottom:var(--s2);line-height:1">5</div>
+        <div class="sh" style="margin-bottom:var(--s2)">Commit atomico (uma mudanca, um commit)</div>
+        <p style="font-size:var(--t-sm);color:var(--t2)">Cada commit faz <strong>uma coisa</strong>. Refactor + feature nova + bug fix tudo junto vira commit impossivel de revisar e pesadelo pra reverter.</p>
+      </div>
+
+      <div class="card" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:48px;font-weight:700;color:var(--au);opacity:.4;margin-bottom:var(--s2);line-height:1">6</div>
+        <div class="sh" style="margin-bottom:var(--s2)">Re-spec antes de re-codar</div>
+        <p style="font-size:var(--t-sm);color:var(--t2)">Se voce mudou de ideia no meio do trabalho, <strong>atualize a spec antes de mexer no codigo</strong>. Senao voce vira detetive da propria mudanca em 2 semanas.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── SECAO 7: 5 anti-patterns ─────────────────────────────── -->
+  <div class="reveal">
+    <div class="ey">Secao 7 de 9</div>
+    <h3 class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s5)">Os 5 anti-patterns que custam dinheiro</h3>
+
+    <div class="ap-card">
+      <div style="font-family:var(--f-mono);font-size:var(--t-sm);font-weight:600;color:var(--err);margin-bottom:var(--s3)">Anti-pattern 1: O Mega-Prompt</div>
+      <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Prompt de 500 linhas com tudo: contexto + 5 tarefas + 10 restricoes + 3 formatos diferentes. Resultado: agente perde foco, entrega tudo medio, voce gasta token em re-prompt.</p>
+      <div style="display:flex;gap:var(--s5);flex-wrap:wrap">
+        <div><div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;color:var(--err);margin-bottom:4px">Sintoma</div><p style="font-size:var(--t-sm);color:var(--t2)">Voce escreve por 10 minutos antes de mandar o prompt.</p></div>
+        <div><div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;color:var(--ok);margin-bottom:4px">Cura</div><p style="font-size:var(--t-sm);color:var(--t2)">Divide em 3-5 prompts pequenos, encadeados.</p></div>
+      </div>
+    </div>
+
+    <div class="ap-card">
+      <div style="font-family:var(--f-mono);font-size:var(--t-sm);font-weight:600;color:var(--err);margin-bottom:var(--s3)">Anti-pattern 2: A Adivinhacao</div>
+      <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Esperar que o agente "saiba" coisas que voce nao disse. "Ele deveria entender que isso e um projeto Django, ne?"</p>
+      <div style="display:flex;gap:var(--s5);flex-wrap:wrap">
+        <div><div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;color:var(--err);margin-bottom:4px">Sintoma</div><p style="font-size:var(--t-sm);color:var(--t2)">Voce reclama "a IA nao entendeu" mais que 1x por semana.</p></div>
+        <div><div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;color:var(--ok);margin-bottom:4px">Cura</div><p style="font-size:var(--t-sm);color:var(--t2)">CLAUDE.md/AGENTS.md robusto. Contexto sempre explicito.</p></div>
+      </div>
+    </div>
+
+    <div class="ap-card">
+      <div style="font-family:var(--f-mono);font-size:var(--t-sm);font-weight:600;color:var(--err);margin-bottom:var(--s3)">Anti-pattern 3: A Aceitacao Cega</div>
+      <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Aceitar diff sem ler. Aceitar resposta sem testar. "Parece OK."</p>
+      <div style="display:flex;gap:var(--s5);flex-wrap:wrap">
+        <div><div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;color:var(--err);margin-bottom:4px">Sintoma</div><p style="font-size:var(--t-sm);color:var(--t2)">Voce comita codigo do agente direto e descobre o bug em producao.</p></div>
+        <div><div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;color:var(--ok);margin-bottom:4px">Cura</div><p style="font-size:var(--t-sm);color:var(--t2)">Revisar o diff. Rodar os testes. Sempre.</p></div>
+      </div>
+    </div>
+
+    <div class="ap-card">
+      <div style="font-family:var(--f-mono);font-size:var(--t-sm);font-weight:600;color:var(--err);margin-bottom:var(--s3)">Anti-pattern 4: A Confianca em Alucinacao</div>
+      <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Usar API/funcao/biblioteca que o agente sugeriu sem verificar se existe. Agente sugere <code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">lodash.deepClone</code> (existe? como assina?), voce usa, quebra.</p>
+      <div style="display:flex;gap:var(--s5);flex-wrap:wrap">
+        <div><div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;color:var(--err);margin-bottom:4px">Sintoma</div><p style="font-size:var(--t-sm);color:var(--t2)">"Tinha certeza que existia."</p></div>
+        <div><div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;color:var(--ok);margin-bottom:4px">Cura</div><p style="font-size:var(--t-sm);color:var(--t2)">Quando agente sugere API que voce nao conhece, peca pra ele rodar/verificar antes de assumir.</p></div>
+      </div>
+    </div>
+
+    <div class="ap-card">
+      <div style="font-family:var(--f-mono);font-size:var(--t-sm);font-weight:600;color:var(--err);margin-bottom:var(--s3)">Anti-pattern 5: O Globalzao</div>
+      <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">(Visto na Aba 2 mas vale repetir.) Tudo no global, nada no local. 30 skills carregadas em todo projeto.</p>
+      <div style="display:flex;gap:var(--s5);flex-wrap:wrap">
+        <div><div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;color:var(--err);margin-bottom:4px">Sintoma</div><p style="font-size:var(--t-sm);color:var(--t2)">Agente lento, contexto inchado, "ele se perde."</p></div>
+        <div><div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;color:var(--ok);margin-bottom:4px">Cura</div><p style="font-size:var(--t-sm);color:var(--t2)">Ver Aba 2 — Metodo. Global enxuto, local especifico.</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── SECAO 8: Checklist novo projeto ──────────────────────── -->
+  <div class="reveal">
+    <div class="ey">Secao 8 de 9</div>
+    <h3 class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">Checklist: novo projeto em 8 passos</h3>
+    <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Quando voce comeca um projeto novo (ou reorganiza um existente), passa por isso. <strong>Nao pula passo.</strong></p>
+
+    <div style="display:flex;flex-direction:column;gap:var(--s3)">
+
+      <div class="card" style="cursor:pointer" onclick="toggleCheck(this)" data-check="oficio-1">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <span class="check-box" style="width:20px;height:20px;border:2px solid var(--b3);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;transition:all .2s;font-size:13px">&#10003;</span>
+          <div style="flex:1">
+            <strong style="color:var(--t1)">1. Cria a pasta</strong>
+            <div class="code" style="margin-top:var(--s3)"><div class="code-body">mkdir meu-projeto && cd meu-projeto</div><button class="cpbtn" onclick="event.stopPropagation();cpCode(this)">Copiar</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="cursor:pointer" onclick="toggleCheck(this)" data-check="oficio-2">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <span class="check-box" style="width:20px;height:20px;border:2px solid var(--b3);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;transition:all .2s;font-size:13px">&#10003;</span>
+          <div style="flex:1">
+            <strong style="color:var(--t1)">2. Inicializa Git</strong>
+            <div class="code" style="margin-top:var(--s3)"><div class="code-body">git init
+git remote add origin git@github.com:voce/meu-projeto.git</div><button class="cpbtn" onclick="event.stopPropagation();cpCode(this)">Copiar</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="cursor:pointer" onclick="toggleCheck(this)" data-check="oficio-3">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <span class="check-box" style="width:20px;height:20px;border:2px solid var(--b3);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;transition:all .2s;font-size:13px">&#10003;</span>
+          <div style="flex:1">
+            <strong style="color:var(--t1)">3. Abre o agente nessa pasta</strong>
+            <div class="code" style="margin-top:var(--s3)"><div class="code-body">claude   # ou: codex</div><button class="cpbtn" onclick="event.stopPropagation();cpCode(this)">Copiar</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="cursor:pointer" onclick="toggleCheck(this)" data-check="oficio-4">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <span class="check-box" style="width:20px;height:20px;border:2px solid var(--b3);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;transition:all .2s;font-size:13px">&#10003;</span>
+          <div style="flex:1">
+            <strong style="color:var(--t1)">4. Cria estrutura local</strong>
+            <div class="code" style="margin-top:var(--s3)"><div class="code-body">mkdir -p .claude/skills    # ou .agents/skills pra Codex
+touch CLAUDE.md            # ou AGENTS.md</div><button class="cpbtn" onclick="event.stopPropagation();cpCode(this)">Copiar</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="cursor:pointer" onclick="toggleCheck(this)" data-check="oficio-5">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <span class="check-box" style="width:20px;height:20px;border:2px solid var(--b3);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;transition:all .2s;font-size:13px">&#10003;</span>
+          <div style="flex:1">
+            <strong style="color:var(--t1)">5. Preenche o CLAUDE.md/AGENTS.md</strong>
+            <p style="font-size:var(--t-sm);color:var(--t2);margin-top:var(--s2)">Use o template da Secao 2. <strong>Nao deixa em branco.</strong> Mesmo que basico, melhor que vazio.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="cursor:pointer" onclick="toggleCheck(this)" data-check="oficio-6">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <span class="check-box" style="width:20px;height:20px;border:2px solid var(--b3);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;transition:all .2s;font-size:13px">&#10003;</span>
+          <div style="flex:1">
+            <strong style="color:var(--t1)">6. Adiciona skills relevantes</strong>
+            <p style="font-size:var(--t-sm);color:var(--t2);margin-top:var(--s2)">Escolha 2-4 skills locais alinhadas com o projeto. Ver Aba 5 — Skills.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="cursor:pointer" onclick="toggleCheck(this)" data-check="oficio-7">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <span class="check-box" style="width:20px;height:20px;border:2px solid var(--b3);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;transition:all .2s;font-size:13px">&#10003;</span>
+          <div style="flex:1">
+            <strong style="color:var(--t1)">7. Primeiro commit</strong>
+            <div class="code" style="margin-top:var(--s3)"><div class="code-body">git add .
+git commit -m "feat: estrutura inicial + setup do agente"
+git push -u origin main</div><button class="cpbtn" onclick="event.stopPropagation();cpCode(this)">Copiar</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="cursor:pointer" onclick="toggleCheck(this)" data-check="oficio-8">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <span class="check-box" style="width:20px;height:20px;border:2px solid var(--b3);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;transition:all .2s;font-size:13px">&#10003;</span>
+          <div style="flex:1">
+            <strong style="color:var(--t1)">8. Valida com prompt simples</strong>
+            <p style="font-size:var(--t-sm);color:var(--t2);margin-top:var(--s2);margin-bottom:var(--s3)">Antes de comecar trabalho real, testa o setup com prompt simples:</p>
+            <div class="code"><div class="code-body">Le o CLAUDE.md/AGENTS.md e me responde:
+1. Qual o stack desse projeto?
+2. Quais convencoes o time segue?
+3. O que NAO fazer?</div><button class="cpbtn" onclick="event.stopPropagation();cpCode(this)">Copiar</button></div>
+            <p style="font-size:var(--t-sm);color:var(--t2);margin-top:var(--s3)">Se o agente responder bem, setup esta valido. Se nao, ajusta o CLAUDE.md/AGENTS.md. <strong>Agora sim, comeca o trabalho.</strong></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── SECAO 9: Ciclo do dia ─────────────────────────────────── -->
+  <div class="reveal">
+    <div class="ey">Secao 9 de 9</div>
+    <h3 class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">O ciclo do dia bem feito</h3>
+    <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Sintese pratica de tudo da aba. 4 momentos, cada um com intenção clara.</p>
+
+    <div class="g4">
+
+      <div class="card cycle-accent-a" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s2)">Manha (15-30min)</div>
+        <div class="sh" style="margin-bottom:var(--s3)">Planning</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--au);flex-shrink:0">→</span> Revisa CLAUDE.md/AGENTS.md (esta atualizado?)</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--au);flex-shrink:0">→</span> Define 1-3 tarefas do dia (use a tabela de decisao)</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--au);flex-shrink:0">→</span> Pra cada tarefa, escreve 4 pilares no caderno</li>
+        </ul>
+      </div>
+
+      <div class="card cycle-accent-b" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--spc);margin-bottom:var(--s2)">Meio (foco)</div>
+        <div class="sh" style="margin-bottom:var(--s3)">Execucao</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--spc);flex-shrink:0">→</span> Roda o agente pra primeira tarefa</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--spc);flex-shrink:0">→</span> Aceita ou rejeita diff (com leitura, nao cega)</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--spc);flex-shrink:0">→</span> Commit atomico</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--spc);flex-shrink:0">→</span> Proxima tarefa</li>
+        </ul>
+      </div>
+
+      <div class="card cycle-accent-c" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s2)">Tarde (review)</div>
+        <div class="sh" style="margin-bottom:var(--s3)">Validacao</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx);flex-shrink:0">→</span> Roda os testes (manualmente ou agente)</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx);flex-shrink:0">→</span> Revisa o que foi feito</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx);flex-shrink:0">→</span> Atualiza CLAUDE.md/AGENTS.md se decisao importante mudou</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx);flex-shrink:0">→</span> Se algo merece virar skill, anota</li>
+        </ul>
+      </div>
+
+      <div class="card cycle-accent-d" style="padding:var(--s5)">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--gsd);margin-bottom:var(--s2)">Fim (handoff, 5min)</div>
+        <div class="sh" style="margin-bottom:var(--s3)">Encerra</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--gsd);flex-shrink:0">→</span> Push final</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--gsd);flex-shrink:0">→</span> Comentario claro no PR / issue tracker</li>
+          <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--gsd);flex-shrink:0">→</span> Limpa contexto da sessao</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="card" style="margin-top:var(--s5);padding:var(--s5);border-left:3px solid var(--au);text-align:center">
+      <p style="font-size:var(--t-md);color:var(--t1);font-weight:500"><strong>Resultado de 1 mes nessa rotina:</strong> 20 dias de trabalho organizado vencem 4 semanas de execucao caotica. Toda vez.</p>
+    </div>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── CTA FINAL ─────────────────────────────────────────────── -->
+  <div class="reveal">
+    <div class="div"></div>
+    <div style="text-align:center;padding:var(--s7) 0">
+      <div class="ey" style="margin-bottom:var(--s4)">Voce viu o oficio. Agora aplica.</div>
+      <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s6)">Proximo passo</div>
+      <div class="g4" style="max-width:800px;margin:0 auto">
+        <button class="card" style="cursor:pointer;text-align:center;padding:var(--s5);border:none" onclick="pg('setup',document.querySelector('[data-tab=setup]'))">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);margin-bottom:var(--s2)">SETUP</div>
+          <div class="sh" style="margin-bottom:var(--s2)">Quiz personalizado</div>
+          <p style="font-size:var(--t-xs);color:var(--t3)">Aba 7 — Setup pronto em 5 minutos</p>
+        </button>
+        <button class="card" style="cursor:pointer;text-align:center;padding:var(--s5);border:none" onclick="pg('stack',document.querySelector('[data-tab=stack]'))">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--cdx);margin-bottom:var(--s2)">STACK</div>
+          <div class="sh" style="margin-bottom:var(--s2)">Ferramentas em detalhe</div>
+          <p style="font-size:var(--t-xs);color:var(--t3)">Aba 4 — Claude Code vs Codex</p>
+        </button>
+        <button class="card" style="cursor:pointer;text-align:center;padding:var(--s5);border:none" onclick="pg('skills',document.querySelector('[data-tab=skills]'))">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--spc);margin-bottom:var(--s2)">SKILLS</div>
+          <div class="sh" style="margin-bottom:var(--s2)">Economize tempo</div>
+          <p style="font-size:var(--t-xs);color:var(--t3)">Aba 5 — 107+ skills documentadas</p>
+        </button>
+        <button class="card" style="cursor:pointer;text-align:center;padding:var(--s5);border:none" onclick="pg('avancado',document.querySelector('[data-tab=avancado]'))">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsd);margin-bottom:var(--s2)">AVANCADO</div>
+          <div class="sh" style="margin-bottom:var(--s2)">Va mais fundo</div>
+          <p style="font-size:var(--t-xs);color:var(--t3)">Aba 6 — MCP, hooks, sub-agentes</p>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+</div>
+
+<script>
+/* ========== CENARIOS ========== */
+var _scenarios=[
+  {
+    title:'Bug em producao, urgencia alta',
+    situacao:'Sao 16h de uma sexta. Cliente reclama que o checkout esta retornando 500. Voce precisa achar e corrigir antes do final do expediente.',
+    bad:'O checkout esta com 500. Conserta.',
+    good:'Contexto: erro 500 no endpoint POST /checkout, intermitente.\nComecou ~30min atras (logs em [caminho]). Stack trace anexado.\nCliente em producao, urgencia alta.\nObjetivo: identificar causa raiz e propor fix minimo, sem rodar deploy ainda.\nRestricoes: nao mudar nada que nao seja diretamente relacionado ao bug.\nSe causa raiz exigir mudanca grande, sinaliza e propoe workaround temporario.\nFormato:\n  1. Hipotese mais provavel (1 linha)\n  2. Como confirmar (comando/query)\n  3. Fix minimo proposto (diff)\n  4. Plano de deploy seguro',
+    porque:'O agente nao tem licenca pra "consertar" — tem licenca pra diagnosticar primeiro. Voce mantem controle, fix e cirurgico, nao introduz novo bug em panico.'
+  },
+  {
+    title:'Feature nova em projeto existente',
+    situacao:'PM pediu "tela de configuracoes do usuario". Projeto ja tem 8 meses, 50 arquivos, convencoes definidas.',
+    bad:'Cria a tela de configuracoes do usuario com salvar perfil, mudar senha, e preferencias de notificacao.',
+    good:'Contexto: projeto [X], stack [Y]. Padroes em CLAUDE.md/AGENTS.md.\nComponentes existentes que devo reusar: [lista de componentes na pasta /components].\nAPI atual de usuario em [arquivo].\nObjetivo: tela /settings com 3 secoes: Perfil (nome, email, foto), Senha (atual + nova), Notificacoes (toggles).\nRestricoes:\n  - Reusar componentes existentes (nao criar Button novo)\n  - Validacao consistente com resto do app\n  - Nao adicionar dep nova\nFormato:\n  1. Plano (que arquivos vai criar/editar)\n  2. Codigo\n  3. Testes basicos\n  4. Pontos que precisam decisao do PM (se houver)',
+    porque:'Voce explicita "reusar o que existe". Sem isso, agente cria componentes novos paralelos aos antigos, gerando inconsistencia visual e codigo duplicado.'
+  },
+  {
+    title:'Refactor grande de codigo legado',
+    situacao:'Modulo de pagamentos com 1.500 linhas, sem testes, todo mundo tem medo de tocar.',
+    bad:'Refatora o modulo de pagamentos.',
+    good:'Contexto: arquivo /src/payments/handler.py com 1.500 linhas.\nSem testes atualmente. Comportamento publico: [3 funcoes principais e suas assinaturas].\nObjetivo: refatorar em modulos coesos, ADICIONANDO testes ANTES de mudar codigo.\nRestricoes:\n  - Comportamento publico identico (nenhum teste de integracao deve quebrar)\n  - Mudancas em commits pequenos\n  - Cada commit deixa o codigo rodavel\n  - Se descobrir bug existente, sinaliza mas nao corrige sozinho\nFormato:\n  1. Plano em fases (test coverage primeiro, depois refactor)\n  2. Para cada fase: lista de commits\n  3. Validacao apos cada fase',
+    porque:'"Testes antes de refactor" e regra de ouro de codigo legado. Sem teste, voce esta refatorando no escuro. Sub-agentes podem ajudar aqui — um escreve teste, outro refatora baseado nos testes.'
+  },
+  {
+    title:'Onboarding em projeto desconhecido',
+    situacao:'Voce assumiu codigo de um cliente novo. 200 arquivos, zero documentacao.',
+    bad:'Me explica o projeto.',
+    good:'Contexto: acabei de assumir esse repositorio. Nao conheco o codigo.\nObjetivo: gerar mapa mental do projeto pra eu entender em 30min.\nEspecificamente:\n  - Pontos de entrada (main, server, etc.)\n  - Modulos principais e suas responsabilidades\n  - Fluxos principais (request -> resposta)\n  - Deps externas criticas\n  - Pontos sensiveis ou complexos\nFormato:\n  - Markdown estruturado por sessoes\n  - Diagrama em ASCII se ajudar\n  - Lista de "perguntas que voce faria pro autor original" no final\n  - Lista de arquivos top-10 que devo ler primeiro, em ordem',
+    porque:'Voce direciona o que quer aprender, nao deixa o agente despejar tudo. Resultado e leitura focada de 30min em vez de 4 horas de exploracao caotica.'
+  },
+  {
+    title:'Migracao de stack/lib',
+    situacao:'Time decidiu trocar de Express pra Fastify. 30 endpoints existentes.',
+    bad:'Migra de Express pra Fastify.',
+    good:'Contexto: aplicacao Node.js com 30 endpoints em Express 4.\nVamos migrar pra Fastify 4. Razao: performance + tipos.\nObjetivo: plano de migracao incremental (nao big-bang).\nRestricoes:\n  - App deve continuar rodando durante migracao (sem down)\n  - Endpoints migrados conviver com Express (boundary clara)\n  - Testes existentes devem continuar passando\nFormato:\n  1. Estrategia (rota a rota? feature por feature? camada por camada?)\n  2. Plano em fases com criterios de "go/no-go" entre fases\n  3. Codigo de exemplo: 1 endpoint migrado completo + comentarios\n  4. Lista de pegadinhas (middlewares Express incompativeis, etc.)',
+    porque:'Migracao e projeto, nao tarefa. Plano em fases com go/no-go evita ficar 3 semanas sem aplicacao funcional.'
+  },
+  {
+    title:'Tarefa que voce nao sabe como comecar',
+    situacao:'Boss te pediu "um sistema de notificacoes que entenda preferencias do usuario e nao faca spam." Voce nem sabe por onde comeca.',
+    bad:'Cria um sistema de notificacoes inteligente.',
+    good:'Contexto: precisamos de sistema de notificacoes do projeto [X].\nTipos de notificacoes possiveis: [lista]. Canais: email, push, in-app.\nStack do projeto: [...].\nObjetivo: nao escrever codigo ainda. Quero um plano de design.\nEspecificamente, me ajude a pensar em:\n  - Modelagem de "preferencia do usuario"\n  - Politicas anti-spam (rate limit, cooldown, agrupamento)\n  - Trade-offs de implementacao (in-house vs servico externo)\n  - MVP vs versao final\nFormato:\n  - 3 opcoes de arquitetura, cada uma com pros/contras\n  - Modelo de dados sugerido\n  - Recomendacao final + razao\n  - Pergunte 5 perguntas de stakeholder que voce precisa antes de codar',
+    porque:'Voce admite que nao sabe e usa o agente como parceiro de pensamento, nao como executor. Resultado e clareza antes de gastar token escrevendo codigo errado.'
+  }
+];
+
+function showScenario(n){
+  var s=_scenarios[n];
+  var panel=document.getElementById('scenario-panel');
+  // highlight active button
+  var btns=panel.closest('.reveal').querySelectorAll('.g3 .card');
+  btns.forEach(function(b,i){b.style.borderColor=i===n?'var(--au)':'';});
+  panel.innerHTML='<div style="margin-bottom:var(--s4)">'
+    +'<div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s2)">Cenario '+( n+1)+' de 6</div>'
+    +'<div class="sh" style="margin-bottom:var(--s2)">'+s.title+'</div>'
+    +'<p style="font-size:var(--t-sm);color:var(--t2)">'+s.situacao+'</p>'
+    +'</div>'
+    +'<div class="cmp" style="margin-bottom:var(--s4)">'
+    +'<div class="cmp-bad"><div class="cmp-h">Prompt errado</div><div class="cmp-b" style="font-family:var(--f-mono);font-size:12px;white-space:pre-wrap">'+escHtml(s.bad)+'</div></div>'
+    +'<div class="cmp-good"><div class="cmp-h">Prompt certo</div><div class="cmp-b" style="font-family:var(--f-mono);font-size:12px;white-space:pre-wrap">'+escHtml(s.good)+'</div></div>'
+    +'</div>'
+    +'<div class="card" style="border-left:3px solid var(--au);padding:var(--s4)">'
+    +'<div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s2)">Por que funciona</div>'
+    +'<p style="font-size:var(--t-sm);color:var(--t2)">'+s.porque+'</p>'
+    +'</div>';
+}
+
+function escHtml(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+/* ========== CHECKLIST ========== */
+function toggleCheck(el){
+  el.classList.toggle('checked');
+  var id=el.getAttribute('data-check');
+  var checks=JSON.parse(localStorage.getItem('gie-checks')||'{}');
+  checks[id]=el.classList.contains('checked');
+  localStorage.setItem('gie-checks',JSON.stringify(checks));
+}
+function loadChecks(){
+  var checks=JSON.parse(localStorage.getItem('gie-checks')||'{}');
+  Object.keys(checks).forEach(function(id){
+    if(checks[id]){var el=document.querySelector('[data-check="'+id+'"]');if(el)el.classList.add('checked')}
+  });
+}
+loadChecks();
+</script>
+</div>
   <div id="page-stack" class="page" role="tabpanel"></div>
   <div id="page-skills" class="page" role="tabpanel"></div>
   <div id="page-avancado" class="page" role="tabpanel"></div>
