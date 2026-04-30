@@ -348,6 +348,394 @@
         </div>
       </div>
     </div>
+
+    <!-- ─── SECAO 1: Bifurcacao ─────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Duas portas. Mesmo metodo. Linguagem diferente.</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s6)">Voce e iniciante ou ja programa?</div>
+        <div class="g2">
+
+          <!-- Card A: Iniciante -->
+          <div class="card" style="border-top:3px solid var(--au);padding:var(--s6)">
+            <div class="ey" style="margin-bottom:var(--s3)">Iniciante curioso</div>
+            <div class="sh" style="font-size:var(--t-lg);margin-bottom:var(--s2)">"Nunca abri um terminal na vida"</div>
+            <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Voce ouviu falar de vibe coding, viu gente fazendo site sozinho com IA, ficou curioso. Nao sabe nem o que e Node.js. Tudo bem.</p>
+            <div style="margin-bottom:var(--s5)">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s3)">O que voce ganha</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--au)">→</span> Em 2 horas, primeiro projeto rodando</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--au)">→</span> Manual personalizado pra sua area de atuacao</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--au)">→</span> Setup automatico sem precisar entender Git agora</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--au)">→</span> Zero jargao desnecessario</li>
+              </ul>
+            </div>
+            <button class="hero-cta" style="width:100%" onclick="event.preventDefault();pg('setup',document.querySelector('[data-tab=setup]'))">Comeco por aqui &rarr;</button>
+          </div>
+
+          <!-- Card B: Dev experiente -->
+          <div class="card" style="border-top:3px solid var(--cdx);padding:var(--s6)">
+            <div class="ey" style="margin-bottom:var(--s3);color:var(--cdx)">Dev experiente</div>
+            <div class="sh" style="font-size:var(--t-lg);margin-bottom:var(--s2)">"Programo ha anos, quero parar de queimar token"</div>
+            <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Voce ja usa Claude Code ou Codex no dia a dia. Ja brigou com contexto inchado, ja viu agente se perder no meio da tarefa. Quer organizacao profissional, nao tutorial basico.</p>
+            <div style="margin-bottom:var(--s5)">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s3)">O que voce ganha</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx)">→</span> Metodo completo de organizacao global vs local</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx)">→</span> Comparativo Claude Code vs Codex sem fanboyice</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx)">→</span> Skills, hooks, MCP, plugins, marketplace</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--cdx)">→</span> Anti-patterns que custam token e produtividade</li>
+              </ul>
+            </div>
+            <button class="hero-cta" style="width:100%;background:var(--cdx)" onclick="event.preventDefault();pg('metodo',document.querySelector('[data-tab=metodo]'))">Vou direto ao ponto &rarr;</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 2: O que e isso aqui ──────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Em uma frase</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">O que e isso aqui</div>
+        <p style="font-size:var(--t-md);color:var(--t1);max-width:680px;margin-bottom:var(--s6);font-weight:500;line-height:1.6">Get It Easy e o metodo de operar agentes de IA. As ferramentas sao intercambiaveis. Voce fica com o que importa: <em style="color:var(--au);font-style:normal">saber operar.</em></p>
+        <div class="g3">
+          <div class="card" style="padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:28px;font-weight:700;color:var(--au);margin-bottom:var(--s3)">1</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Fundacao</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Mindset, contexto global vs local, organizacao, workflow. Vale pra qualquer agente.</p>
+          </div>
+          <div class="card" style="padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:28px;font-weight:700;color:var(--au);margin-bottom:var(--s3)">2</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Stack</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Claude Code, Codex, Cursor, skills, MCP, plugins. Lado a lado, sem fanatismo.</p>
+          </div>
+          <div class="card" style="padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:28px;font-weight:700;color:var(--au);margin-bottom:var(--s3)">3</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Personalizacao</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Quiz que monta seu manual, suas skills, seus projetos. Sob medida pro seu contexto.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 3: Pre-requisitos ──────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Antes de comecar</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">Pre-requisitos</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Vale tanto pra Claude Code quanto pra Codex. Sao a mesma base.</p>
+
+        <div class="sh" style="margin-bottom:var(--s4)">Os tres essenciais</div>
+        <div style="overflow-x:auto;margin-bottom:var(--s7)">
+          <table class="mt">
+            <thead>
+              <tr>
+                <th>Ferramenta</th>
+                <th>Pra que serve</th>
+                <th>Como verificar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color:var(--t1)">Node.js</strong></td>
+                <td>Instalar e rodar agentes via npm/npx</td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">node --version</code></td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Python</strong></td>
+                <td>Rodar scripts e skills baseadas em Python</td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">python --version</code></td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Git</strong></td>
+                <td>Versionar projetos e backup no GitHub</td>
+                <td><code style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au1)">git --version</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sh" style="margin-bottom:var(--s5)">Os agentes — escolhe um pra comecar, ou os dois</div>
+
+        <div class="g2" style="margin-bottom:var(--s6)">
+          <div>
+            <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s3)">
+              <span style="font-family:var(--f-body);font-weight:600;color:var(--t1)">Claude Code</span>
+              <span class="badge" style="background:var(--cc-bg);color:var(--cc);border:1px solid var(--cc-b)">Anthropic</span>
+            </div>
+            <div class="code">
+              <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+              <span class="code-body">npm install -g @anthropic-ai/claude-code</span>
+            </div>
+            <p style="font-size:var(--t-xs);color:var(--t3);margin-top:var(--s2)">Depois: <code style="font-family:var(--f-mono);color:var(--au1)">claude</code> no terminal pra abrir.</p>
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s3)">
+              <span style="font-family:var(--f-body);font-weight:600;color:var(--t1)">Codex CLI</span>
+              <span class="badge" style="background:var(--cdx-bg);color:var(--cdx);border:1px solid var(--cdx-b)">OpenAI</span>
+            </div>
+            <div class="code">
+              <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+              <span class="code-body">npm install -g @openai/codex</span>
+            </div>
+            <p style="font-size:var(--t-xs);color:var(--t3);margin-top:var(--s2)">Depois: <code style="font-family:var(--f-mono);color:var(--au1)">codex</code> no terminal pra abrir.</p>
+          </div>
+        </div>
+
+        <div class="card" style="padding:var(--s5);border-left:3px solid var(--au)">
+          <div class="sh" style="margin-bottom:var(--s2)">A conta no GitHub (essencial)</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Sem GitHub voce perde projeto se o computador queimar. Cria conta gratis em github.com, configura SSH ou login no terminal, e versiona tudo. <strong style="color:var(--t1)">Toda pasta de projeto vira um repositorio.</strong> Nao tem desculpa.</p>
+          <p style="font-size:var(--t-sm);color:var(--t3)">Se voce nao tem nada disso instalado: vai na Aba Do Zero ou faz o quiz — ele monta o setup pra voce. <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('setup',document.querySelector('[data-tab=setup]'))">Faco o quiz agora</button></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 4: FAQs ────────────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Antes de tocar em qualquer agente</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">8 conceitos fundamentais</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Resposta curta, sem enrolacao. Depois aprofunda nas outras abas.</p>
+        <div class="faq">
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">01</span> O que e uma "skill"?</span> <span class="ficon">+</span></button>
+            <div class="fa">Skill e uma pasta com um arquivo <code style="font-family:var(--f-mono);color:var(--au1)">SKILL.md</code> (e opcionalmente scripts) que ensina o agente a fazer uma tarefa especifica. Tipo: "como fazer um logo", "como analisar uma planilha de CNPJs", "como revisar codigo Python". O agente le a skill quando precisa, executa, retorna ao fluxo. E padrao aberto adotado por Claude Code, Codex, Cursor e Aider — nao e exclusivo de uma ferramenta. <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('skills',document.querySelector('[data-tab=skills]'))">Ver Aba Skills &rarr;</button></div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">02</span> O que e um "subagent"?</span> <span class="ficon">+</span></button>
+            <div class="fa">E uma sub-sessao que o agente principal abre pra resolver uma tarefa especifica sem poluir o contexto principal. Tipo um "estagiario" focado: voce pede "pesquisa X", ele pesquisa em paralelo, retorna resumo, libera o agente principal pra continuar. Reduz contexto, acelera trabalho. <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('metodo',document.querySelector('[data-tab=metodo]'))">Ver Aba Metodo &rarr;</button> e <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('avancado',document.querySelector('[data-tab=avancado]'))">Avancado &rarr;</button></div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">03</span> O que e CLAUDE.md / AGENTS.md?</span> <span class="ficon">+</span></button>
+            <div class="fa">E o "briefing" do projeto. Um markdown na raiz do projeto que diz pro agente: como esse projeto e organizado, qual o stack, quais convencoes seguir, o que NUNCA fazer. <strong style="color:var(--t1)">Claude Code chama de CLAUDE.md. Codex chama de AGENTS.md. O conteudo e quase identico.</strong> <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('oficio',document.querySelector('[data-tab=oficio]'))">Ver Aba Oficio &rarr;</button> e <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('avancado',document.querySelector('[data-tab=avancado]'))">Avancado &rarr;</button></div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">04</span> O que e MCP (Model Context Protocol)?</span> <span class="ficon">+</span></button>
+            <div class="fa">Padrao aberto que conecta agentes a ferramentas externas: bancos de dados, APIs, GitHub, Filesystem, Notion. Em vez de o agente "achar" dados na internet, ele consulta direto a fonte autenticada. <strong style="color:var(--t1)">Suportado nativamente por Claude Code e Codex.</strong> <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('avancado',document.querySelector('[data-tab=avancado]'))">Ver Aba Avancado &rarr;</button></div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">05</span> O que e janela de contexto?</span> <span class="ficon">+</span></button>
+            <div class="fa">E quanta informacao o agente consegue manter na cabeca em uma sessao. Em 2026, Claude Opus tem 1 milhao de tokens (~750 mil palavras), Codex (GPT-5.4) tem 1.05 milhao. Mas <strong style="color:var(--t1)">mais contexto nao e melhor automaticamente</strong> — contexto inchado distrai o agente. Por isso o metodo de global vs local importa tanto. <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('metodo',document.querySelector('[data-tab=metodo]'))">Ver Aba Metodo &rarr;</button></div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">06</span> Como e a primeira sessao com um agente?</span> <span class="ficon">+</span></button>
+            <div class="fa">Voce abre o terminal, vai na pasta do projeto, digita <code style="font-family:var(--f-mono);color:var(--au1)">claude</code> ou <code style="font-family:var(--f-mono);color:var(--au1)">codex</code>, e simplesmente conversa. O agente le os arquivos da pasta, le seu CLAUDE.md/AGENTS.md, le suas skills, e fica pronto. Voce diz o que quer, ele planeja, executa, mostra o resultado. <strong style="color:var(--t1)">Voce continua no controle</strong> — pode pedir mudanca, voltar passo, mudar abordagem.</div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">07</span> Claude Code ou Codex — qual escolher?</span> <span class="ficon">+</span></button>
+            <div class="fa">Resposta honesta: <strong style="color:var(--t1)">os dois funcionam bem em 2026 e convergem em features.</strong> Codex tem barreira de entrada menor (mais "out of the box"), desktop app polido, consome menos tokens. Claude Code tem mais granularidade pra customizar (26 hooks vs 3 modos), Computer Use mais maduro, output mais minucioso em avaliacoes cegas. Se voce esta comecando, qualquer um serve. Se quer o melhor de cada, use os dois pra revisao cruzada. <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('stack',document.querySelector('[data-tab=stack]'))">Ver Aba Stack &rarr;</button></div>
+          </div>
+
+          <div class="fi">
+            <button class="fq" onclick="tf(this)"><span><span style="color:var(--au);font-family:var(--f-mono);margin-right:var(--s3)">08</span> Vou estar refem de uma empresa?</span> <span class="ficon">+</span></button>
+            <div class="fa">Nao se voce aprender o metodo aqui. Skills sao padrao aberto. AGENTS.md e padrao aberto. MCP e padrao aberto. Os conceitos de global vs local funcionam em qualquer agente. <strong style="color:var(--t1)">Voce aprende o oficio uma vez, e migra de ferramenta quando quiser. Esse e o ponto inteiro do toolkit.</strong></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 5: Stats ───────────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Em numeros</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s6)">O toolkit em dados</div>
+        <div class="g4">
+          <div class="card" style="text-align:center;padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:38px;font-weight:700;color:var(--au);line-height:1">107+</div>
+            <div style="font-size:var(--t-sm);color:var(--t3);margin-top:var(--s2)">skills documentadas</div>
+          </div>
+          <div class="card" style="text-align:center;padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:38px;font-weight:700;color:var(--au);line-height:1">5</div>
+            <div style="font-size:var(--t-sm);color:var(--t3);margin-top:var(--s2)">ferramentas cobertas</div>
+          </div>
+          <div class="card" style="text-align:center;padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:38px;font-weight:700;color:var(--au);line-height:1">24+</div>
+            <div style="font-size:var(--t-sm);color:var(--t3);margin-top:var(--s2)">agentes de exemplo</div>
+          </div>
+          <div class="card" style="text-align:center;padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:38px;font-weight:700;color:var(--au);line-height:1">2</div>
+            <div style="font-size:var(--t-sm);color:var(--t3);margin-top:var(--s2)">padroes interoperaveis</div>
+          </div>
+          <div class="card" style="text-align:center;padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:38px;font-weight:700;color:var(--au);line-height:1">9</div>
+            <div style="font-size:var(--t-sm);color:var(--t3);margin-top:var(--s2)">abas no toolkit</div>
+          </div>
+          <div class="card" style="text-align:center;padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:38px;font-weight:700;color:var(--au);line-height:1">4M</div>
+            <div style="font-size:var(--t-sm);color:var(--t3);margin-top:var(--s2)">devs usando Codex/semana</div>
+            <div style="font-size:var(--t-xs);color:var(--t4);margin-top:2px">OpenAI, abr/2026</div>
+          </div>
+          <div class="card" style="text-align:center;padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:38px;font-weight:700;color:var(--au);line-height:1">~4%</div>
+            <div style="font-size:var(--t-sm);color:var(--t3);margin-top:var(--s2)">commits publicos via Claude Code</div>
+            <div style="font-size:var(--t-xs);color:var(--t4);margin-top:2px">SemiAnalysis, fev/2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 6: Mapa de navegacao ───────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Navegue pelo objetivo</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s6)">Como navegar o toolkit</div>
+        <div style="display:flex;flex-direction:column;gap:var(--s4)">
+
+          <div class="card" style="padding:var(--s4) var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s2)">"Quero entender o que e isso tudo"</div>
+            <div style="display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap">
+              <span style="font-size:var(--t-sm);color:var(--t1);font-weight:500">Aba 1 — voce esta aqui</span>
+              <span style="color:var(--au)">→</span>
+              <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('metodo',document.querySelector('[data-tab=metodo]'))">O Metodo</button>
+              <span style="color:var(--au)">→</span>
+              <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('oficio',document.querySelector('[data-tab=oficio]'))">Oficio</button>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s4) var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s2)">"Quero comecar a usar agora"</div>
+            <div style="display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap">
+              <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('setup',document.querySelector('[data-tab=setup]'))">Setup — quiz</button>
+              <span style="color:var(--au)">→</span>
+              <span style="font-size:var(--t-sm);color:var(--t2)">Pre-requisitos acima</span>
+              <span style="color:var(--au)">→</span>
+              <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('setup',document.querySelector('[data-tab=setup]'))">Volta pro quiz</button>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s4) var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s2)">"Ja uso agente, quero organizar melhor"</div>
+            <div style="display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap">
+              <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('metodo',document.querySelector('[data-tab=metodo]'))">O Metodo</button>
+              <span style="color:var(--au)">→</span>
+              <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('avancado',document.querySelector('[data-tab=avancado]'))">Avancado</button>
+              <span style="color:var(--au)">→</span>
+              <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('cola',document.querySelector('[data-tab=cola]'))">Cola &amp; Dicas Pro</button>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s4) var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s2)">"Quero comparar Claude Code vs Codex"</div>
+            <div style="display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap">
+              <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('stack',document.querySelector('[data-tab=stack]'))">Stack</button>
+              <span style="color:var(--au)">→</span>
+              <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('custos',document.querySelector('[data-tab=custos]'))">Custos &amp; Planos</button>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s4) var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s2)">"Quero criar minhas proprias skills"</div>
+            <div style="display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap">
+              <button style="background:none;border:none;color:var(--au);cursor:pointer;font-size:var(--t-sm);padding:0;text-decoration:underline" onclick="event.preventDefault();pg('skills',document.querySelector('[data-tab=skills]'))">Skills</button>
+              <span style="color:var(--au)">→</span>
+              <span style="font-size:var(--t-sm);color:var(--t2)">Sub-aba Custom Skills</span>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s4) var(--s5);border-color:var(--au3)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s2)">"Estou perdido, me ajuda"</div>
+            <div style="display:flex;align-items:center;gap:var(--s2)">
+              <button class="hero-cta" style="padding:8px 20px;font-size:var(--t-sm)" onclick="event.preventDefault();pg('setup',document.querySelector('[data-tab=setup]'))">Faz o quiz, ele resolve &rarr;</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 7: A primeira pergunta ─────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div style="background:var(--aubg);border:1px solid rgba(217,168,50,.18);border-radius:var(--r-xl);padding:var(--s7)">
+          <div class="ey" style="margin-bottom:var(--s4)">Antes de instalar qualquer coisa</div>
+          <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s5)">A primeira pergunta que voce devia se fazer</div>
+          <p style="font-size:var(--t-md);color:var(--t2);margin-bottom:var(--s5)">Antes de instalar qualquer coisa, antes de assistir tutorial, antes de gastar token: pergunta isso.</p>
+          <div style="background:var(--bg0);border:1px solid var(--b2);border-radius:var(--r-lg);padding:var(--s5) var(--s6);margin-bottom:var(--s5)">
+            <p style="font-family:var(--f-display);font-size:var(--t-lg);font-weight:700;color:var(--t1);line-height:1.4">"O que eu quero que esse agente faca por mim, repetidamente, no proximo ano?"</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s6)">
+            <div style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au)">→</span> Se a resposta e "site pra cliente" — voce vai em uma direcao.</div>
+            <div style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au)">→</span> Se e "analise de planilhas grandes" — outra direcao.</div>
+            <div style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au)">→</span> Se e "automacao de tarefas chatas no escritorio" — outra direcao.</div>
+            <div style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au)">→</span> Se e "aprender a programar do zero" — outra direcao ainda.</div>
+          </div>
+          <p style="font-size:var(--t-b);color:var(--t1);font-weight:600;margin-bottom:var(--s5)">O agente e a ferramenta. <em style="color:var(--au);font-style:normal">Voce e o oficio.</em> O quiz na Aba Setup ajuda voce a responder essa pergunta com clareza, e te entrega um manual personalizado em cima da resposta.</p>
+          <button class="hero-cta" onclick="event.preventDefault();pg('setup',document.querySelector('[data-tab=setup]'))">Faco o quiz agora &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 8: CTA final ───────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Escolha seu caminho</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">Comeco agora</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Tres caminhos dependendo do seu perfil.</p>
+        <div class="g3">
+
+          <div class="card" style="padding:var(--s6);display:flex;flex-direction:column;gap:var(--s4)">
+            <div>
+              <div class="badge b-opt" style="margin-bottom:var(--s3)">Iniciante completo</div>
+              <div class="sh" style="margin-bottom:var(--s2)">Do zero ao primeiro projeto</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Aba Do Zero (setup guiado) ou quiz na Aba Setup — ele monta o caminho pra voce.</p>
+            </div>
+            <button class="hero-cta" style="width:100%" onclick="event.preventDefault();pg('setup',document.querySelector('[data-tab=setup]'))">Faco o quiz &rarr;</button>
+          </div>
+
+          <div class="card" style="padding:var(--s6);display:flex;flex-direction:column;gap:var(--s4);border-color:var(--b2)">
+            <div>
+              <div class="badge b-new" style="margin-bottom:var(--s3)">Alguma experiencia</div>
+              <div class="sh" style="margin-bottom:var(--s2)">Metodo + ferramentas</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Aba O Metodo e depois Aba Stack. Fundacao solida antes de customizar.</p>
+            </div>
+            <button class="hero-cta" onclick="event.preventDefault();pg('metodo',document.querySelector('[data-tab=metodo]'))">Ver O Metodo &rarr;</button>
+          </div>
+
+          <div class="card" style="padding:var(--s6);display:flex;flex-direction:column;gap:var(--s4)">
+            <div>
+              <div class="badge" style="background:var(--cc-bg);color:var(--cc);border:1px solid var(--cc-b);margin-bottom:var(--s3)">Dev experiente</div>
+              <div class="sh" style="margin-bottom:var(--s2)">Avancado + cola pro</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Aba Avancado e depois Aba Cola &amp; Dicas. Direto ao que importa pra quem ja opera.</p>
+            </div>
+            <button class="hero-cta" style="background:var(--cc)" onclick="event.preventDefault();pg('avancado',document.querySelector('[data-tab=avancado]'))">Ver Avancado &rarr;</button>
+          </div>
+
+        </div>
+
+        <!-- Nota de fechamento -->
+        <div style="margin-top:var(--s8);padding:var(--s5);border-top:1px solid var(--b1);text-align:center">
+          <p style="font-size:var(--t-sm);color:var(--t3);max-width:600px;margin:0 auto">O metodo aqui foi construido testando com clientes reais, em portugues, no Brasil. Nao e traducao de tutorial gringo. As ferramentas que cobrimos sao as que efetivamente funcionam — testadas, nao teoricas.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="sec-spacer"></div>
+
   </div>
   <div id="page-metodo" class="page" role="tabpanel"></div>
   <div id="page-oficio" class="page" role="tabpanel"></div>
