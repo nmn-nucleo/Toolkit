@@ -5127,7 +5127,681 @@ function resetQuiz() {
 </script>
 </div>
   <div id="page-cola" class="page" role="tabpanel"></div>
-  <div id="page-custos" class="page" role="tabpanel"></div>
+  <div id="page-custos" class="page" role="tabpanel">
+<style>
+.custos-badge-cc{background:var(--cc-bg);color:var(--cc);border:1px solid var(--cc-b);font-family:var(--f-mono);font-size:var(--t-xs);padding:2px 8px;border-radius:4px}
+.custos-badge-cdx{background:var(--cdx-bg);color:var(--cdx);border:1px solid var(--cdx-b);font-family:var(--f-mono);font-size:var(--t-xs);padding:2px 8px;border-radius:4px}
+.custos-price-highlight{font-family:var(--f-mono);font-weight:600;color:var(--au)}
+.custos-notice{background:var(--aubg);border:1px solid rgba(217,168,50,.22);border-radius:var(--r-md);padding:var(--s4) var(--s5);font-size:var(--t-sm);color:var(--t2)}
+.custos-scenario{background:var(--bg3);border:1px solid var(--b1);border-radius:var(--r-lg);padding:var(--s5);display:flex;flex-direction:column;gap:var(--s3)}
+.custos-scenario-price{font-family:var(--f-display);font-weight:800;font-size:var(--t-xl);color:var(--au)}
+.custos-scenario-label{font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t3);text-transform:uppercase;letter-spacing:.08em}
+.custos-hack{background:var(--bg3);border:1px solid var(--b1);border-left:3px solid var(--ok);border-radius:var(--r-md);padding:var(--s4) var(--s5)}
+.custos-hidden{background:var(--bg3);border:1px solid var(--b1);border-left:3px solid var(--err);border-radius:var(--r-md);padding:var(--s4) var(--s5)}
+.custos-val-col{background:var(--ok-bg);border:1px solid var(--ok-b);border-radius:var(--r-md);padding:var(--s4)}
+.custos-nval-col{background:var(--err-bg);border:1px solid var(--err-b);border-radius:var(--r-md);padding:var(--s4)}
+.custos-rec-block{background:var(--aubg);border:1px solid rgba(217,168,50,.22);border-radius:var(--r-xl);padding:var(--s7) var(--s6);text-align:center}
+.custos-efic-bar{height:6px;border-radius:3px;background:var(--bg2);overflow:hidden;margin-top:4px}
+.custos-efic-fill-cc{height:100%;background:var(--cc);border-radius:3px}
+.custos-efic-fill-cdx{height:100%;background:var(--cdx);border-radius:3px}
+@media(max-width:768px){.custos-g4{grid-template-columns:1fr 1fr!important}}
+@media(max-width:480px){.custos-g4{grid-template-columns:1fr!important}}
+</style>
+
+<!-- ─── INTRO ─────────────────────────────────────────────────────── -->
+<div class="W2">
+  <div class="reveal">
+    <div class="ey">Calculadora + comparativo + cenarios reais</div>
+    <h2 class="DH">Sem dolar virando susto.<br><em>Calculo em real,</em> com cenario seu.</h2>
+    <p class="dl">Conteudo gringo cota custo em dolar e nao serve pra voce planejar. Esta aba traduz tudo pra <strong>reais</strong>, com cenarios reais (estudante, freelancer, time pequeno, projeto pesado), comparativo Claude Code vs Codex, e calculadora interativa pra estimar custo mensal antes de assinar.</p>
+    <div class="custos-notice">Ultima revisao de precos: <strong>abril 2026</strong>. Cambio de referencia: <strong>R$ 5,40 / USD</strong>. Confira valores atuais no checkout do provider.</div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ─── SECAO 1 — OS PLANOS HOJE ────────────────────────────────── -->
+<div class="W">
+  <div class="reveal">
+    <div class="ey">Secao 1</div>
+    <h3 class="sh" style="font-size:var(--t-xl)">Os planos hoje (lado a lado)</h3>
+  </div>
+
+  <div class="g2 reveal" style="gap:var(--s6);margin-top:var(--s6);align-items:start">
+    <!-- Anthropic -->
+    <div>
+      <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4)">
+        <span class="custos-badge-cc">Claude Code</span>
+        <span style="font-size:var(--t-sm);color:var(--t3)">Anthropic</span>
+      </div>
+      <table class="mt">
+        <thead>
+          <tr>
+            <th>Plano</th>
+            <th>USD/mes</th>
+            <th style="color:var(--au)">R$ (~5,40)</th>
+            <th>Limites</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Pro</strong></td>
+            <td>$20</td>
+            <td class="custos-price-highlight">~R$ 108</td>
+            <td>Sonnet 4.6 + uso moderado de Opus 4.7. Limites diarios. Adequado pra uso pessoal.</td>
+          </tr>
+          <tr>
+            <td><strong>Max 5x</strong></td>
+            <td>$100</td>
+            <td class="custos-price-highlight">~R$ 540</td>
+            <td>5x o uso do Pro. Acesso priorizado a Opus 4.7.</td>
+          </tr>
+          <tr>
+            <td><strong>Max 20x</strong></td>
+            <td>$200</td>
+            <td class="custos-price-highlight">~R$ 1.080</td>
+            <td>20x o uso do Pro. Limites altos pra trabalho profissional intensivo.</td>
+          </tr>
+          <tr>
+            <td><strong>API</strong></td>
+            <td>Pay-per-token</td>
+            <td class="custos-price-highlight">Variavel</td>
+            <td>Sonnet 4.6: ~$3/$15 por M tokens. Opus 4.7: ~$15/$75.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- OpenAI -->
+    <div>
+      <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4)">
+        <span class="custos-badge-cdx">Codex</span>
+        <span style="font-size:var(--t-sm);color:var(--t3)">OpenAI</span>
+      </div>
+      <table class="mt">
+        <thead>
+          <tr>
+            <th>Plano</th>
+            <th>USD/mes</th>
+            <th style="color:var(--au)">R$ (~5,40)</th>
+            <th>Limites</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ChatGPT Plus</strong></td>
+            <td>$20</td>
+            <td class="custos-price-highlight">~R$ 108</td>
+            <td>Codex incluso. GPT-5.4 com limites moderados.</td>
+          </tr>
+          <tr>
+            <td><strong>ChatGPT Pro</strong></td>
+            <td>$200</td>
+            <td class="custos-price-highlight">~R$ 1.080</td>
+            <td>Codex sem limite pratico, reasoning high, Codex Cloud incluso.</td>
+          </tr>
+          <tr>
+            <td><strong>API</strong></td>
+            <td>Pay-per-token</td>
+            <td class="custos-price-highlight">Variavel</td>
+            <td>GPT-5.4: ~$2/$8 por M tokens.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Comparativo direto -->
+  <div class="reveal" style="margin-top:var(--s7)">
+    <h4 class="sh">Comparativo direto</h4>
+    <table class="mt" style="margin-top:var(--s4)">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Pro / Plus ($20)</th>
+          <th>Max 5x / (sem equivalente)</th>
+          <th>Max 20x / Pro ($200)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="custos-badge-cc">Claude Code</span></td>
+          <td>Pro — Sonnet ilimitado moderado, Opus limitado</td>
+          <td>Max 5x — todos modelos, 5x uso</td>
+          <td>Max 20x — todos modelos, 20x uso</td>
+        </tr>
+        <tr>
+          <td><span class="custos-badge-cdx">Codex</span></td>
+          <td>ChatGPT Plus — Codex incluso, limites moderados</td>
+          <td style="color:var(--t4);">(nao tem tier intermediario)</td>
+          <td>ChatGPT Pro — Codex sem limite pratico, Cloud incluso</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:var(--s4);font-size:var(--t-sm);color:var(--t3)"><strong style="color:var(--warn)">Observacao:</strong> Codex pula o tier intermediario. Voce paga $20 ou $200 — entre os dois nao ha opcao.</p>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ─── SECAO 2 — CENARIOS REAIS ────────────────────────────────── -->
+<div class="W">
+  <div class="reveal">
+    <div class="ey">Secao 2</div>
+    <h3 class="sh" style="font-size:var(--t-xl)">Cenarios reais em R$</h3>
+    <p style="font-size:var(--t-sm);color:var(--t3);margin-bottom:var(--s6)">4 personas com uso tipico. Numero estimado, varia conforme intensidade.</p>
+  </div>
+
+  <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--s4)" class="custos-g4">
+
+    <!-- Estudante -->
+    <div class="custos-scenario" style="border-top:3px solid var(--opc)">
+      <div class="custos-scenario-label">Estudante / hobbyista</div>
+      <div class="custos-scenario-price">R$ 108/mes</div>
+      <p style="font-size:var(--t-xs);color:var(--t3)">1-2h por dia, projetos pessoais, aprendizado.</p>
+      <table class="mt" style="margin-top:var(--s3)">
+        <thead><tr><th>Recomendacao</th><th>Custo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Codex via ChatGPT Plus</strong></td><td class="custos-price-highlight">R$ 108</td></tr>
+          <tr><td>API pay-per-token (uso leve)</td><td style="color:var(--t3)">R$ 30-80</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:var(--t-xs);color:var(--t2);margin-top:var(--s3)">ChatGPT Plus inclui Codex + ChatGPT regular pra outras necessidades. Melhor custo-beneficio pra quem nao depende profissionalmente.</p>
+    </div>
+
+    <!-- Freelancer -->
+    <div class="custos-scenario" style="border-top:3px solid var(--ok)">
+      <div class="custos-scenario-label">Freelancer / dev solo</div>
+      <div class="custos-scenario-price">R$ 540/mes</div>
+      <p style="font-size:var(--t-xs);color:var(--t3)">4-6h por dia, projetos pagos, varios clientes simultaneos.</p>
+      <table class="mt" style="margin-top:var(--s3)">
+        <thead><tr><th>Recomendacao</th><th>Custo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Claude Code Max 5x</strong></td><td class="custos-price-highlight">R$ 540</td></tr>
+          <tr><td>ChatGPT Plus + Claude Pro (combo)</td><td style="color:var(--t3)">~R$ 216</td></tr>
+          <tr><td>Codex Plus + skills bem feitas</td><td style="color:var(--t3)">R$ 108</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:var(--t-xs);color:var(--t2);margin-top:var(--s3)">Max 5x da headroom suficiente pra trabalho profissional sem ansiedade de limite. Combo de dois Pro custa ~metade e permite revisao cruzada. <strong>Dica:</strong> comece com combo Plus + Pro (R$ 216). Se sentir limitacao, sobe pra Max 5x.</p>
+    </div>
+
+    <!-- Time pequeno -->
+    <div class="custos-scenario" style="border-top:3px solid var(--gsd)">
+      <div class="custos-scenario-label">Time pequeno (3-5 devs)</div>
+      <div class="custos-scenario-price">R$ 1.512/mes</div>
+      <p style="font-size:var(--t-xs);color:var(--t3)">Trabalho intensivo, multiplos projetos paralelos, codigo critico.</p>
+      <table class="mt" style="margin-top:var(--s3)">
+        <thead><tr><th>Recomendacao</th><th>Custo (time)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Max 20x (1) + 4x Pro</strong></td><td class="custos-price-highlight">R$ 1.512</td></tr>
+          <tr><td>2x Max 5x + 3x ChatGPT Plus</td><td style="color:var(--t3)">R$ 1.404</td></tr>
+          <tr><td>5x ChatGPT Pro</td><td style="color:var(--err)">R$ 5.400 (caro)</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:var(--t-xs);color:var(--t2);margin-top:var(--s3)">Time precisa balancear conta principal forte (Max 20x pra codigo critico) + contas regulares pra dev individual. Codex Pro a $200 fica caro pra todo dev.</p>
+    </div>
+
+    <!-- Projeto critico -->
+    <div class="custos-scenario" style="border-top:3px solid var(--err)">
+      <div class="custos-scenario-label">Projeto critico</div>
+      <div class="custos-scenario-price">R$ 2.160/mes</div>
+      <p style="font-size:var(--t-xs);color:var(--t3)">Financeiro/saude/legal — revisao cruzada obrigatoria.</p>
+      <table class="mt" style="margin-top:var(--s3)">
+        <thead><tr><th>Recomendacao</th><th>Custo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Max 20x + Codex Pro (cross-review)</strong></td><td class="custos-price-highlight">R$ 2.160</td></tr>
+          <tr><td>API pay-per-token controlado</td><td style="color:var(--t3)">R$ 1-3k</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:var(--t-xs);color:var(--t2);margin-top:var(--s3)">Claude escreve, Codex revisa (ou vice-versa). Custo dobra, qualidade tambem. <strong>Bug em producao em projeto critico custa muito mais que R$ 1.080/mes.</strong></p>
+    </div>
+
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ─── SECAO 3 — CALCULADORA ────────────────────────────────────── -->
+<div class="W2">
+  <div class="reveal">
+    <div class="ey">Secao 3</div>
+    <h3 class="sh" style="font-size:var(--t-xl)">Calculadora interativa de custo</h3>
+    <p style="font-size:var(--t-sm);color:var(--t3);margin-bottom:var(--s6)">Responde as perguntas e a calculadora estima seu custo mensal. Use como <strong>referencia, nao previsao exata</strong> — uso real varia.</p>
+  </div>
+
+  <div class="reveal">
+    <div class="card" style="border:1px solid var(--aubg);padding:var(--s6)">
+      <!-- Model selector -->
+      <div style="margin-bottom:var(--s5)">
+        <label style="font-size:var(--t-xs);color:var(--t3);font-family:var(--f-mono);display:block;margin-bottom:var(--s2)">AGENTE PRINCIPAL</label>
+        <div style="display:flex;gap:var(--s2)">
+          <button id="calc-cc" onclick="calcAgent('cc')" style="flex:1;padding:var(--s3);font-size:var(--t-xs);font-family:var(--f-mono);background:var(--bg3);border:1px solid var(--b2);border-radius:var(--r-sm);color:var(--t2);cursor:pointer">Claude Code</button>
+          <button id="calc-cdx" onclick="calcAgent('cdx')" style="flex:1;padding:var(--s3);font-size:var(--t-xs);font-family:var(--f-mono);background:var(--au);border:1px solid var(--au);border-radius:var(--r-sm);color:var(--bg0);cursor:pointer">Codex</button>
+        </div>
+      </div>
+
+      <!-- Plano -->
+      <div style="margin-bottom:var(--s5)">
+        <label style="font-size:var(--t-xs);color:var(--t3);font-family:var(--f-mono);display:block;margin-bottom:var(--s2)">PLANO</label>
+        <select id="calc-plan" onchange="calcUpdate()" style="width:100%;padding:var(--s3);font-size:var(--t-sm);font-family:var(--f-mono);background:var(--bg3);border:1px solid var(--b2);border-radius:var(--r-sm);color:var(--t1)">
+          <option value="pro">Pro / Plus ($20/mes)</option>
+          <option value="max5">Max 5x ($100/mes)</option>
+          <option value="max20">Max 20x / Pro ($200/mes)</option>
+          <option value="api">API (pay-per-token)</option>
+        </select>
+      </div>
+
+      <!-- Cambio -->
+      <div style="margin-bottom:var(--s5)">
+        <label style="font-size:var(--t-xs);color:var(--t3);font-family:var(--f-mono);display:block;margin-bottom:var(--s2)">CAMBIO USD&rarr;BRL</label>
+        <input id="calc-cambio" type="number" value="5.40" step="0.10" min="1" max="20" oninput="calcUpdate()" style="width:100%;padding:var(--s3);font-size:var(--t-b);font-family:var(--f-mono);background:var(--bg3);border:1px solid var(--b2);border-radius:var(--r-sm);color:var(--t1)">
+      </div>
+
+      <!-- Devs -->
+      <div style="margin-bottom:var(--s5)">
+        <label style="font-size:var(--t-xs);color:var(--t3);font-family:var(--f-mono);display:block;margin-bottom:var(--s2)">NUMERO DE DEVS <span id="calc-devs-v" style="color:var(--au)">1</span></label>
+        <input id="calc-devs" type="range" min="1" max="20" value="1" oninput="document.getElementById('calc-devs-v').textContent=this.value;calcUpdate()" style="width:100%;accent-color:var(--au)">
+      </div>
+
+      <!-- Presets -->
+      <div style="display:flex;gap:var(--s2);margin-bottom:var(--s5);flex-wrap:wrap">
+        <button onclick="calcPreset('estudante')" style="padding:var(--s2) var(--s4);font-size:var(--t-xs);font-family:var(--f-mono);background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r-sm);color:var(--t2);cursor:pointer">Estudante</button>
+        <button onclick="calcPreset('freelancer')" style="padding:var(--s2) var(--s4);font-size:var(--t-xs);font-family:var(--f-mono);background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r-sm);color:var(--t2);cursor:pointer">Freelancer</button>
+        <button onclick="calcPreset('time')" style="padding:var(--s2) var(--s4);font-size:var(--t-xs);font-family:var(--f-mono);background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r-sm);color:var(--t2);cursor:pointer">Time 5 devs</button>
+        <button onclick="calcPreset('critico')" style="padding:var(--s2) var(--s4);font-size:var(--t-xs);font-family:var(--f-mono);background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r-sm);color:var(--t2);cursor:pointer">Projeto critico</button>
+      </div>
+
+      <!-- Result -->
+      <div style="background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r-lg);padding:var(--s6)">
+        <div style="display:flex;align-items:baseline;gap:var(--s3);margin-bottom:var(--s4)">
+          <span style="font-family:var(--f-display);font-size:var(--t-2xl);font-weight:700;color:var(--au)" id="calc-result">R$ 108</span>
+          <span style="font-size:var(--t-sm);color:var(--t3)">/mes (estimativa)</span>
+        </div>
+        <div class="g2" style="gap:var(--s4)">
+          <div>
+            <div style="font-size:var(--t-xs);color:var(--t4);font-family:var(--f-mono)">CUSTO USD/MES</div>
+            <div style="font-size:var(--t-md);color:var(--t1);font-family:var(--f-mono)" id="calc-usd">$20</div>
+          </div>
+          <div>
+            <div style="font-size:var(--t-xs);color:var(--t4);font-family:var(--f-mono)">POR DEV</div>
+            <div style="font-size:var(--t-md);color:var(--t1);font-family:var(--f-mono)" id="calc-per-dev">R$ 108</div>
+          </div>
+        </div>
+        <p style="font-size:var(--t-xs);color:var(--t4);margin-top:var(--s4)" id="calc-dica">Dica: ChatGPT Plus ou Claude Pro e o melhor ponto de entrada.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var calcCurrentAgent = 'cdx';
+var calcPrices = {
+  cc: { pro: 20, max5: 100, max20: 200, api: 0 },
+  cdx: { pro: 20, max5: null, max20: 200, api: 0 }
+};
+
+function calcAgent(agent) {
+  calcCurrentAgent = agent;
+  document.getElementById('calc-cc').style.background = agent === 'cc' ? 'var(--au)' : 'var(--bg3)';
+  document.getElementById('calc-cc').style.borderColor = agent === 'cc' ? 'var(--au)' : 'var(--b2)';
+  document.getElementById('calc-cc').style.color = agent === 'cc' ? 'var(--bg0)' : 'var(--t2)';
+  document.getElementById('calc-cdx').style.background = agent === 'cdx' ? 'var(--au)' : 'var(--bg3)';
+  document.getElementById('calc-cdx').style.borderColor = agent === 'cdx' ? 'var(--au)' : 'var(--b2)';
+  document.getElementById('calc-cdx').style.color = agent === 'cdx' ? 'var(--bg0)' : 'var(--t2)';
+  var sel = document.getElementById('calc-plan');
+  sel.options[1].disabled = agent === 'cdx';
+  sel.options[1].text = agent === 'cdx' ? 'Max 5x (indisponivel Codex)' : 'Max 5x ($100/mes)';
+  if (agent === 'cdx' && sel.value === 'max5') sel.value = 'pro';
+  calcUpdate();
+}
+
+function calcUpdate() {
+  var plan = document.getElementById('calc-plan').value;
+  var cambio = parseFloat(document.getElementById('calc-cambio').value) || 5.40;
+  var devs = parseInt(document.getElementById('calc-devs').value) || 1;
+  var prices = calcPrices[calcCurrentAgent];
+  var usd = prices[plan] || 0;
+  if (plan === 'api') usd = calcCurrentAgent === 'cc' ? 4 * devs : 2 * devs;
+  var totalUsd = usd * devs;
+  if (plan !== 'api') totalUsd = usd * devs;
+  var totalBrl = Math.round(totalUsd * cambio);
+  var perDev = Math.round((totalUsd / devs) * cambio);
+
+  document.getElementById('calc-result').textContent = 'R$ ' + totalBrl.toLocaleString('pt-BR');
+  document.getElementById('calc-usd').textContent = '$' + totalUsd;
+  document.getElementById('calc-per-dev').textContent = 'R$ ' + perDev.toLocaleString('pt-BR');
+
+  var dicas = {
+    pro: 'Melhor ponto de entrada. Da conta de uso pessoal e projetos leves.',
+    max5: '5x o uso do Pro. Bom pra freelancer com varios clientes.',
+    max20: 'Uso profissional intensivo. Justifica em projetos pagos.',
+    api: 'Pay-per-token. Mais economico pra uso intermitente, mais caro pra uso intensivo.'
+  };
+  document.getElementById('calc-dica').textContent = 'Dica: ' + (dicas[plan] || '');
+}
+
+function calcPreset(preset) {
+  var sel = document.getElementById('calc-plan');
+  var devs = document.getElementById('calc-devs');
+  switch(preset) {
+    case 'estudante': calcAgent('cdx'); sel.value = 'pro'; devs.value = 1; break;
+    case 'freelancer': calcAgent('cc'); sel.value = 'max5'; devs.value = 1; break;
+    case 'time': calcAgent('cc'); sel.value = 'max20'; devs.value = 5; break;
+    case 'critico': calcAgent('cc'); sel.value = 'max20'; devs.value = 2; break;
+  }
+  document.getElementById('calc-devs-v').textContent = devs.value;
+  calcUpdate();
+}
+</script>
+
+<div class="div"></div>
+
+<!-- ─── SECAO 4 — QUANDO VALE TER OS DOIS ───────────────────────── -->
+<div class="W">
+  <div class="reveal">
+    <div class="ey">Secao 4</div>
+    <h3 class="sh" style="font-size:var(--t-xl)">Quando vale ter os dois (revisao cruzada)</h3>
+    <p style="font-size:var(--t-sm);color:var(--t3);margin-bottom:var(--s6)">A pergunta nao e "qual escolher" — e "quando vale pagar pelos dois?"</p>
+  </div>
+
+  <div class="g2 reveal" style="gap:var(--s5)">
+    <div class="custos-val-col">
+      <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--ok);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--s4)">Vale pagar pelos dois quando...</div>
+      <div style="display:flex;flex-direction:column;gap:var(--s4)">
+        <div>
+          <div style="font-size:var(--t-sm);font-weight:600;color:var(--t1);margin-bottom:4px">1. Voce trabalha em codigo critico</div>
+          <p style="font-size:var(--t-xs);color:var(--t2)">Bug em producao em sistema de pagamento, saude, juridico ou area regulada custa <strong>muito</strong> mais que R$ 1.080/mes. Revisao cruzada pega 53-80% mais bugs que solo.</p>
+        </div>
+        <div>
+          <div style="font-size:var(--t-sm);font-weight:600;color:var(--t1);margin-bottom:4px">2. Voce cobra projetos premium</div>
+          <p style="font-size:var(--t-xs);color:var(--t2)">Cliente que paga R$ 30k pra entrega merece codigo revisado em pipeline de qualidade. Custo de R$ 2.160/mes vira 7% de uma entrega. Negocio.</p>
+        </div>
+        <div>
+          <div style="font-size:var(--t-sm);font-weight:600;color:var(--t1);margin-bottom:4px">3. Voce esta em time profissional</div>
+          <p style="font-size:var(--t-xs);color:var(--t2)">Em time, voce nao pode arriscar bug por economia de R$ 1k/mes. Combo justifica facil.</p>
+        </div>
+        <div>
+          <div style="font-size:var(--t-sm);font-weight:600;color:var(--t1);margin-bottom:4px">4. Voce e early adopter</div>
+          <p style="font-size:var(--t-xs);color:var(--t2)">Vale por 2-3 meses pra entender qual encaixa melhor no seu fluxo, depois decide.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="custos-nval-col">
+      <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--err);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--s4)">NAO vale pagar pelos dois quando...</div>
+      <div style="display:flex;flex-direction:column;gap:var(--s4)">
+        <div>
+          <div style="font-size:var(--t-sm);font-weight:600;color:var(--t1);margin-bottom:4px">1. Voce esta comecando</div>
+          <p style="font-size:var(--t-xs);color:var(--t2)">Antes de pagar pelos dois, <strong>domine um</strong>. So o tempo de aprendizado dobra se voce divide foco.</p>
+        </div>
+        <div>
+          <div style="font-size:var(--t-sm);font-weight:600;color:var(--t1);margin-bottom:4px">2. Tarefas sao simples / repetitivas</div>
+          <p style="font-size:var(--t-xs);color:var(--t2)">Codigo nao-critico, projeto pessoal, automacao basica — um agente sozinho da conta de sobra.</p>
+        </div>
+        <div>
+          <div style="font-size:var(--t-sm);font-weight:600;color:var(--t1);margin-bottom:4px">3. Orcamento aperta</div>
+          <p style="font-size:var(--t-xs);color:var(--t2)">R$ 2.160/mes e dinheiro real. Se isso afeta seu orcamento mensal, <strong>comeca com um plano basico e escala depois</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ─── SECAO 5 — HACKS PRA REDUZIR CUSTO ───────────────────────── -->
+<div class="W2">
+  <div class="reveal">
+    <div class="ey">Secao 5</div>
+    <h3 class="sh" style="font-size:var(--t-xl)">Hacks pra reduzir custo</h3>
+    <p style="font-size:var(--t-sm);color:var(--t3);margin-bottom:var(--s6)">Pequenos ajustes de habito economizam token — e dinheiro — todo mes.</p>
+  </div>
+
+  <div class="reveal" style="display:flex;flex-direction:column;gap:var(--s3)">
+    <div class="custos-hack">
+      <div style="display:flex;gap:var(--s4);align-items:flex-start">
+        <span style="font-family:var(--f-display);font-size:var(--t-2xl);font-weight:800;color:var(--ok);opacity:.4;line-height:1;flex-shrink:0">1</span>
+        <div>
+          <div style="font-weight:600;color:var(--t1);margin-bottom:4px">Use API quando uso for irregular</div>
+          <p style="font-size:var(--t-sm);color:var(--t2)">Se voce usa muito em alguns dias e zero em outros, <strong>API pay-per-token</strong> pode sair mais barato que assinatura mensal. Calcula 2-3 meses de uso real antes de migrar pra plano fixo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="custos-hack">
+      <div style="display:flex;gap:var(--s4);align-items:flex-start">
+        <span style="font-family:var(--f-display);font-size:var(--t-2xl);font-weight:800;color:var(--ok);opacity:.4;line-height:1;flex-shrink:0">2</span>
+        <div>
+          <div style="font-weight:600;color:var(--t1);margin-bottom:4px">Skills bem feitas reduzem token</div>
+          <p style="font-size:var(--t-sm);color:var(--t2)">Cada skill bem documentada e cada CLAUDE.md/AGENTS.md curto economiza token em <strong>toda</strong> sessao. Investimento de 1h em skills boas paga em 1 mes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="custos-hack">
+      <div style="display:flex;gap:var(--s4);align-items:flex-start">
+        <span style="font-family:var(--f-display);font-size:var(--t-2xl);font-weight:800;color:var(--ok);opacity:.4;line-height:1;flex-shrink:0">3</span>
+        <div>
+          <div style="font-weight:600;color:var(--t1);margin-bottom:4px">/clear religiosamente</div>
+          <p style="font-size:var(--t-sm);color:var(--t2)">Sessao acumula contexto. Tarefa nova = <code style="font-family:var(--f-mono);color:var(--au1)">/clear</code>. Voce evita re-processar contexto antigo desnecessariamente.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="custos-hack">
+      <div style="display:flex;gap:var(--s4);align-items:flex-start">
+        <span style="font-family:var(--f-display);font-size:var(--t-2xl);font-weight:800;color:var(--ok);opacity:.4;line-height:1;flex-shrink:0">4</span>
+        <div>
+          <div style="font-weight:600;color:var(--t1);margin-bottom:4px">Subagent pra trabalho pesado</div>
+          <p style="font-size:var(--t-sm);color:var(--t2)">Subagent tem contexto proprio. Pesquisa pesada nele nao polui (e nao consome token de) o agente principal.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="custos-hack">
+      <div style="display:flex;gap:var(--s4);align-items:flex-start">
+        <span style="font-family:var(--f-display);font-size:var(--t-2xl);font-weight:800;color:var(--ok);opacity:.4;line-height:1;flex-shrink:0">5</span>
+        <div>
+          <div style="font-weight:600;color:var(--t1);margin-bottom:4px">/effort low ou reasoning="low" pra tarefa simples</div>
+          <p style="font-size:var(--t-sm);color:var(--t2)">Nao precisa "pensar profundo" pra renomear variavel. Reduz token em 30-50% sem perda de qualidade pra trabalho rotineiro.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="custos-hack">
+      <div style="display:flex;gap:var(--s4);align-items:flex-start">
+        <span style="font-family:var(--f-display);font-size:var(--t-2xl);font-weight:800;color:var(--ok);opacity:.4;line-height:1;flex-shrink:0">6</span>
+        <div>
+          <div style="font-weight:600;color:var(--t1);margin-bottom:4px">Plan Mode antes de implementar</div>
+          <p style="font-size:var(--t-sm);color:var(--t2)">Custo: 1 prompt extra. Beneficio: evita 5-10 prompts de re-implementacao quando abordagem inicial estava errada.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="custos-hack">
+      <div style="display:flex;gap:var(--s4);align-items:flex-start">
+        <span style="font-family:var(--f-display);font-size:var(--t-2xl);font-weight:800;color:var(--ok);opacity:.4;line-height:1;flex-shrink:0">7</span>
+        <div>
+          <div style="font-weight:600;color:var(--t1);margin-bottom:4px">Local enxuto + global enxuto</div>
+          <p style="font-size:var(--t-sm);color:var(--t2)"><strong>O Globalzao custa caro.</strong> Cada token de contexto carregado e token gasto antes do trabalho comecar. Audita seus skills regularmente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ─── SECAO 6 — COMPARATIVO DE EFICIENCIA ─────────────────────── -->
+<div class="W">
+  <div class="reveal">
+    <div class="ey">Secao 6</div>
+    <h3 class="sh" style="font-size:var(--t-xl)">Comparativo de eficiencia (token por tarefa)</h3>
+    <p style="font-size:var(--t-sm);color:var(--t3);margin-bottom:var(--s6)">Dados reais de benchmarks publicos.</p>
+  </div>
+
+  <div class="reveal">
+    <table class="mt">
+      <thead>
+        <tr>
+          <th>Tarefa</th>
+          <th><span class="custos-badge-cc">Claude Code</span></th>
+          <th><span class="custos-badge-cdx">Codex</span></th>
+          <th>Diferenca</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bug fix simples</td>
+          <td>50-100k tokens</td>
+          <td>15-40k tokens</td>
+          <td style="color:var(--cdx)">Codex 2-3x mais barato</td>
+        </tr>
+        <tr>
+          <td>Feature pequena</td>
+          <td>200-400k tokens</td>
+          <td>50-150k tokens</td>
+          <td style="color:var(--cdx)">Codex 2.5-3x mais barato</td>
+        </tr>
+        <tr>
+          <td>Refactor medio</td>
+          <td>800k-1.5M tokens</td>
+          <td>250-600k tokens</td>
+          <td style="color:var(--cdx)">Codex 2-3x mais barato</td>
+        </tr>
+        <tr>
+          <td>Clone Figma &rarr; React</td>
+          <td>6.2M tokens</td>
+          <td>1.5M tokens</td>
+          <td style="color:var(--cdx)">Codex 4x mais barato</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="g2" style="gap:var(--s5);margin-top:var(--s6)">
+      <div class="card">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--cdx);margin-bottom:var(--s3)">CODEX</div>
+        <p style="font-size:var(--t-sm);color:var(--t2)">Mais eficiente em token. Otimo pra volume. Custo-beneficio superior em tarefas repetitivas e bem definidas.</p>
+      </div>
+      <div class="card">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--cc);margin-bottom:var(--s3)">CLAUDE CODE</div>
+        <p style="font-size:var(--t-sm);color:var(--t2)">Mais minucioso e completo. Em avaliacoes cegas, vence 67% das comparacoes vs 25% do Codex (8% empate). Otimo pra qualidade que justifica custo.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--bg3);border:1px solid var(--b2);border-radius:var(--r-md);padding:var(--s5);margin-top:var(--s5)">
+      <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);margin-bottom:var(--s3)">CONCLUSAO ADULTA</div>
+      <p style="font-size:var(--t-sm);color:var(--t2)"><strong>Nem um nem outro e sempre melhor.</strong> Depende do que voce esta fazendo. Codex pra volume e velocidade. Claude Code pra qualidade e completude.</p>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ─── SECAO 7 — CUSTOS INVISIVEIS ─────────────────────────────── -->
+<div class="W2">
+  <div class="reveal">
+    <div class="ey">Secao 7</div>
+    <h3 class="sh" style="font-size:var(--t-xl)">Custos invisiveis (que ninguem fala)</h3>
+    <p style="font-size:var(--t-sm);color:var(--t3);margin-bottom:var(--s6)">Alem da assinatura mensal, existem custos que nao aparecem na fatura.</p>
+  </div>
+
+  <div class="reveal" style="display:flex;flex-direction:column;gap:var(--s3)">
+    <div class="custos-hidden">
+      <div style="font-weight:600;color:var(--t1);margin-bottom:4px">Custo 1 — Tempo de aprendizado</div>
+      <p style="font-size:var(--t-sm);color:var(--t2)">Trocar de agente custa <strong>30-60h</strong> de re-aprendizado de fluxo. Se voce ja domina um, nao troca por causa de R$ 50/mes de diferenca. Mas se esta comecando, pega o que voce vai conseguir aprender mais rapido (geralmente Codex).</p>
+    </div>
+
+    <div class="custos-hidden">
+      <div style="font-weight:600;color:var(--t1);margin-bottom:4px">Custo 2 — Bug em producao</div>
+      <p style="font-size:var(--t-sm);color:var(--t2)">Bug em codigo de IA aceito sem revisao custa <strong>horas/dias</strong> de debug + impacto em cliente. Vale a economia que ela trouxe? Sempre depende. Em codigo critico, <strong>nunca</strong>.</p>
+    </div>
+
+    <div class="custos-hidden">
+      <div style="font-weight:600;color:var(--t1);margin-bottom:4px">Custo 3 — Re-trabalho por contexto inflado</div>
+      <p style="font-size:var(--t-sm);color:var(--t2)">Globalzao + sessao bagunçada custa em token <strong>e</strong> em qualidade. Voce paga 3x: token extra + retrabalho do output ruim + tempo seu corrigindo.</p>
+    </div>
+
+    <div class="custos-hidden">
+      <div style="font-weight:600;color:var(--t1);margin-bottom:4px">Custo 4 — Platform lock-in</div>
+      <p style="font-size:var(--t-sm);color:var(--t2)">Construir tudo em volta de uma ferramenta especifica e platform lock. Se a empresa muda preco/politica, voce ta refem. <strong>Por isso o metodo agnostico</strong> — voce migra de provider sem refazer setup.</p>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ─── SECAO 8 — RECOMENDACAO FINAL ────────────────────────────── -->
+<div class="W2">
+  <div class="reveal">
+    <div class="ey">Secao 8</div>
+    <h3 class="sh" style="font-size:var(--t-xl)">Recomendacao final do Get It Easy</h3>
+  </div>
+
+  <div class="custos-rec-block reveal">
+    <div style="display:flex;flex-direction:column;gap:var(--s6);text-align:left;max-width:640px;margin:0 auto">
+      <div>
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);margin-bottom:var(--s2)">COMECANDO DO ZERO (R$ 100-200/MES)</div>
+        <div style="font-size:var(--t-md);font-weight:600;color:var(--t1);margin-bottom:var(--s2)">ChatGPT Plus <em style="color:var(--t3);font-style:normal">ou</em> Claude Code Pro (R$ 108)</div>
+        <p style="font-size:var(--t-sm);color:var(--t2)">Escolhe um. Comeca, aprende. Em 2-3 meses voce vai saber se ficou bom ou se precisa subir.</p>
+      </div>
+      <div style="height:1px;background:var(--b1)"></div>
+      <div>
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);margin-bottom:var(--s2)">PROFISSIONAL / FREELANCE (R$ 200-600/MES)</div>
+        <div style="font-size:var(--t-md);font-weight:600;color:var(--t1);margin-bottom:var(--s2)">Combo Claude Pro + Codex Plus (R$ 216) <em style="color:var(--t3);font-style:normal">ou</em> Max 5x (R$ 540)</div>
+        <p style="font-size:var(--t-sm);color:var(--t2)">Combo da revisao cruzada, Max 5x da headroom. Depende do seu fluxo.</p>
+      </div>
+      <div style="height:1px;background:var(--b1)"></div>
+      <div>
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);margin-bottom:var(--s2)">TIME PEQUENO OU PROJETO SERIO (R$ 1.000+/MES)</div>
+        <div style="font-size:var(--t-md);font-weight:600;color:var(--t1);margin-bottom:var(--s2)">Combo Claude Max 20x + Codex Pro (R$ 2.160)</div>
+        <p style="font-size:var(--t-sm);color:var(--t2)">Justifica facil em qualquer projeto que paga &gt; R$ 30k. Revisao cruzada vira diferencial competitivo.</p>
+      </div>
+      <div style="height:1px;background:var(--b1)"></div>
+      <div>
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t4);margin-bottom:var(--s2)">TIME GRANDE / EMPRESA</div>
+        <div style="font-size:var(--t-md);font-weight:600;color:var(--t1);margin-bottom:var(--s2)">Enterprise pricing — avaliacao caso a caso</div>
+        <p style="font-size:var(--t-sm);color:var(--t2)">Acima de 10 devs ja faz sentido conversar com Anthropic/OpenAI sobre descontos por volume, suporte dedicado e audit trail.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ─── CTA FINAL ────────────────────────────────────────────────── -->
+<div class="W2">
+  <div class="reveal" style="text-align:center">
+    <div class="ey" style="justify-content:center;display:block">Voce viu os custos. Aplica.</div>
+    <div class="g2" style="gap:var(--s4);margin-top:var(--s6);text-align:left">
+      <div class="card" style="cursor:pointer" onclick="document.querySelector('[data-tab=setup]').click()">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);margin-bottom:var(--s2)">ABA 7 — QUIZ</div>
+        <div style="font-size:var(--t-sm);color:var(--t1);font-weight:500">Setup automatico com plano sugerido &rarr;</div>
+      </div>
+      <div class="card" style="cursor:pointer" onclick="document.querySelector('[data-tab=stack]').click()">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);margin-bottom:var(--s2)">ABA 4 — STACK</div>
+        <div style="font-size:var(--t-sm);color:var(--t1);font-weight:500">Ver as ferramentas em detalhe &rarr;</div>
+      </div>
+      <div class="card" style="cursor:pointer" onclick="document.querySelector('[data-tab=metodo]').click()">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);margin-bottom:var(--s2)">ABA 2 — O METODO</div>
+        <div style="font-size:var(--t-sm);color:var(--t1);font-weight:500">Dominar o metodo (economizar token) &rarr;</div>
+      </div>
+      <div class="card" style="cursor:pointer" onclick="document.querySelector('[data-tab=avancado]').click()">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);margin-bottom:var(--s2)">ABA 6 — AVANCADO</div>
+        <div style="font-size:var(--t-sm);color:var(--t1);font-weight:500">Dicas avancadas de eficiencia &rarr;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER NOTE ──────────────────────────────────────────────── -->
+<div class="W2">
+  <div style="border-top:1px solid var(--b1);padding-top:var(--s6);text-align:center">
+    <p style="font-size:var(--t-xs);color:var(--t4);font-family:var(--f-mono)">Precos baseados na tabela Anthropic/OpenAI de Abril/2026. Valores em R$ sao estimativas. Cambio de referencia: R$ 5,40/USD.</p>
+  </div>
+</div>
+
+</div>
 </main>
 
 <div class="search-overlay" id="search-overlay" onclick="if(event.target===this)closeSearch()">
