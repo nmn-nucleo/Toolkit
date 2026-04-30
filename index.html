@@ -4658,7 +4658,474 @@ Quando o usuario pedir analise de arquivo CNPJ:
     <div class="sec-spacer"></div>
 
   </div>
-  <div id="page-setup" class="page" role="tabpanel"></div>
+  <div id="page-setup" class="page" role="tabpanel">
+<style>
+.quiz-progress{display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s6)}
+.quiz-bar{flex:1;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.quiz-fill{height:100%;background:var(--au);border-radius:2px;transition:width var(--dur-slow) var(--ease)}
+.quiz-counter{font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t3);white-space:nowrap}
+.quiz-step{animation:fadeUp 220ms var(--ease) both}
+.quiz-q{font-family:var(--f-display);font-weight:700;font-size:var(--t-lg);color:var(--t1);margin-bottom:var(--s3)}
+.quiz-why{font-size:var(--t-sm);color:var(--t3);margin-bottom:var(--s5)}
+.quiz-opts{display:flex;flex-direction:column;gap:var(--s3)}
+.quiz-opt{background:var(--bg3);border:1px solid var(--b1);border-radius:var(--r-md);padding:var(--s4);cursor:pointer;transition:all var(--dur-base);text-align:left;color:var(--t2);font-size:var(--t-sm)}
+.quiz-opt:hover{border-color:var(--b3);background:var(--bg4)}
+.quiz-opt.selected{border-color:var(--au);background:var(--aubg);color:var(--t1)}
+.quiz-nav{display:flex;justify-content:space-between;margin-top:var(--s6)}
+.quiz-btn{padding:8px 24px;border-radius:var(--r-sm);font-size:var(--t-sm);border:1px solid var(--b2);background:var(--bg3);color:var(--t2);transition:all var(--dur-base)}
+.quiz-btn:hover{border-color:var(--b3);color:var(--t1)}
+.quiz-btn-primary{background:var(--au);color:var(--bg0);border-color:var(--au);font-weight:500}
+.quiz-btn-primary:hover{background:var(--au1)}
+.quiz-result-tabs{display:flex;gap:2px;margin-bottom:var(--s4)}
+.quiz-result-tab{padding:6px 16px;background:var(--bg3);border:1px solid var(--b1);border-radius:var(--r-sm) var(--r-sm) 0 0;color:var(--t3);font-size:var(--t-sm);cursor:pointer;border-bottom:none}
+.quiz-result-tab.active{background:var(--bg2);color:var(--t1)}
+.quiz-result-panel{display:none;background:var(--bg2);border:1px solid var(--b1);border-radius:0 var(--r-md) var(--r-md) var(--r-md);padding:var(--s5)}
+.quiz-result-panel.active{display:block}
+.setup-tier-card{background:var(--bg3);border:1px solid var(--b1);border-radius:var(--r-lg);padding:var(--s5);display:flex;flex-direction:column}
+.setup-tier-card.popular{border-color:var(--au);position:relative}
+.setup-tier-popular-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--au);color:var(--bg0);font-family:var(--f-mono);font-size:var(--t-xs);padding:2px 12px;border-radius:99px;white-space:nowrap}
+.setup-tier-price{font-family:var(--f-display);font-weight:800;font-size:var(--t-xl);color:var(--t1);margin:var(--s3) 0}
+.setup-tier-sub{font-size:var(--t-xs);color:var(--t3);font-family:var(--f-mono)}
+.setup-tier-items{list-style:none;display:flex;flex-direction:column;gap:var(--s2);margin:var(--s4) 0;flex:1}
+.setup-tier-items li{font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2);align-items:flex-start}
+.setup-tier-items li::before{content:'✓';color:var(--au);font-family:var(--f-mono);font-size:var(--t-xs);margin-top:3px;flex-shrink:0}
+.setup-tier-items li.dimmed::before{content:'—';color:var(--t4)}
+.setup-tier-items li.dimmed{color:var(--t4)}
+.case-card{background:var(--bg3);border:1px solid var(--b1);border-radius:var(--r-lg);padding:var(--s5)}
+.case-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:var(--s3)}
+.setup-cta-block{background:var(--aubg);border:1px solid rgba(217,168,50,.22);border-radius:var(--r-xl);padding:var(--s8) var(--s6);text-align:center}
+</style>
+
+<!-- ─── INTRO ─────────────────────────────────────────────────────── -->
+<div class="W2">
+  <div class="reveal">
+    <div class="ey">Quiz gratuito + setup automatico</div>
+    <h2 class="DH">Tutorial generico nao serve pra ninguem.<br>Serve pra todos.<br><em>Que e quase a mesma coisa.</em></h2>
+    <p class="dl">A maior parte do conteudo sobre Claude Code e Codex e generico — escrito pro "desenvolvedor mediano" que nao existe. Voce nao e um dev mediano. Voce tem uma area de atuacao, uma stack, um sistema operacional, um nivel de experiencia, e objetivos especificos. Esse quiz colhe tudo isso em 5 minutos e te entrega <strong>seu</strong> setup. Personalizado. Pronto pra rodar.</p>
+    <div style="display:flex;gap:var(--s3);flex-wrap:wrap">
+      <button class="hero-cta" onclick="startQuiz()">Comeco o quiz gratis &rarr;</button>
+      <a href="#setup-premium" class="hero-cta" style="background:var(--bg3);color:var(--t1);border:1px solid var(--b2)">Quero o pacote completo &rarr;</a>
+    </div>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── SECAO 1: O que o quiz entrega ─────────────────────────── -->
+  <div class="reveal">
+    <div class="ey">O que voce recebe</div>
+    <div class="sh" style="margin-bottom:var(--s5)">Free vs Premium — em 1 clique depois do quiz</div>
+    <div class="g2">
+      <!-- Free -->
+      <div class="card" style="border-color:var(--b2)">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--ok);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s4)">Gratis — depois do quiz</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s3)">
+          <li style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--ok);flex-shrink:0">✓</span><span><strong style="color:var(--t1)">Prompt personalizado</strong> pra colar no Claude Code ou Codex (com nome, area, stack)</span></li>
+          <li style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--ok);flex-shrink:0">✓</span><span><strong style="color:var(--t1)">CLAUDE.md ou AGENTS.md</strong> customizado (pronto pra colocar na raiz do seu projeto)</span></li>
+          <li style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--ok);flex-shrink:0">✓</span><span><strong style="color:var(--t1)">Lista de skills recomendadas</strong> pro seu perfil (com links e instrucoes de install)</span></li>
+          <li style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--ok);flex-shrink:0">✓</span><span><strong style="color:var(--t1)">3 ideias de agentes</strong> pra construir baseadas na sua area</span></li>
+          <li style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--ok);flex-shrink:0">✓</span><span><strong style="color:var(--t1)">3 ideias de projetos</strong> pra comecar (do simples ao avancado)</span></li>
+          <li style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--ok);flex-shrink:0">✓</span><span><strong style="color:var(--t1)">Comandos de setup</strong> (Bash/PowerShell) pro seu sistema operacional</span></li>
+        </ul>
+        <div style="margin-top:var(--s5)">
+          <button class="hero-cta" style="width:100%;padding:10px" onclick="startQuiz()">Comeco o quiz gratis &rarr;</button>
+        </div>
+      </div>
+      <!-- Premium -->
+      <div class="card" style="border-color:rgba(217,168,50,.3);background:var(--aubg)">
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s4)">Premium — pacote completo</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s3)">
+          <li style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au);flex-shrink:0">✦</span><span><strong style="color:var(--t1)">Manual em PDF (40-60 paginas)</strong> com sua identidade visual — printable, profissional, com exemplos da sua area</span></li>
+          <li style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au);flex-shrink:0">✦</span><span><strong style="color:var(--t1)">Setup script automatizado</strong> que instala tudo de uma vez</span></li>
+          <li style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au);flex-shrink:0">✦</span><span><strong style="color:var(--t1)">Pacote ZIP</strong> com skills ja configuradas pro seu caso de uso</span></li>
+          <li style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au);flex-shrink:0">✦</span><span><strong style="color:var(--t1)">Tema personalizado</strong> (cores, slogans, exemplos com seu universo de referencia)</span></li>
+          <li style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au);flex-shrink:0">✦</span><span><strong style="color:var(--t1)">Atualizacoes do manual por 12 meses</strong></span></li>
+          <li style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au);flex-shrink:0">✦</span><span><strong style="color:var(--t1)">Acesso ao Discord</strong> da comunidade Get It Easy</span></li>
+          <li style="display:flex;gap:var(--s3);font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au);flex-shrink:0">✦</span><span><strong style="color:var(--t1)">Office hour mensal</strong> (tira-duvidas em grupo)</span></li>
+        </ul>
+        <div style="margin-top:var(--s5)">
+          <a href="#setup-premium" class="hero-cta" style="width:100%;padding:10px;display:block;text-align:center">Ver pacote completo &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── QUIZ CONTAINER ─────────────────────────────────────────── -->
+  <div class="reveal">
+    <div class="ey">O quiz</div>
+    <div class="sh" style="margin-bottom:var(--s2)">6 perguntas. ~5 minutos. Setup pronto.</div>
+    <p style="font-size:var(--t-sm);color:var(--t3);margin-bottom:var(--s5)">Cada pergunta tem o motivo de existir — sem pergunta inutil. Resultado gerado no browser, sem backend, sem cadastro.</p>
+  </div>
+
+  <div id="quiz-container" style="display:none" class="reveal">
+    <div class="quiz-progress">
+      <div class="quiz-bar"><div class="quiz-fill" id="quiz-fill" style="width:16.6%"></div></div>
+      <div class="quiz-counter">Pergunta <span id="quiz-cur">1</span> de 6</div>
+    </div>
+    <div id="quiz-steps"></div>
+    <div class="quiz-nav">
+      <button class="quiz-btn" id="quiz-prev" onclick="quizNav(-1)" style="visibility:hidden">&larr; Anterior</button>
+      <button class="quiz-btn quiz-btn-primary" id="quiz-next" onclick="quizNav(1)">Proximo &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ─── RESULT CONTAINER ───────────────────────────────────────── -->
+  <div id="quiz-result" style="display:none">
+    <div class="sh" style="color:var(--au);margin-bottom:var(--s5)">Seu setup personalizado</div>
+    <div class="quiz-result-tabs">
+      <button class="quiz-result-tab active" onclick="quizResultTab('prompt',this)">Prompt para o agente</button>
+      <button class="quiz-result-tab" onclick="quizResultTab('claudemd',this)">CLAUDE.md / AGENTS.md</button>
+    </div>
+    <div class="quiz-result-panel active" id="qr-prompt"></div>
+    <div class="quiz-result-panel" id="qr-claudemd"></div>
+    <div style="display:flex;gap:var(--s3);margin-top:var(--s4);flex-wrap:wrap">
+      <button class="quiz-btn" onclick="copyQuizResult('prompt')">Copiar prompt</button>
+      <button class="quiz-btn" onclick="copyQuizResult('claudemd')">Copiar CLAUDE.md</button>
+      <button class="quiz-btn" onclick="downloadQuizResult()">Baixar arquivo</button>
+      <button class="quiz-btn" onclick="resetQuiz()">Refazer quiz</button>
+    </div>
+  </div>
+
+  <!-- Start quiz CTA (shown before quiz starts) -->
+  <div id="quiz-cta-block" class="reveal" style="text-align:center;padding:var(--s7) 0">
+    <button class="hero-cta" style="font-size:var(--t-md);padding:14px 40px" onclick="startQuiz()">Comeco o quiz agora &rarr;</button>
+    <p style="font-size:var(--t-sm);color:var(--t3);margin-top:var(--s3)">Gratis. 5 minutos. Sem cadastro.</p>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── SECAO 3: Casos reais ───────────────────────────────────── -->
+  <div class="reveal">
+    <div class="ey">Casos reais</div>
+    <div class="sh" style="margin-bottom:var(--s2)">4 perfis, 4 setups completamente diferentes</div>
+    <p style="font-size:var(--t-sm);color:var(--t3);margin-bottom:var(--s6)">O mesmo quiz. Resultados que nao se repetem.</p>
+  </div>
+
+  <div class="g2 reveal">
+    <!-- Rosa -->
+    <div class="case-card">
+      <div class="case-avatar" style="background:rgba(70,181,201,.1)">&#x1F680;</div>
+      <div style="font-family:var(--f-display);font-weight:700;color:var(--t1);margin-bottom:2px">Rosa</div>
+      <div style="font-size:var(--t-xs);color:var(--t3);font-family:var(--f-mono);margin-bottom:var(--s4)">Educadora · Mac · Nunca programou · Tema espacial</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--cdx);font-family:var(--f-mono);font-size:var(--t-xs)">AGENTE →</span> Codex (curva menor)</li>
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au);font-family:var(--f-mono);font-size:var(--t-xs)">SLOGAN →</span> "Do zero a orbita, em um comando de cada vez"</li>
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--ok);font-family:var(--f-mono);font-size:var(--t-xs)">PROJETOS →</span> Site estilo astronauta, Quiz educacional, Diario em markdown</li>
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--gsd);font-family:var(--f-mono);font-size:var(--t-xs)">AGENTES →</span> Astronauta-tutor, Comandante de tarefas</li>
+      </ul>
+    </div>
+    <!-- Pedro -->
+    <div class="case-card">
+      <div class="case-avatar" style="background:rgba(124,106,255,.1)">&#x1F4BB;</div>
+      <div style="font-family:var(--f-display);font-weight:700;color:var(--t1);margin-bottom:2px">Pedro</div>
+      <div style="font-size:var(--t-xs);color:var(--t3);font-family:var(--f-mono);margin-bottom:var(--s4)">Dev senior · Linux · Claude Code · Consultoria</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--cc);font-family:var(--f-mono);font-size:var(--t-xs)">AGENTE →</span> Claude Code (full customizacao)</li>
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au);font-family:var(--f-mono);font-size:var(--t-xs)">CLAUDE.md →</span> Convencoes de commit, padrao de PR, regras de revisao</li>
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--ok);font-family:var(--f-mono);font-size:var(--t-xs)">PROJETOS →</span> Pipeline de entrega, Template SDD, Dashboard de produtividade</li>
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--gsd);font-family:var(--f-mono);font-size:var(--t-xs)">SKILLS →</span> Spec-Kit, Superpowers, GSD avancado</li>
+      </ul>
+    </div>
+    <!-- Marina -->
+    <div class="case-card">
+      <div class="case-avatar" style="background:rgba(45,191,138,.1)">&#x1F4CA;</div>
+      <div style="font-family:var(--f-display);font-weight:700;color:var(--t1);margin-bottom:2px">Marina</div>
+      <div style="font-size:var(--t-xs);color:var(--t3);font-family:var(--f-mono);margin-bottom:var(--s4)">Analista de dados · Windows · Python+Git instalados</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--cdx);font-family:var(--f-mono);font-size:var(--t-xs)">AGENTE →</span> Codex (eficiencia em scripts)</li>
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au);font-family:var(--f-mono);font-size:var(--t-xs)">SETUP →</span> DuckDB MCP ja conectado</li>
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--ok);font-family:var(--f-mono);font-size:var(--t-xs)">PROJETOS →</span> Dashboard KPIs, Relatorio mensal, Comparador de planilhas</li>
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--gsd);font-family:var(--f-mono);font-size:var(--t-xs)">AGENTES →</span> Analista jr (SQL em portugues), Dashboard builder</li>
+      </ul>
+    </div>
+    <!-- Carlos -->
+    <div class="case-card">
+      <div class="case-avatar" style="background:rgba(232,82,122,.1)">&#x2696;&#xFE0F;</div>
+      <div style="font-family:var(--f-display);font-weight:700;color:var(--t1);margin-bottom:2px">Carlos</div>
+      <div style="font-size:var(--t-xs);color:var(--t3);font-family:var(--f-mono);margin-bottom:var(--s4)">Advogado · Mac · Nunca programou · Automacao</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--cdx);font-family:var(--f-mono);font-size:var(--t-xs)">AGENTE →</span> Codex desktop app (UI visual, baixa friccao)</li>
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--au);font-family:var(--f-mono);font-size:var(--t-xs)">SETUP →</span> Zero-terminal, instala tudo via desktop</li>
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--ok);font-family:var(--f-mono);font-size:var(--t-xs)">PROJETOS →</span> Revisao de contratos, Banco de jurisprudencia, Sistema de prazos</li>
+        <li style="font-size:var(--t-sm);color:var(--t2)"><span style="color:var(--gsd);font-family:var(--f-mono);font-size:var(--t-xs)">AGENTES →</span> Revisor juridico, Resumidor de processos, Gerador de minutas</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── SECAO PREMIUM ──────────────────────────────────────────── -->
+  <div id="setup-premium" class="reveal">
+    <div class="ey">Pacote completo</div>
+    <div class="sh" style="margin-bottom:var(--s2)">Por que pegar o pacote completo?</div>
+    <p style="font-size:var(--t-sm);color:var(--t3);margin-bottom:var(--s6)">O quiz gratis te entrega o suficiente pra comecar. Mas tem coisas que so o pacote pago entrega.</p>
+  </div>
+
+  <div class="g3 reveal" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+    <!-- Manual R$197 -->
+    <div class="setup-tier-card" style="position:relative">
+      <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s3)">Pacote Manual</div>
+      <div class="setup-tier-price">R$ 197</div>
+      <div class="setup-tier-sub">one-time · acesso permanente</div>
+      <ul class="setup-tier-items">
+        <li>Tudo do quiz gratis</li>
+        <li>Manual em PDF (40-60 paginas) com sua identidade visual</li>
+        <li>Setup script automatizado (1 comando, instala tudo)</li>
+        <li>Pacote ZIP com skills configuradas</li>
+        <li>Tema personalizado completo</li>
+        <li>Atualizacoes do manual por 12 meses</li>
+        <li class="dimmed">Discord da comunidade</li>
+        <li class="dimmed">Office hour mensal</li>
+        <li class="dimmed">Sessao 1-a-1</li>
+      </ul>
+      <button class="quiz-btn" style="width:100%;padding:10px;margin-top:auto">Quero o Manual</button>
+    </div>
+    <!-- Comunidade R$47/mes -->
+    <div class="setup-tier-card popular">
+      <div class="setup-tier-popular-badge">MAIS POPULAR</div>
+      <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s3)">Comunidade</div>
+      <div class="setup-tier-price">R$ 47</div>
+      <div class="setup-tier-sub">por mes · cancela quando quiser</div>
+      <ul class="setup-tier-items">
+        <li>Tudo do Pacote Manual</li>
+        <li>Discord da comunidade Get It Easy</li>
+        <li>Office hour mensal (call em grupo)</li>
+        <li>Atualizacoes continuas enquanto assinar</li>
+        <li class="dimmed">Sessao 1-a-1</li>
+        <li class="dimmed">Plugin privado</li>
+        <li class="dimmed">Suporte direto 30 dias</li>
+      </ul>
+      <button class="hero-cta" style="width:100%;padding:10px;margin-top:auto">Entrar pra Comunidade</button>
+    </div>
+    <!-- Customizado R$1.997+ -->
+    <div class="setup-tier-card" style="position:relative">
+      <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s3)">Customizado</div>
+      <div class="setup-tier-price">R$ 1.997<span style="font-size:var(--t-sm);color:var(--t3)">+</span></div>
+      <div class="setup-tier-sub">one-time · sessao 1-a-1</div>
+      <ul class="setup-tier-items">
+        <li>Tudo da Comunidade</li>
+        <li>Sessao 1-a-1 (1-2 horas) no seu projeto/empresa real</li>
+        <li>CLAUDE.md / AGENTS.md sob medida pro seu stack</li>
+        <li>Plugin privado (opcional)</li>
+        <li>30 dias de suporte direto (resposta em 24h)</li>
+        <li>Validacao com seu time / aluna</li>
+      </ul>
+      <button class="quiz-btn" style="width:100%;padding:10px;margin-top:auto">Falar sobre o Customizado</button>
+    </div>
+  </div>
+
+  <p style="font-size:var(--t-xs);color:var(--t4);text-align:center;margin-top:var(--s4);font-family:var(--f-mono)">* Precos de referencia, sujeitos a ajuste. Sempre confira valores no checkout.</p>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── FAQ ────────────────────────────────────────────────────── -->
+  <div class="reveal">
+    <div class="ey">Duvidas</div>
+    <div class="sh" style="margin-bottom:var(--s5)">Perguntas frequentes sobre o quiz</div>
+    <div class="faq">
+      <div class="fi"><button class="fq" onclick="tf(this)"><span>Quanto tempo leva?</span><span class="ficon">+</span></button><div class="fa">~5 minutos pra responder. Resultado e gerado em segundos diretamente no browser.</div></div>
+      <div class="fi"><button class="fq" onclick="tf(this)"><span>Posso refazer o quiz?</span><span class="ficon">+</span></button><div class="fa">Quantas vezes quiser. Cada vez gera um setup novo. Util quando seu objetivo muda — mudou de area, comecou novo tipo de projeto.</div></div>
+      <div class="fi"><button class="fq" onclick="tf(this)"><span>Funciona pra Mac, Windows e Linux?</span><span class="ficon">+</span></button><div class="fa">Sim. O quiz pergunta seu SO e ajusta os comandos automaticamente (PowerShell vs Bash vs zsh).</div></div>
+      <div class="fi"><button class="fq" onclick="tf(this)"><span>Preciso saber programar?</span><span class="ficon">+</span></button><div class="fa">Nao. O quiz tem opcao "nunca programei" e o setup gerado e adaptado pra voce. Inclusive escolhe ferramentas com menor curva (Codex desktop em vez de Claude Code CLI, por exemplo).</div></div>
+      <div class="fi"><button class="fq" onclick="tf(this)"><span>Os arquivos gerados sao meus?</span><span class="ficon">+</span></button><div class="fa">100% seus. Voce baixa, edita, compartilha, modifica como quiser. Nao tem DRM, nao tem licenca restritiva.</div></div>
+      <div class="fi"><button class="fq" onclick="tf(this)"><span>Voces guardam meus dados?</span><span class="ficon">+</span></button><div class="fa">Apenas o que voce escolhe compartilhar (email, se preencheu). As respostas do quiz sao processadas client-side e nao sao enviadas pra nenhum servidor.</div></div>
+      <div class="fi"><button class="fq" onclick="tf(this)"><span>Posso fazer o quiz e nao comprar nada?</span><span class="ficon">+</span></button><div class="fa">Por favor. Esse e o ponto. O quiz gratis ja te da setup funcional. Se valer a pena, voce volta pro pacote pago. Se nao, voce ja saiu daqui melhor do que entrou.</div></div>
+    </div>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+  <!-- ─── CTA FINAL ──────────────────────────────────────────────── -->
+  <div class="setup-cta-block reveal">
+    <div class="ey" style="text-align:center">Pronto pra parar de perder tempo com tutorial generico?</div>
+    <h3 style="font-family:var(--f-display);font-weight:800;font-size:var(--t-2xl-fluid);color:var(--t1);letter-spacing:-.04em;margin-bottom:var(--s4)">O quiz e gratis.<br><em style="color:var(--au)">5 minutos. Setup pronto.</em></h3>
+    <button class="hero-cta" style="font-size:var(--t-md);padding:14px 40px" onclick="startQuiz()">Comeco o quiz agora &rarr;</button>
+    <p style="font-size:var(--t-sm);color:var(--t3);margin-top:var(--s4)">Ou se ja sabe que quer o pacote completo:&nbsp;&nbsp;<a href="#setup-premium" style="color:var(--au);text-decoration:underline">ver planos</a></p>
+  </div>
+
+  <div class="sec-spacer"></div>
+
+</div>
+
+<script>
+/* ========== QUIZ ========== */
+var quizData = [
+  {
+    q: "Qual seu nivel de experiencia?",
+    why: "Define a linguagem do manual e profundidade dos exemplos.",
+    opts: ["Nunca programei", "Programo basico (HTML/CSS, scripts simples)", "Programo profissionalmente", "Sou dev senior, quero otimizar workflow"]
+  },
+  {
+    q: "Qual sua area de atuacao principal?",
+    why: "Define skills relevantes, exemplos, e ideias de agentes.",
+    opts: ["Designer / criativo", "Analista de dados", "Programador", "Empresario / gestor", "Advogado / contador / consultor", "Marketing / conteudo", "Educador / pesquisador", "Estudante / curioso", "Outro"]
+  },
+  {
+    q: "Qual seu sistema operacional?",
+    why: "Ajusta comandos de instalacao e paths.",
+    opts: ["Windows", "macOS", "Linux"]
+  },
+  {
+    q: "O que voce ja tem instalado?",
+    why: "Se nao tem nada, o setup comeca pelos pre-requisitos.",
+    opts: ["Node.js", "Python", "Git", "Conta GitHub", "Nenhum disso", "Nao sei"],
+    multi: true
+  },
+  {
+    q: "Claude Code, Codex, ou recomendacao?",
+    why: "Foca o setup no agente escolhido.",
+    opts: ["Quero Claude Code", "Quero Codex", "Recomende pra mim baseado no perfil"]
+  },
+  {
+    q: "Qual seu objetivo principal nos proximos 3 meses?",
+    why: "Define projetos sugeridos e agentes recomendados.",
+    opts: ["Construir um produto/site", "Automatizar tarefas chatas do trabalho", "Analisar dados / criar dashboards", "Aprender programacao na pratica", "Acelerar entregas em projetos pagos", "Outro"]
+  }
+];
+
+var quizAnswers = {};
+var quizStep = 0;
+
+function startQuiz() {
+  var ctaBlock = document.getElementById('quiz-cta-block');
+  if (ctaBlock) ctaBlock.style.display = 'none';
+  document.getElementById('quiz-container').style.display = 'block';
+  document.getElementById('quiz-result').style.display = 'none';
+  quizStep = 0;
+  quizAnswers = JSON.parse(localStorage.getItem('gie-quiz') || '{}');
+  renderQuizStep();
+  document.getElementById('quiz-container').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function renderQuizStep() {
+  var d = quizData[quizStep];
+  var saved = quizAnswers[quizStep];
+  var html = '<div class="quiz-step active">';
+  html += '<div class="quiz-q">' + d.q + '</div>';
+  html += '<div class="quiz-why">' + d.why + '</div>';
+  html += '<div class="quiz-opts">';
+  d.opts.forEach(function(opt, i) {
+    var selected = d.multi ? (saved && saved.indexOf(i) > -1) : (saved === i);
+    html += '<button class="quiz-opt' + (selected ? ' selected' : '') + '" onclick="quizSelect(' + quizStep + ',' + i + ',this,' + (d.multi ? 'true' : 'false') + ')">' + opt + '</button>';
+  });
+  html += '</div></div>';
+  document.getElementById('quiz-steps').innerHTML = html;
+  document.getElementById('quiz-cur').textContent = quizStep + 1;
+  document.getElementById('quiz-fill').style.width = ((quizStep + 1) / 6 * 100) + '%';
+  document.getElementById('quiz-prev').style.visibility = quizStep === 0 ? 'hidden' : 'visible';
+  document.getElementById('quiz-next').textContent = quizStep === 5 ? 'Ver resultado \u2192' : 'Proximo \u2192';
+}
+
+function quizSelect(step, idx, btn, multi) {
+  if (multi) {
+    if (!quizAnswers[step]) quizAnswers[step] = [];
+    var pos = quizAnswers[step].indexOf(idx);
+    if (pos > -1) { quizAnswers[step].splice(pos, 1); btn.classList.remove('selected'); }
+    else { quizAnswers[step].push(idx); btn.classList.add('selected'); }
+  } else {
+    quizAnswers[step] = idx;
+    btn.parentNode.querySelectorAll('.quiz-opt').forEach(function(o) { o.classList.remove('selected'); });
+    btn.classList.add('selected');
+  }
+  localStorage.setItem('gie-quiz', JSON.stringify(quizAnswers));
+}
+
+function quizNav(dir) {
+  if (dir === 1 && quizStep === 5) { generateQuizResult(); return; }
+  quizStep = Math.max(0, Math.min(5, quizStep + dir));
+  renderQuizStep();
+}
+
+function generateQuizResult() {
+  var a = quizAnswers;
+  var level = quizData[0].opts[a[0] !== undefined ? a[0] : 0];
+  var area = quizData[1].opts[a[1] !== undefined ? a[1] : 0];
+  var os = quizData[2].opts[a[2] !== undefined ? a[2] : 0];
+  var agent = a[4] === 0 ? 'Claude Code' : a[4] === 1 ? 'Codex' : 'Recomendado';
+  var goal = quizData[5].opts[a[5] !== undefined ? a[5] : 0];
+
+  if (a[4] === 2 || a[4] === undefined) {
+    agent = (a[0] === undefined || a[0] <= 1) ? 'Codex' : 'Claude Code';
+  }
+  var file = agent === 'Codex' ? 'AGENTS.md' : 'CLAUDE.md';
+  var cmd = agent === 'Codex' ? 'codex' : 'claude';
+
+  var prompt = 'Voce e meu assistente de setup. Meu perfil:\n';
+  prompt += '- Nivel: ' + level + '\n';
+  prompt += '- Area: ' + area + '\n';
+  prompt += '- OS: ' + os + '\n';
+  prompt += '- Agente: ' + agent + '\n';
+  prompt += '- Objetivo: ' + goal + '\n\n';
+  prompt += 'Configure meu ambiente de desenvolvimento seguindo o metodo Get It Easy:\n';
+  prompt += '1. Verifique pre-requisitos (Node.js, Python, Git)\n';
+  prompt += '2. Instale o ' + agent + '\n';
+  prompt += '3. Crie um ' + file + ' personalizado para meu perfil\n';
+  prompt += '4. Sugira 3 skills relevantes para minha area\n';
+  prompt += '5. Sugira 3 projetos iniciais alinhados com meu objetivo\n';
+  prompt += '6. Monte os comandos de setup para ' + os;
+
+  var claudemd = '# Meu Projeto\n\n';
+  claudemd += '## Stack\n';
+  claudemd += '- Agente: ' + agent + '\n';
+  claudemd += '- OS: ' + os + '\n\n';
+  claudemd += '## Perfil\n';
+  claudemd += '- Nivel: ' + level + '\n';
+  claudemd += '- Area: ' + area + '\n';
+  claudemd += '- Objetivo: ' + goal + '\n\n';
+  claudemd += '## Convencoes\n';
+  claudemd += '- Commits atomicos (feat/fix/refactor/docs/test/chore)\n';
+  claudemd += '- Portugues brasileiro\n';
+  claudemd += '- Testes antes de commitar\n\n';
+  claudemd += '## O que NAO fazer\n';
+  claudemd += '- Nao instalar dependencia sem perguntar\n';
+  claudemd += '- Nao modificar arquivos fora do escopo\n';
+  claudemd += '- Nao commitar .env ou segredos\n\n';
+  claudemd += '## Comandos uteis\n';
+  claudemd += '- Abrir agente: ' + cmd + '\n';
+  claudemd += '- Rodar testes: pytest / npm test\n';
+
+  document.getElementById('qr-prompt').innerHTML = '<div class="code" style="white-space:pre-wrap"><div class="code-body">' + prompt.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div><button class="cpbtn" onclick="cpCode(this)">Copiar</button></div>';
+  document.getElementById('qr-claudemd').innerHTML = '<div class="code" style="white-space:pre-wrap"><div class="code-body">' + claudemd.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div><button class="cpbtn" onclick="cpCode(this)">Copiar</button></div>';
+
+  document.getElementById('quiz-container').style.display = 'none';
+  document.getElementById('quiz-result').style.display = 'block';
+  document.getElementById('quiz-result').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function quizResultTab(id, btn) {
+  btn.parentNode.querySelectorAll('.quiz-result-tab').forEach(function(t) { t.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.quiz-result-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('qr-' + id).classList.add('active');
+}
+
+function copyQuizResult(type) {
+  var el = document.getElementById('qr-' + type).querySelector('.code-body');
+  copyToClipboard(el.textContent);
+}
+
+function downloadQuizResult() {
+  var text = document.getElementById('qr-claudemd').querySelector('.code-body').textContent;
+  var agent = quizAnswers[4] === 1 ? 'AGENTS' : 'CLAUDE';
+  var blob = new Blob([text], { type: 'text/markdown' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = agent + '.md'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function resetQuiz() {
+  quizAnswers = {};
+  quizStep = 0;
+  localStorage.removeItem('gie-quiz');
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-container').style.display = 'block';
+  renderQuizStep();
+  document.getElementById('quiz-container').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</div>
   <div id="page-cola" class="page" role="tabpanel"></div>
   <div id="page-custos" class="page" role="tabpanel"></div>
 </main>
