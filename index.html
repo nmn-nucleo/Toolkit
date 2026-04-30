@@ -2619,7 +2619,999 @@ loadChecks();
     <div class="sec-spacer"></div>
 
   </div>
-  <div id="page-skills" class="page" role="tabpanel"></div>
+  <div id="page-skills" class="page" role="tabpanel">
+
+    <!-- ─── INTRO ───────────────────────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Padrao aberto adotado por Anthropic, OpenAI, Cursor e Aider</div>
+        <h2 class="DH">Skill nao e truque de<br>uma ferramenta.<br><em>E o oficio empacotado.</em></h2>
+        <p class="dl">Em 2026, skill virou <strong style="color:var(--t1)">o padrao da industria</strong> pra encapsular conhecimento e fluxo de trabalho de agentes de IA. Claude Code le <code style="font-family:var(--f-mono);font-size:12px;color:var(--au1)">SKILL.md</code>. Codex le <code style="font-family:var(--f-mono);font-size:12px;color:var(--au1)">SKILL.md</code>. Cursor le. Aider le. Voce escreve <strong style="color:var(--t1)">uma vez</strong> e funciona em qualquer harness. Isso muda tudo: aprender a criar e organizar skills nao e investir em uma plataforma — e investir em uma habilidade portavel que vai te servir nos proximos 5 anos, em qualquer agente que ainda vai aparecer.</p>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 1: O que e uma skill ──────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 1</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">O que e uma skill (em 2 minutos)</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">Skill e uma <strong style="color:var(--t1)">pasta com um arquivo <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">SKILL.md</code></strong> que ensina o agente a executar uma tarefa especifica.</p>
+
+        <div class="code" style="margin-bottom:var(--s6)">
+          <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+          <span class="code-body"><span class="ch">minha-skill/</span>
+<span class="cg">├── SKILL.md</span>          <span class="cm">← descricao + instrucoes</span>
+<span class="cc">├── scripts/</span>          <span class="cm">← (opcional) codigo executavel</span>
+<span class="cc">│   └── helper.py</span>
+<span class="cc">└── references/</span>       <span class="cm">← (opcional) docs/exemplos</span>
+<span class="cc">    └── exemplo.json</span></span>
+        </div>
+
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">O agente le o <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">SKILL.md</code> quando precisa, segue as instrucoes, executa scripts se houver, retorna ao fluxo principal.</p>
+
+        <div class="sh" style="margin-bottom:var(--s4)">Por que skill funciona melhor que prompt direto</div>
+        <div style="overflow-x:auto;margin-bottom:var(--s7)">
+          <table class="mt">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Prompt direto</th>
+                <th>Skill</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color:var(--t1)">Reusabilidade</strong></td>
+                <td>Voce reescreve toda vez</td>
+                <td><span style="color:var(--ok)">Escreve uma vez, usa sempre</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Consistencia</strong></td>
+                <td>Varia conforme voce digita</td>
+                <td><span style="color:var(--ok)">Constante</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Compartilhamento</strong></td>
+                <td>Copia e cola entre pessoas</td>
+                <td><span style="color:var(--ok)">Versiona via Git</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Curadoria</strong></td>
+                <td>So voce sabe o que funciona</td>
+                <td><span style="color:var(--ok)">Time todo se beneficia</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color:var(--t1)">Evolucao</strong></td>
+                <td>Voce esquece o que mudou</td>
+                <td><span style="color:var(--ok)">Versiona em commit</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sh" style="margin-bottom:var(--s4)">Dois tipos de skill</div>
+        <div class="g2">
+          <div class="card" style="border-top:3px solid var(--au);padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s3)">Instructions-only (so texto)</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">O <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">SKILL.md</code> tem todas as instrucoes em prosa/bullets. O agente segue. <strong style="color:var(--t1)">Maioria das skills e isso.</strong></p>
+          </div>
+          <div class="card" style="border-top:3px solid var(--cdx);padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s3)">Com scripts</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">O <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">SKILL.md</code> aponta pra codigo (<code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">scripts/foo.py</code>) que o agente executa pra obter resultado deterministico. <strong style="color:var(--t1)">Util quando precisa de logica complexa, conexao com API, ou comportamento garantido.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 2: Anatomia do SKILL.md ──────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 2</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s5)">Anatomia do SKILL.md</div>
+
+        <div class="sh" style="margin-bottom:var(--s3)">Estrutura minima (10 linhas)</div>
+        <div class="code" style="margin-bottom:var(--s5)">
+          <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+          <span class="code-body"><span class="cm">---</span>
+<span class="ch">name:</span> <span class="cg">commit-padrao</span>
+<span class="ch">description:</span> <span class="cc">Formata mensagens de commit no padrao do projeto (conventional commits)</span>
+<span class="cm">---</span>
+
+<span class="ch"># Commit Padrao</span>
+
+<span class="cc">Quando o usuario pedir pra commitar, formate a mensagem assim:</span>
+
+<span class="cc">- Tipo: feat | fix | docs | refactor | test | chore</span>
+<span class="cc">- Escopo opcional entre parenteses</span>
+<span class="cc">- Descricao curta no imperativo, sem ponto final</span>
+<span class="cc">- Body opcional em paragrafos separados</span>
+
+<span class="cc">Exemplo: `feat(auth): adiciona login via Google`</span></span>
+        </div>
+
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">So isso. <strong style="color:var(--t1)">Nome, descricao, instrucoes.</strong> Funciona em Claude Code e Codex sem mudanca.</p>
+
+        <div class="sh" style="margin-bottom:var(--s3)">Estrutura completa</div>
+        <div class="code" style="margin-bottom:var(--s6)">
+          <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+          <span class="code-body"><span class="cm">---</span>
+<span class="ch">name:</span> <span class="cg">nome-da-skill</span>              <span class="cm"># obrigatorio</span>
+<span class="ch">description:</span> <span class="cc">descricao curta</span>     <span class="cm"># obrigatorio (e o que dispara invocacao implicita)</span>
+<span class="ch">allow_implicit_invocation:</span> <span class="cg">true</span>  <span class="cm"># opcional (default true)</span>
+<span class="cm">---</span>
+
+<span class="ch"># Titulo legivel</span>
+
+<span class="ch">## Quando usar</span>
+<span class="cc">- Cenario 1</span>
+<span class="cc">- Cenario 2</span>
+
+<span class="ch">## Como executar</span>
+<span class="cc">1. Passo 1</span>
+<span class="cc">2. Passo 2</span>
+<span class="cc">3. Passo 3</span>
+
+<span class="ch">## Inputs esperados</span>
+<span class="cc">- input_a: tipo (descricao)</span>
+<span class="cc">- input_b: tipo (descricao)</span>
+
+<span class="ch">## Outputs garantidos</span>
+<span class="cc">- Formato do output</span>
+
+<span class="ch">## Pegadinhas</span>
+<span class="cc">- Cuidado com X</span>
+<span class="cc">- Sempre validar Y</span>
+
+<span class="ch">## Scripts disponiveis</span>
+<span class="cc">- `scripts/parse.py` — usa quando precisar de Z</span>
+<span class="cc">- `scripts/format.sh` — usa pra W</span>
+
+<span class="ch">## Referencias</span>
+<span class="cc">- `references/exemplo-input.json`</span>
+<span class="cc">- `references/exemplo-output.json`</span></span>
+        </div>
+
+        <div class="sh" style="margin-bottom:var(--s4)">Frontmatter — os campos importantes</div>
+        <div style="display:flex;flex-direction:column;gap:var(--s4);margin-bottom:var(--s6)">
+          <div class="card" style="padding:var(--s4)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-sm);color:var(--au1);margin-bottom:var(--s2)">name <span class="badge b-req" style="margin-left:var(--s2)">obrigatorio</span></div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Identificador unico. Use kebab-case. Ex: <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">analise-csv</code>, <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">parser-pdf</code>, <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">commit-padrao</code>.</p>
+          </div>
+          <div class="card" style="padding:var(--s4)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-sm);color:var(--au1);margin-bottom:var(--s2)">description <span class="badge b-req" style="margin-left:var(--s2)">obrigatorio</span></div>
+            <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)"><strong style="color:var(--t1)">A parte mais critica.</strong> E isso que faz o agente decidir se invoca a skill quando voce pede algo. Escreve com palavras-gatilho que voce realmente usaria.</p>
+            <div class="cmp">
+              <div class="cmp-bad">
+                <div class="cmp-h">Ruim</div>
+                <div class="cmp-b">"Skill que faz analise"</div>
+              </div>
+              <div class="cmp-good">
+                <div class="cmp-h">Bom</div>
+                <div class="cmp-b">"Analisa arquivo CSV e gera resumo estatistico (media, mediana, outliers, valores faltantes). Uso: dados tabulares, planilhas, exports de banco."</div>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="padding:var(--s4)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-sm);color:var(--au1);margin-bottom:var(--s2)">allow_implicit_invocation <span class="badge b-opt" style="margin-left:var(--s2)">opcional</span></div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Se <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">true</code> (default), o agente pode invocar a skill sozinho quando matchear a descricao. Se <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">false</code>, so funciona quando voce chama explicitamente (<code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">$nome-da-skill</code>).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 3: Como cada agente descobre skills ────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 3</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s5)">Como cada agente descobre skills</div>
+
+        <div class="g2" style="margin-bottom:var(--s6)">
+          <div>
+            <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4)">
+              <span class="sh" style="margin-bottom:0;color:var(--cc)">Claude Code</span>
+            </div>
+            <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Procura skills em camadas hierarquicas:</p>
+            <div style="overflow-x:auto">
+              <table class="mt">
+                <thead>
+                  <tr>
+                    <th>Camada</th>
+                    <th>Localizacao</th>
+                    <th>Escopo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Sistema</td><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">/usr/local/share/claude/skills/</code></td><td>Toda maquina</td></tr>
+                  <tr><td>Admin</td><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">/etc/claude/skills/</code></td><td>Politicas org</td></tr>
+                  <tr><td>Usuario</td><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">~/.claude/skills/</code></td><td>Voce</td></tr>
+                  <tr><td>Projeto</td><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">&lt;projeto&gt;/.claude/skills/</code></td><td>Esse projeto</td></tr>
+                  <tr><td>Arvore</td><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">&lt;subpasta&gt;/.claude/skills/</code></td><td>Subdiretorios</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="font-size:var(--t-xs);color:var(--t3);margin-top:var(--s2)">Mais especifico vence menos especifico (em conflito de nome).</p>
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4)">
+              <span class="sh" style="margin-bottom:0;color:var(--cdx)">Codex</span>
+            </div>
+            <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Procura skills em duas raizes:</p>
+            <div style="overflow-x:auto">
+              <table class="mt">
+                <thead>
+                  <tr>
+                    <th>Localizacao</th>
+                    <th>Escopo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">~/.codex/skills/</code></td><td>Voce (global)</td></tr>
+                  <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">.agents/skills/</code> em qualquer pasta da raiz ate pwd</td><td>Local (per-repo)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="font-size:var(--t-xs);color:var(--t3);margin-top:var(--s2)">Codex <strong>nao mescla</strong> skills com mesmo nome — ambas aparecem no seletor.</p>
+          </div>
+        </div>
+
+        <div class="sh" style="margin-bottom:var(--s3)">A regra portavel</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">A pasta muda (<code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">.claude/skills</code> vs <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">.agents/skills</code>). O conteudo dentro <strong style="color:var(--t1)">nao muda</strong>. Voce pode manter os dois lados a lado no mesmo projeto:</p>
+
+        <div class="code" style="margin-bottom:var(--s4)">
+          <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+          <span class="code-body"><span class="ch">meu-projeto/</span>
+<span class="cc">├── .claude/</span>
+<span class="cc">│   └── skills/</span>         <span class="cm">← Claude Code le aqui</span>
+<span class="cc">│       └── analise-csv/</span>
+<span class="cc">│           └── SKILL.md</span>
+<span class="cc">└── .agents/</span>
+<span class="cc">    └── skills/</span>         <span class="cm">← Codex le aqui</span>
+<span class="cc">        └── analise-csv/</span>   <span class="cm">← mesma skill, mesmo SKILL.md</span>
+<span class="cc">            └── SKILL.md</span></span>
+        </div>
+
+        <div class="card" style="padding:var(--s4);border-left:3px solid var(--au)">
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s2)">Truque pro</div>
+          <p style="font-size:var(--t-sm);color:var(--t2)">Faz uma pasta unica e usa <strong style="color:var(--t1)">symlink</strong>. Voce edita um arquivo, ambos os agentes leem.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 4: Tutorial ─────────────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 4</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">Crie sua primeira skill em 10 minutos</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Tutorial agnostico. Funciona em Claude Code OU Codex. Vamos criar a skill <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">commit-padrao</code> — ela formata mensagens de commit no padrao conventional commits.</p>
+
+        <div class="steps">
+
+          <div class="step">
+            <div class="snum" style="background:var(--aubg);border:1px solid rgba(217,168,50,.3);color:var(--au)">1</div>
+            <div style="flex:1">
+              <div class="stool">Cria a estrutura</div>
+              <div class="code" style="margin-top:var(--s3)">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cm"># Pra Claude Code:</span>
+<span class="cg">mkdir</span> <span class="cp">-p</span> .claude/skills/commit-padrao
+
+<span class="cm"># Pra Codex:</span>
+<span class="cg">mkdir</span> <span class="cp">-p</span> .agents/skills/commit-padrao</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="snum" style="background:var(--aubg);border:1px solid rgba(217,168,50,.3);color:var(--au)">2</div>
+            <div style="flex:1">
+              <div class="stool">Cria o SKILL.md</div>
+              <div class="code" style="margin-top:var(--s3);margin-bottom:var(--s3)">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cm"># Substitua .claude por .agents conforme seu agente</span>
+<span class="cg">touch</span> .claude/skills/commit-padrao/SKILL.md</span>
+              </div>
+              <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Cole o conteudo:</p>
+              <div class="code">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cm">---</span>
+<span class="ch">name:</span> <span class="cg">commit-padrao</span>
+<span class="ch">description:</span> <span class="cc">Formata mensagens de commit no padrao conventional commits do projeto</span>
+<span class="cm">---</span>
+
+<span class="ch"># Commit Padrao</span>
+
+<span class="cc">Quando o usuario pedir pra commitar, formate a mensagem assim:</span>
+
+<span class="ch">## Estrutura</span>
+<span class="cg">`&lt;tipo&gt;(&lt;escopo opcional&gt;): &lt;descricao&gt;`</span>
+
+<span class="ch">## Tipos validos</span>
+<span class="cc">- **feat**: nova feature</span>
+<span class="cc">- **fix**: correcao de bug</span>
+<span class="cc">- **docs**: mudanca de documentacao</span>
+<span class="cc">- **refactor**: refactor sem mudanca de comportamento</span>
+<span class="cc">- **test**: adicionar/modificar testes</span>
+<span class="cc">- **chore**: mudancas de build/config/deps</span>
+
+<span class="ch">## Regras</span>
+<span class="cc">- Descricao no imperativo presente: "adiciona", nao "adicionado"</span>
+<span class="cc">- Sem ponto final</span>
+<span class="cc">- Maximo 72 caracteres na primeira linha</span>
+<span class="cc">- Body opcional em paragrafos separados (com 2 newlines)</span>
+
+<span class="ch">## Exemplos</span>
+<span class="cc">- `feat(auth): adiciona login via Google`</span>
+<span class="cc">- `fix(api): corrige timeout em /users/sync`</span>
+<span class="cc">- `docs: atualiza README com instrucoes de deploy`</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="snum" style="background:var(--aubg);border:1px solid rgba(217,168,50,.3);color:var(--au)">3</div>
+            <div style="flex:1">
+              <div class="stool">Reinicia o agente</div>
+              <div class="code" style="margin-top:var(--s3)">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cm"># Sai e abre de novo</span>
+<span class="cg">claude</span>    <span class="cm"># ou: codex</span></span>
+              </div>
+              <p style="font-size:var(--t-xs);color:var(--t3);margin-top:var(--s2)">Pra Codex, pode tambem rodar <code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">/skills</code> no chat pra ver as skills disponiveis.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="snum" style="background:var(--aubg);border:1px solid rgba(217,168,50,.3);color:var(--au)">4</div>
+            <div style="flex:1">
+              <div class="stool">Testa</div>
+              <p style="font-size:var(--t-sm);color:var(--t2);margin-top:var(--s3);margin-bottom:var(--s3)">No agente, manda:</p>
+              <div class="code" style="margin-bottom:var(--s3)">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cc">Faz um commit dessas mudancas. Adicionei autenticacao via Google.</span></span>
+              </div>
+              <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Se a skill foi descoberta, o agente vai usar o formato <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">feat(auth): adiciona login via Google</code> automaticamente. Se nao, voce pode invocar explicitamente:</p>
+              <div class="code">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cg">$commit-padrao</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="snum" style="background:var(--aubg);border:1px solid rgba(217,168,50,.3);color:var(--au)">5</div>
+            <div style="flex:1">
+              <div class="stool">Versiona</div>
+              <div class="code" style="margin-top:var(--s3)">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cg">git add</span> .claude/skills/commit-padrao/    <span class="cm"># ou .agents/skills/...</span>
+<span class="cg">git commit</span> <span class="cp">-m</span> <span class="ch">"feat: adiciona skill commit-padrao"</span>
+<span class="cg">git push</span></span>
+              </div>
+              <div class="card" style="margin-top:var(--s4);padding:var(--s4);border-left:3px solid var(--ok);background:var(--ok-bg)">
+                <p style="font-size:var(--t-sm);color:var(--t2)">Pronto. <strong style="color:var(--t1)">Time todo agora tem essa skill.</strong></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 5: 4 ferramentas auxiliares ───────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 5</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">As 4 ferramentas auxiliares</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s7)">Agora que voce sabe o que e skill e como criar uma, vamos ver as 4 ferramentas auxiliares maduras que ja entregam dezenas de skills prontas.</p>
+
+        <!-- GSD -->
+        <div class="card" style="border-top:4px solid var(--gsd);padding:var(--s6);margin-bottom:var(--s5)">
+          <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4)">
+            <span class="sh" style="margin-bottom:0;color:var(--gsd)">GSD — Get Shit Done</span>
+            <span class="badge" style="background:var(--gsd-bg);color:var(--gsd);border:1px solid var(--gsd-b)">roxo</span>
+            <span class="badge b-opt">repositorio de skills</span>
+          </div>
+          <div class="g2" style="margin-bottom:var(--s5)">
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:var(--s2)">Problema</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Voce abre o agente de manha e nao sabe por onde comecar. Tem 12 tarefas no backlog do cliente, 4 pendencias do dia anterior, 1 bug em producao. Sem rotina, voce gasta 1h so decidindo o que fazer.</p>
+            </div>
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--gsd);margin-bottom:var(--s2)">Solucao</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">GSD adiciona <strong style="color:var(--t1)">gerencia de tarefa nativa</strong> dentro do agente. Voce conversa com o agente como se fosse seu PM.</p>
+            </div>
+          </div>
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:var(--s3)">Comandos principais</div>
+          <div style="display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s5)">
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--gsd);min-width:200px">/task new &lt;descricao&gt;</code><span style="font-size:var(--t-sm);color:var(--t2)">cria tarefa</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--gsd);min-width:200px">/task list</code><span style="font-size:var(--t-sm);color:var(--t2)">lista tarefas pendentes</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--gsd);min-width:200px">/task done &lt;id&gt;</code><span style="font-size:var(--t-sm);color:var(--t2)">marca como concluida</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--gsd);min-width:200px">/task focus &lt;id&gt;</code><span style="font-size:var(--t-sm);color:var(--t2)">entra em modo foco numa tarefa</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--gsd);min-width:200px">/branch sync</code><span style="font-size:var(--t-sm);color:var(--t2)">sincroniza branch com main</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--gsd);min-width:200px">/status</code><span style="font-size:var(--t-sm);color:var(--t2)">relatorio do projeto</span></div>
+          </div>
+          <div class="g2">
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--ok);margin-bottom:var(--s2)">Quando usar</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s1)">
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--ok)">+</span> Projetos com mais de 3-4 tarefas paralelas</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--ok)">+</span> Trabalho de freelancer com multiplos clientes</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--ok)">+</span> Time pequeno sem ferramenta dedicada (Jira, Linear)</li>
+              </ul>
+            </div>
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--err);margin-bottom:var(--s2)">Quando NAO usar</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s1)">
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--err)">-</span> Time ja com Linear/Jira maduro</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--err)">-</span> Projeto pessoal pequeno (overhead)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spec-Kit -->
+        <div class="card" style="border-top:4px solid var(--spc);padding:var(--s6);margin-bottom:var(--s5)">
+          <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4)">
+            <span class="sh" style="margin-bottom:0;color:var(--spc)">Spec-Kit</span>
+            <span class="badge" style="background:var(--spc-bg);color:var(--spc);border:1px solid var(--spc-b)">verde</span>
+            <span class="badge b-opt">SDD framework</span>
+          </div>
+          <div class="g2" style="margin-bottom:var(--s5)">
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:var(--s2)">Problema</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Voce pede "constroi sistema de notificacoes" e o agente entrega algo que nao bate com o que voce queria. <strong style="color:var(--t1)">Razao:</strong> sua especificacao mental nunca virou texto. Agente preencheu lacunas com suposicao.</p>
+            </div>
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--spc);margin-bottom:var(--s2)">Solucao</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Spec-Kit forca um fluxo de spec antes do codigo. Voce escreve a spec primeiro. Agente le. Implementa de acordo. <strong style="color:var(--t1)">Resultado bate.</strong></p>
+            </div>
+          </div>
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:var(--s3)">Comandos principais</div>
+          <div style="display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s5)">
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--spc);min-width:200px">/spec new &lt;feature&gt;</code><span style="font-size:var(--t-sm);color:var(--t2)">gera spec a partir de ideia</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--spc);min-width:200px">/spec review</code><span style="font-size:var(--t-sm);color:var(--t2)">valida spec antes de implementar</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--spc);min-width:200px">/spec expand</code><span style="font-size:var(--t-sm);color:var(--t2)">expande RFs e RNFs</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--spc);min-width:200px">/spec to-tasks</code><span style="font-size:var(--t-sm);color:var(--t2)">quebra spec em tarefas executaveis</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--spc);min-width:200px">/spec validate</code><span style="font-size:var(--t-sm);color:var(--t2)">checa se implementacao bate com spec</span></div>
+          </div>
+          <div class="g2">
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--ok);margin-bottom:var(--s2)">Quando usar</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s1)">
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--ok)">+</span> Tarefas grandes (&gt; 2h estimado)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--ok)">+</span> Trabalho pra cliente (precisa documentar decisao)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--ok)">+</span> Time colaborativo (spec vira contrato)</li>
+              </ul>
+            </div>
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--err);margin-bottom:var(--s2)">Quando NAO usar</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s1)">
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--err)">-</span> Bug fix urgente (overhead atrapalha)</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--err)">-</span> Prototipo de 30 minutos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Superpowers -->
+        <div class="card" style="border-top:4px solid var(--sup);padding:var(--s6);margin-bottom:var(--s5)">
+          <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4)">
+            <span class="sh" style="margin-bottom:0;color:var(--sup)">Superpowers</span>
+            <span class="badge" style="background:var(--sup-bg);color:var(--sup);border:1px solid var(--sup-b)">ambar</span>
+            <span class="badge b-opt">plugin instalavel</span>
+          </div>
+          <div class="g2" style="margin-bottom:var(--s5)">
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:var(--s2)">Problema</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Comandos comuns ficam verbosos. Voce digita "ajuda eu a debugar isso seguindo o padrao X..." de novo e de novo. Cada vez voce escreve diferente. Resultado varia.</p>
+            </div>
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--sup);margin-bottom:var(--s2)">Solucao</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Superpowers e um pacote de slash commands prontos que encapsulam padroes comuns. Voce digita 2-3 caracteres, ele expande pro <strong style="color:var(--t1)">prompt completo e otimizado</strong>.</p>
+            </div>
+          </div>
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:var(--s3)">Comandos principais</div>
+          <div style="display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s4)">
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--sup);min-width:120px">/debug</code><span style="font-size:var(--t-sm);color:var(--t2)">fluxo de debug estruturado (pergunta sintoma, hipoteses, valida)</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--sup);min-width:120px">/refactor</code><span style="font-size:var(--t-sm);color:var(--t2)">refactor com criterios explicitos</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--sup);min-width:120px">/explain</code><span style="font-size:var(--t-sm);color:var(--t2)">explicacao em camadas (alto nivel → detalhe)</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--sup);min-width:120px">/test</code><span style="font-size:var(--t-sm);color:var(--t2)">gera testes pra codigo selecionado</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--sup);min-width:120px">/review</code><span style="font-size:var(--t-sm);color:var(--t2)">revisao critica de codigo</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--sup);min-width:120px">/plan</code><span style="font-size:var(--t-sm);color:var(--t2)">planejamento antes de codar</span></div>
+            <div style="display:flex;gap:var(--s3);align-items:baseline"><code style="font-family:var(--f-mono);font-size:11px;color:var(--sup);min-width:120px">/doc</code><span style="font-size:var(--t-sm);color:var(--t2)">gera documentacao estruturada</span></div>
+          </div>
+          <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:var(--s2)">Install</div>
+          <div class="code" style="margin-bottom:var(--s5)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cm"># No marketplace de plugins do Claude Code</span>
+<span class="cg">/plugin install</span> superpowers</span>
+          </div>
+          <div class="g2">
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--ok);margin-bottom:var(--s2)">Quando usar</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s1)">
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--ok)">+</span> Voce ja tem fluxo definido e quer atalho</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--ok)">+</span> Iniciante que ainda nao escreve prompts otimizados</li>
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--ok)">+</span> Quem cansou de redigitar mesma estrutura</li>
+              </ul>
+            </div>
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--err);margin-bottom:var(--s2)">Quando NAO usar</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s1)">
+                <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--err)">-</span> Voce precisa de prompts altamente customizados pra contexto especifico</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- GSP teaser -->
+        <div class="card" style="border-top:4px solid var(--gsp);padding:var(--s6);background:var(--gsp-bg)">
+          <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4)">
+            <span class="sh" style="margin-bottom:0;color:var(--gsp)">GSP — Get Sheet Pretty</span>
+            <span class="badge" style="background:var(--gsp-bg);color:var(--gsp);border:1px solid var(--gsp-b)">showcase</span>
+            <span class="badge b-opt">design system completo</span>
+          </div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Este e o caso de skill madura mais completo do toolkit. <strong style="color:var(--t1)">20+ comandos organizados em pipeline</strong>. Vale uma secao propria.</p>
+          <div style="display:flex;align-items:center;gap:var(--s4)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.12em;color:var(--gsp)">Vai pra Secao 6</div>
+            <div style="font-size:22px;color:var(--gsp)">↓</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 6: GSP em detalhe ──────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 6 — Showcase de skill avancada</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s5);color:var(--gsp)">GSP em detalhe (o caso de skill madura)</div>
+
+        <div class="sh" style="margin-bottom:var(--s3)">O problema que GSP resolve</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Designer freelancer brasileiro recebe brief de cliente: "preciso de logo, identidade, site, deck pra investidor, posts pra Instagram, e um e-mail de lancamento."</p>
+        <div class="cmp" style="margin-bottom:var(--s6)">
+          <div class="cmp-bad">
+            <div class="cmp-h">Sem GSP</div>
+            <div class="cmp-b">Voce itera com IA item por item, gastando 80% do tempo em ajuste visual, perdendo coerencia entre as pecas, e entregando em 2-3 semanas.</div>
+          </div>
+          <div class="cmp-good">
+            <div class="cmp-h">Com GSP</div>
+            <div class="cmp-b">Voce roda o pipeline. Em <strong>dias</strong> tem entrega coerente, profissional, com identidade unica.</div>
+          </div>
+        </div>
+
+        <div class="sh" style="margin-bottom:var(--s4)">Como funciona — Dual Diamond</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s5)">GSP organiza o trabalho em <strong style="color:var(--t1)">dois diamantes</strong> sequenciais:</p>
+
+        <div class="g2" style="margin-bottom:var(--s6)">
+          <div class="card" style="border-top:3px solid var(--gsp);padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.12em;color:var(--gsp);margin-bottom:var(--s3)">Diamante 1 — Descobrir</div>
+            <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Convergencia → divergencia → convergencia. <strong style="color:var(--t1)">O agente entende o cliente antes de produzir.</strong></p>
+            <div style="display:flex;flex-direction:column;gap:var(--s3)">
+              <div style="display:flex;gap:var(--s3);align-items:flex-start">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gsp-bg);border:1px solid var(--gsp-b);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);flex-shrink:0">1</div>
+                <div>
+                  <div style="font-size:var(--t-sm);font-weight:600;color:var(--t1)">Brief inicial</div>
+                  <p style="font-size:var(--t-sm);color:var(--t2)">O agente faz 12-15 perguntas curtas (tom, publico, valores, referencias). Voce responde em conversacao.</p>
+                </div>
+              </div>
+              <div style="display:flex;gap:var(--s3);align-items:flex-start">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gsp-bg);border:1px solid var(--gsp-b);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);flex-shrink:0">2</div>
+                <div>
+                  <div style="font-size:var(--t-sm);font-weight:600;color:var(--t1)">Sintese</div>
+                  <p style="font-size:var(--t-sm);color:var(--t2)">Agente sintetiza em 1 paragrafo: "Estou entendendo que vc quer X pra publico Y com tom Z. Confirmar?"</p>
+                </div>
+              </div>
+              <div style="display:flex;gap:var(--s3);align-items:flex-start">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gsp-bg);border:1px solid var(--gsp-b);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);flex-shrink:0">3</div>
+                <div>
+                  <div style="font-size:var(--t-sm);font-weight:600;color:var(--t1)">Refinamento</div>
+                  <p style="font-size:var(--t-sm);color:var(--t2)">Voce ajusta. Agente atualiza sintese.</p>
+                </div>
+              </div>
+              <div style="display:flex;gap:var(--s3);align-items:flex-start">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gsp-bg);border:1px solid var(--gsp-b);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);flex-shrink:0">4</div>
+                <div>
+                  <div style="font-size:var(--t-sm);font-weight:600;color:var(--t1)">Convergencia em direcao criativa</div>
+                  <p style="font-size:var(--t-sm);color:var(--t2)">3 propostas de territorio criativo. Voce escolhe uma.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-top:3px solid var(--gsp);padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.12em;color:var(--gsp);margin-bottom:var(--s3)">Diamante 2 — Entregar</div>
+            <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Implementacao do territorio escolhido em <strong style="color:var(--t1)">8 fases</strong>. Cada fase e uma skill independente.</p>
+            <div style="display:flex;flex-direction:column;gap:var(--s3)">
+              <div style="display:flex;gap:var(--s3);align-items:center">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gsp-bg);border:1px solid var(--gsp-b);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);flex-shrink:0">1</div>
+                <div style="font-size:var(--t-sm);color:var(--t2)"><strong style="color:var(--t1)">Naming</strong> — gera nomes alinhados com territorio</div>
+              </div>
+              <div style="display:flex;gap:var(--s3);align-items:center">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gsp-bg);border:1px solid var(--gsp-b);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);flex-shrink:0">2</div>
+                <div style="font-size:var(--t-sm);color:var(--t2)"><strong style="color:var(--t1)">Logo</strong> — concepcao + 5 variacoes + selecao + refinamento</div>
+              </div>
+              <div style="display:flex;gap:var(--s3);align-items:center">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gsp-bg);border:1px solid var(--gsp-b);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);flex-shrink:0">3</div>
+                <div style="font-size:var(--t-sm);color:var(--t2)"><strong style="color:var(--t1)">Identidade</strong> — paleta, tipografia, voz, principios visuais</div>
+              </div>
+              <div style="display:flex;gap:var(--s3);align-items:center">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gsp-bg);border:1px solid var(--gsp-b);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);flex-shrink:0">4</div>
+                <div style="font-size:var(--t-sm);color:var(--t2)"><strong style="color:var(--t1)">Brand book</strong> — documento PDF consolidado</div>
+              </div>
+              <div style="display:flex;gap:var(--s3);align-items:center">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gsp-bg);border:1px solid var(--gsp-b);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);flex-shrink:0">5</div>
+                <div style="font-size:var(--t-sm);color:var(--t2)"><strong style="color:var(--t1)">Aplicacoes web</strong> — landing page, copy, hero, secoes</div>
+              </div>
+              <div style="display:flex;gap:var(--s3);align-items:center">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gsp-bg);border:1px solid var(--gsp-b);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);flex-shrink:0">6</div>
+                <div style="font-size:var(--t-sm);color:var(--t2)"><strong style="color:var(--t1)">Aplicacoes deck</strong> — pitch deck (10-15 slides)</div>
+              </div>
+              <div style="display:flex;gap:var(--s3);align-items:center">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gsp-bg);border:1px solid var(--gsp-b);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);flex-shrink:0">7</div>
+                <div style="font-size:var(--t-sm);color:var(--t2)"><strong style="color:var(--t1)">Aplicacoes social</strong> — kit de posts (5-10 templates)</div>
+              </div>
+              <div style="display:flex;gap:var(--s3);align-items:center">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gsp-bg);border:1px solid var(--gsp-b);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--gsp);flex-shrink:0">8</div>
+                <div style="font-size:var(--t-sm);color:var(--t2)"><strong style="color:var(--t1)">Aplicacoes email</strong> — newsletter, transacionais, lancamento</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sh" style="margin-bottom:var(--s4)">Setup rapido vs setup completo</div>
+        <div class="g2" style="margin-bottom:var(--s6)">
+          <div class="card" style="padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--ok);margin-bottom:var(--s3)">Setup rapido (5 minutos)</div>
+            <div class="code">
+              <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+              <span class="code-body"><span class="cm"># Cria estrutura local</span>
+<span class="cg">mkdir</span> <span class="cp">-p</span> .claude/skills/gsp
+<span class="cm"># Copia o starter</span>
+<span class="cg">curl</span> <span class="cp">-L</span> https://github.com/[gsp-repo]/starter > .claude/skills/gsp/SKILL.md</span>
+            </div>
+            <p style="font-size:var(--t-xs);color:var(--t3);margin-top:var(--s3)">Pronto. Voce tem uma skill <code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp</code> que dispara o pipeline.</p>
+          </div>
+          <div class="card" style="padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--gsp);margin-bottom:var(--s3)">Setup completo (30 minutos)</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--gsp)">→</span> Clona o repositorio inteiro do GSP</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--gsp)">→</span> Customiza o territorio criativo padrao pro seu cliente</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--gsp)">→</span> Adiciona skills pais (uma pra cada cliente recorrente)</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--gsp)">→</span> Configura templates personalizados</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--gsp)">→</span> Faz primeiro projeto teste</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sh" style="margin-bottom:var(--s4)">Os 20+ comandos do GSP</div>
+        <div style="overflow-x:auto;margin-bottom:var(--s6)">
+          <table class="mt">
+            <thead>
+              <tr>
+                <th>Fase</th>
+                <th>Comando</th>
+                <th>Descricao</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td rowspan="3" style="color:var(--gsp);font-weight:600;vertical-align:top;padding-top:var(--s4)">Naming</td><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-name-generate</code></td><td>gera 20 nomes alinhados</td></tr>
+              <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-name-validate</code></td><td>checa se nome ja existe (busca + dominio)</td></tr>
+              <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-name-evolve</code></td><td>ajusta nome escolhido</td></tr>
+              <tr><td rowspan="3" style="color:var(--gsp);font-weight:600;vertical-align:top;padding-top:var(--s4)">Logo</td><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-logo-concepts</code></td><td>5 conceitos visuais</td></tr>
+              <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-logo-render</code></td><td>renderiza concept em SVG</td></tr>
+              <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-logo-variations</code></td><td>variacoes (horizontal, vertical, simbolo, monocromatico)</td></tr>
+              <tr><td rowspan="4" style="color:var(--gsp);font-weight:600;vertical-align:top;padding-top:var(--s4)">Identidade</td><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-palette</code></td><td>paleta primaria + secundaria + neutros</td></tr>
+              <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-typography</code></td><td>combinacao de fontes (display + body + mono)</td></tr>
+              <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-voice</code></td><td>tom de voz, exemplos do/dont</td></tr>
+              <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-principles</code></td><td>principios visuais documentados</td></tr>
+              <tr><td rowspan="2" style="color:var(--gsp);font-weight:600;vertical-align:top;padding-top:var(--s4)">Brand book</td><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-brandbook</code></td><td>gera PDF consolidado</td></tr>
+              <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-brandbook-export</code></td><td>exporta assets em pasta organizada</td></tr>
+              <tr><td rowspan="3" style="color:var(--gsp);font-weight:600;vertical-align:top;padding-top:var(--s4)">Web</td><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-landing</code></td><td>landing page completa</td></tr>
+              <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-copy</code></td><td>copy hero + secoes</td></tr>
+              <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-hero</code></td><td>hero section especifica</td></tr>
+              <tr><td rowspan="2" style="color:var(--gsp);font-weight:600;vertical-align:top;padding-top:var(--s4)">Deck</td><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-deck</code></td><td>pitch deck completo</td></tr>
+              <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-slide</code></td><td>slide individual</td></tr>
+              <tr><td rowspan="2" style="color:var(--gsp);font-weight:600;vertical-align:top;padding-top:var(--s4)">Social</td><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-social-kit</code></td><td>kit de templates</td></tr>
+              <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-post</code></td><td>post individual</td></tr>
+              <tr><td rowspan="2" style="color:var(--gsp);font-weight:600;vertical-align:top;padding-top:var(--s4)">Email</td><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-newsletter</code></td><td>newsletter</td></tr>
+              <tr><td><code style="font-family:var(--f-mono);font-size:10px;color:var(--au1)">gsp-transactional</code></td><td>emails do app (welcome, reset, etc.)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sh" style="margin-bottom:var(--s4)">Antes de GSP / Depois de GSP</div>
+        <div style="overflow-x:auto;margin-bottom:var(--s6)">
+          <table class="mt">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Sem GSP</th>
+                <th>Com GSP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong style="color:var(--t1)">Tempo medio identidade completa</strong></td><td>2-3 semanas</td><td><span style="color:var(--ok)">3-5 dias</span></td></tr>
+              <tr><td><strong style="color:var(--t1)">Coerencia entre pecas</strong></td><td>Variavel</td><td><span style="color:var(--ok)">Alta</span></td></tr>
+              <tr><td><strong style="color:var(--t1)">Documentacao gerada</strong></td><td>Manual / nao gerada</td><td><span style="color:var(--ok)">Automatica (brand book)</span></td></tr>
+              <tr><td><strong style="color:var(--t1)">Reusabilidade</strong></td><td>Cada projeto comeca do zero</td><td><span style="color:var(--ok)">Setup customizado por cliente</span></td></tr>
+              <tr><td><strong style="color:var(--t1)">Custo de revisao</strong></td><td>Alto (cada peca em isolado)</td><td><span style="color:var(--ok)">Baixo (territorio ja validado)</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="g2">
+          <div>
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--ok);margin-bottom:var(--s2)">Quando usar GSP</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--ok)">+</span> Trabalho de identidade visual completo (logo + identidade + aplicacoes)</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--ok)">+</span> Cliente novo recorrente (vale investir no setup completo)</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--ok)">+</span> Voce e designer/agencia que entrega "tudo"</li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--err);margin-bottom:var(--s2)">Quando NAO usar GSP</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s2)">
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--err)">-</span> Voce so precisa de uma peca isolada (overkill)</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--err)">-</span> Cliente ja tem identidade definida (use partes especificas)</li>
+              <li style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--err)">-</span> Projeto interno simples</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 7: Workflows combinados ────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 7</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">Combinacoes poderosas (workflows multi-skill)</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Skills funcionam ainda melhor combinadas. Aqui os workflows mais usados:</p>
+
+        <div class="g2">
+
+          <div class="card" style="border-top:3px solid var(--gsd);padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:var(--s2)">Workflow 1</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Projeto solo</div>
+            <div style="font-size:var(--t-xs);color:var(--t3);font-family:var(--f-mono);margin-bottom:var(--s3)">GSD + Spec-Kit</div>
+            <p style="font-size:var(--t-xs);color:var(--t3);margin-bottom:var(--s3)">Dev solo trabalhando em projeto medio.</p>
+            <div style="display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s4)">
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--spc)">/spec new</span><span style="font-size:var(--t-xs);color:var(--t3)">cria a spec</span></div>
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--spc)">/spec to-tasks</span><span style="font-size:var(--t-xs);color:var(--t3)">quebra em tarefas</span></div>
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--gsd)">/task new</span><span style="font-size:var(--t-xs);color:var(--t3)">registra cada tarefa</span></div>
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--gsd)">/task focus</span><span style="font-size:var(--t-xs);color:var(--t3)">entra em foco</span></div>
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--gsd)">/task done</span><span style="font-size:var(--t-xs);color:var(--t3)">marca concluida</span></div>
+            </div>
+            <div style="font-size:var(--t-xs);color:var(--ok);border-top:1px solid var(--b1);padding-top:var(--s3)">Resultado: voce nao perde tarefa nem trabalha sem spec.</div>
+          </div>
+
+          <div class="card" style="border-top:3px solid var(--sup);padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:var(--s2)">Workflow 2</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Iniciante acelerado</div>
+            <div style="font-size:var(--t-xs);color:var(--t3);font-family:var(--f-mono);margin-bottom:var(--s3)">Superpowers + Spec-Kit</div>
+            <p style="font-size:var(--t-xs);color:var(--t3);margin-bottom:var(--s3)">Voce esta aprendendo, ainda escreve prompt vago.</p>
+            <div style="display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s4)">
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--sup)">/plan</span><span style="font-size:var(--t-xs);color:var(--t3)">estrutura antes de codar</span></div>
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--spc)">/spec new</span><span style="font-size:var(--t-xs);color:var(--t3)">formaliza a ideia</span></div>
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--sup)">/explain</span><span style="font-size:var(--t-xs);color:var(--t3)">entende codigo existente</span></div>
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--sup)">/refactor</span><span style="font-size:var(--t-xs);color:var(--t3)">melhora conforme aprende</span></div>
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--sup)">/test</span><span style="font-size:var(--t-xs);color:var(--t3)">/review antes de commitar</span></div>
+            </div>
+            <div style="font-size:var(--t-xs);color:var(--ok);border-top:1px solid var(--b1);padding-top:var(--s3)">Resultado: voce escreve menos, aprende mais, codigo sai melhor.</div>
+          </div>
+
+          <div class="card" style="border-top:3px solid var(--gsp);padding:var(--s5)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:var(--s2)">Workflow 3</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Designer freelancer</div>
+            <div style="font-size:var(--t-xs);color:var(--t3);font-family:var(--f-mono);margin-bottom:var(--s3)">GSP + GSD</div>
+            <p style="font-size:var(--t-xs);color:var(--t3);margin-bottom:var(--s3)">Entrega identidade visual pra cliente novo.</p>
+            <div style="display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s4)">
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--gsd)">/task new</span><span style="font-size:var(--t-xs);color:var(--t3)">registra projeto cliente</span></div>
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--gsp)">gsp-name-generate</span><span style="font-size:var(--t-xs);color:var(--t3)">naming</span></div>
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--gsp)">gsp-logo-concepts</span><span style="font-size:var(--t-xs);color:var(--t3)">→ render</span></div>
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--gsp)">gsp-palette + gsp-typography</span></div>
+              <div style="display:flex;gap:var(--s2);align-items:baseline"><span style="font-family:var(--f-mono);font-size:11px;color:var(--gsp)">gsp-brandbook</span><span style="font-size:var(--t-xs);color:var(--t3)">entregavel principal</span></div>
+            </div>
+            <div style="font-size:var(--t-xs);color:var(--ok);border-top:1px solid var(--b1);padding-top:var(--s3)">Resultado: entrega completa em dias com coerencia.</div>
+          </div>
+
+          <div class="card" style="border-top:3px solid var(--au);padding:var(--s5);background:var(--aubg)">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:var(--s2)">Workflow 4</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Time profissional</div>
+            <div style="font-size:var(--t-xs);color:var(--t3);font-family:var(--f-mono);margin-bottom:var(--s3)">Todas combinadas</div>
+            <p style="font-size:var(--t-xs);color:var(--t3);margin-bottom:var(--s3)">Time de 5-10 pessoas, projeto serio.</p>
+            <div style="display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s4)">
+              <div style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--spc)">→</span> Spec-Kit como base de toda feature</div>
+              <div style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--gsd)">→</span> GSD pra gerencia diaria</div>
+              <div style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--sup)">→</span> Superpowers pra atalhos individuais</div>
+              <div style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--gsp)">→</span> GSP se time tem componente visual</div>
+              <div style="font-size:var(--t-sm);color:var(--t2);display:flex;gap:var(--s2)"><span style="color:var(--au)">→</span> Skills proprias do time pra padroes especificos</div>
+            </div>
+            <div style="font-size:var(--t-xs);color:var(--ok);border-top:1px solid rgba(217,168,50,.15);padding-top:var(--s3)">Resultado: time alinhado, padroes consistentes, onboarding rapido pra novo membro.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 8: Distribuicao de skills ──────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 8</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s5)">Como criar e distribuir suas proprias skills</div>
+
+        <div style="display:flex;flex-direction:column;gap:var(--s4)">
+
+          <div class="card" style="border-left:4px solid var(--t4);padding:var(--s5);display:flex;gap:var(--s5);align-items:flex-start">
+            <div style="font-family:var(--f-mono);font-size:28px;font-weight:700;color:var(--t4);flex-shrink:0">1</div>
+            <div>
+              <div class="sh" style="margin-bottom:var(--s2)">Skill local (so pro projeto)</div>
+              <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s2)">Mora em <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">&lt;projeto&gt;/.claude/skills/</code> ou <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">&lt;projeto&gt;/.agents/skills/</code>. Versionada com o codigo. Time todo recebe via Git.</p>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3)">Quando usar: padrao especifico desse projeto.</div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left:4px solid var(--b2);padding:var(--s5);display:flex;gap:var(--s5);align-items:flex-start">
+            <div style="font-family:var(--f-mono);font-size:28px;font-weight:700;color:var(--b3);flex-shrink:0">2</div>
+            <div>
+              <div class="sh" style="margin-bottom:var(--s2)">Skill pessoal (so pra voce)</div>
+              <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s2)">Mora em <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">~/.claude/skills/</code> ou <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">~/.codex/skills/</code>. So existe na sua maquina.</p>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3)">Quando usar: padroes pessoais (tom de email, atalhos individuais).</div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left:4px solid var(--cdx);padding:var(--s5);display:flex;gap:var(--s5);align-items:flex-start">
+            <div style="font-family:var(--f-mono);font-size:28px;font-weight:700;color:var(--cdx);flex-shrink:0">3</div>
+            <div>
+              <div class="sh" style="margin-bottom:var(--s2)">Skill de time (compartilhada via Git)</div>
+              <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s2)">Repositorio dedicado com skills. Time clona local, faz symlink pro <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">.claude/skills/</code> ou <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">.agents/skills/</code>.</p>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--t3)">Quando usar: padroes que valem pra todos os projetos do time.</div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left:4px solid var(--au);background:var(--aubg);padding:var(--s5);display:flex;gap:var(--s5);align-items:flex-start">
+            <div style="font-family:var(--f-mono);font-size:28px;font-weight:700;color:var(--au);flex-shrink:0">4</div>
+            <div>
+              <div class="sh" style="margin-bottom:var(--s2)">Skill publica (plugin no marketplace)</div>
+              <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s2)">Empacota skills em um plugin. Publica via <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">cloud code create-plugin</code> (Claude Code) ou no registry do Codex. Usuarios instalam via comando.</p>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au)">Quando usar: voce tem skill madura que serve a muita gente. (Detalhes na Aba 6 — Avancado, secao Plugins.)</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── SECAO 9: Regra de ouro ───────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Secao 9</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s3)">A regra de ouro pra criar skills</div>
+        <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Pergunta antes de criar uma skill nova:</p>
+
+        <div style="display:flex;flex-direction:column;gap:var(--s4);margin-bottom:var(--s7)">
+
+          <div class="card" style="padding:var(--s5)">
+            <div style="display:flex;gap:var(--s3);align-items:flex-start">
+              <div style="font-family:var(--f-mono);font-size:var(--t-lg);font-weight:700;color:var(--au);flex-shrink:0">1</div>
+              <div>
+                <div style="font-size:var(--t-b);font-weight:600;color:var(--t1);margin-bottom:var(--s2)">Voce ja repetiu isso 3 vezes?</div>
+                <p style="font-size:var(--t-sm);color:var(--t2)">Se nao, ainda e tarefa pontual. Nao vira skill ainda.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s5)">
+            <div style="display:flex;gap:var(--s3);align-items:flex-start">
+              <div style="font-family:var(--f-mono);font-size:var(--t-lg);font-weight:700;color:var(--au);flex-shrink:0">2</div>
+              <div>
+                <div style="font-size:var(--t-b);font-weight:600;color:var(--t1);margin-bottom:var(--s2)">A descricao seria reconhecivel pelo agente?</div>
+                <p style="font-size:var(--t-sm);color:var(--t2)">Se sua descricao e generica ("Skill que faz X"), nao funciona. <strong style="color:var(--t1)">A descricao precisa ter palavras que voce usaria no prompt.</strong></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s5)">
+            <div style="display:flex;gap:var(--s3);align-items:flex-start">
+              <div style="font-family:var(--f-mono);font-size:var(--t-lg);font-weight:700;color:var(--au);flex-shrink:0">3</div>
+              <div>
+                <div style="font-size:var(--t-b);font-weight:600;color:var(--t1);margin-bottom:var(--s2)">O passo-a-passo cabe em 50-100 linhas?</div>
+                <p style="font-size:var(--t-sm);color:var(--t2)">Skill muito grande dilui o foco. Quebra em multiplas skills relacionadas.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s5)">
+            <div style="display:flex;gap:var(--s3);align-items:flex-start">
+              <div style="font-family:var(--f-mono);font-size:var(--t-lg);font-weight:700;color:var(--au);flex-shrink:0">4</div>
+              <div>
+                <div style="font-size:var(--t-b);font-weight:600;color:var(--t1);margin-bottom:var(--s2)">Ela serve pra mais de um projeto?</div>
+                <p style="font-size:var(--t-sm);color:var(--t2)">Se sim → skill global. Se nao → skill local.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="padding:var(--s5)">
+            <div style="display:flex;gap:var(--s3);align-items:flex-start">
+              <div style="font-family:var(--f-mono);font-size:var(--t-lg);font-weight:700;color:var(--au);flex-shrink:0">5</div>
+              <div>
+                <div style="font-size:var(--t-b);font-weight:600;color:var(--t1);margin-bottom:var(--s2)">Voce conseguiria explicar em 30 segundos pro time?</div>
+                <p style="font-size:var(--t-sm);color:var(--t2)">Se nao consegue, ainda nao esta clara. Refina o <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">SKILL.md</code> ate conseguir.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="background:var(--aubg);border:1px solid rgba(217,168,50,.2);border-radius:var(--r-xl);padding:var(--s6);text-align:center">
+          <p style="font-family:var(--f-display);font-size:var(--t-lg);font-weight:700;color:var(--au);line-height:1.4">Skill boa = 1 trabalho, 1 descricao reconhecivel,<br>instrucoes claras, 50-100 linhas, fim.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ─── CTA FINAL ─────────────────────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Proximos passos</div>
+        <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s5)">Voce viu skills. Agora aplica:</div>
+        <div class="g2">
+
+          <div class="card" style="padding:var(--s5);cursor:pointer;border-top:3px solid var(--gsd)" onclick="pg('avancado',document.querySelector('[data-tab=avancado]'))">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--gsd);margin-bottom:var(--s2)">Aba 6</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Avancado</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Quer aprender a criar plugins (skills empacotadas)?</p>
+            <div style="margin-top:var(--s3);color:var(--gsd);font-size:var(--t-sm)">Ir pra Avancado &rarr;</div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);cursor:pointer;border-top:3px solid var(--au)" onclick="pg('setup',document.querySelector('[data-tab=setup]'))">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s2)">Aba 7</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Quiz personalizado</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Quer setup pronto com skills?</p>
+            <div style="margin-top:var(--s3);color:var(--au);font-size:var(--t-sm)">Ir pra o Quiz &rarr;</div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);cursor:pointer;border-top:3px solid var(--cdx)" onclick="pg('metodo',document.querySelector('[data-tab=metodo]'))">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s2)">Aba 2</div>
+            <div class="sh" style="margin-bottom:var(--s2)">O Metodo</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Quer ver tudo na pratica?</p>
+            <div style="margin-top:var(--s3);color:var(--cdx);font-size:var(--t-sm)">Ir pra O Metodo &rarr;</div>
+          </div>
+
+          <div class="card" style="padding:var(--s5);cursor:pointer;border-top:3px solid var(--sup)" onclick="pg('cola',document.querySelector('[data-tab=cola]'))">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--sup);margin-bottom:var(--s2)">Aba 8</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Cola & Dicas Pro</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Quer atalhos pra dia a dia?</p>
+            <div style="margin-top:var(--s3);color:var(--sup);font-size:var(--t-sm)">Ir pra Cola & Dicas &rarr;</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-spacer"></div>
+
+  </div>
   <div id="page-avancado" class="page" role="tabpanel"></div>
   <div id="page-setup" class="page" role="tabpanel"></div>
   <div id="page-cola" class="page" role="tabpanel"></div>
