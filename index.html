@@ -233,6 +233,15 @@
     .sec-spacer-sm{height:var(--s6)}
     .div{height:1px;background:var(--b1);margin:var(--s7) 0}
 
+    /* ─── Sub-tabs (Aba 6) ──────────────────────────────────── */
+    .subtabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r-md);padding:3px;position:sticky;top:50px;z-index:50;margin-bottom:var(--s6)}
+    .subtabs::-webkit-scrollbar{display:none}
+    .subtab{background:none;border:none;padding:6px 14px;color:var(--t3);font-family:var(--f-mono);font-size:var(--t-xs);white-space:nowrap;border-radius:var(--r-sm);transition:all var(--dur-base);cursor:pointer;display:flex;align-items:center;gap:4px}
+    .subtab:hover{color:var(--t1);background:var(--bg3)}
+    .subtab.active{color:var(--t1);background:var(--bg3);font-weight:500}
+    .subpage{display:none}
+    .subpage.active{display:block;animation:fadeUp 180ms var(--ease) both}
+
     /* ─── Header / nav ──────────────────────────────────────── */
     header{position:sticky;top:0;z-index:100;height:50px;background:rgba(14,15,20,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--b1);display:flex;align-items:center;padding:0 var(--s4)}
     .logo{font-family:var(--f-display);font-weight:800;font-size:var(--t-md);color:var(--t1);margin-right:var(--s5);white-space:nowrap;cursor:pointer}
@@ -3612,7 +3621,1043 @@ loadChecks();
     <div class="sec-spacer"></div>
 
   </div>
-  <div id="page-avancado" class="page" role="tabpanel"></div>
+  <div id="page-avancado" class="page" role="tabpanel">
+
+    <!-- ─── INTRO ───────────────────────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="ey">Conteudo tecnico — para quem ja domina o basico</div>
+        <h2 class="DH">O nivel raso e tutorial.<br><em>O nivel profundo e oficio.</em></h2>
+        <p class="dl">Essa aba e pra quem ja passou pelas Abas 1 a 5 e quer ir alem: configurar com precisao, expandir capacidades via MCP, dividir trabalho com subagents, programar limites com hooks, criar skills proprias, otimizar performance, integrar com CI/CD, debuggar problemas, gerir memoria semantica, e empacotar tudo em plugins distribuiveis. <strong style="color:var(--t1)">Cada sub-aba e independente — entra pelo que precisa.</strong></p>
+      </div>
+    </div>
+
+    <!-- ─── SUB-TAB NAV (sticky) ─────────────────────────────────── -->
+    <div class="W" style="padding-top:0;padding-bottom:0">
+      <div class="subtabs">
+        <button class="subtab active" onclick="subtab('claudemd',this)">CLAUDE.md</button>
+        <button class="subtab" onclick="subtab('settings',this)">settings</button>
+        <button class="subtab" onclick="subtab('mcp',this)">MCP</button>
+        <button class="subtab" onclick="subtab('subagents',this)">Subagents</button>
+        <button class="subtab" onclick="subtab('hooks',this)">Hooks</button>
+        <button class="subtab" onclick="subtab('customskills',this)">Custom skills</button>
+        <button class="subtab" onclick="subtab('perf',this)">Performance</button>
+        <button class="subtab" onclick="subtab('cicd',this)">CI/CD</button>
+        <button class="subtab" onclick="subtab('trouble',this)">Troubleshooting</button>
+        <button class="subtab" onclick="subtab('memoria',this)">Memoria <span class="badge b-new" style="margin-left:4px">NOVO</span></button>
+        <button class="subtab" onclick="subtab('plugins',this)">Plugins <span class="badge b-new" style="margin-left:4px">NOVO</span></button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SUB 1 — CLAUDE.md / AGENTS.md avancado                    -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="subpage active" id="sub-claudemd">
+      <div class="W">
+        <div class="reveal">
+          <div class="ey">Sub-aba 1</div>
+          <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s2)">CLAUDE.md / AGENTS.md avancado</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Aprofunda o que foi visto nas Abas 2 e 3.</p>
+
+          <div class="sh" style="margin-bottom:var(--s4)">A hierarquia em camadas (Claude Code)</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Claude Code le <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">CLAUDE.md</code> em <strong style="color:var(--t1)">5 niveis hierarquicos</strong> — mais especifico vence:</p>
+          <div class="code" style="margin-bottom:var(--s6)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="ch">1. System   </span> <span class="cm">→ /etc/claude/CLAUDE.md             (admin maquina)</span>
+<span class="cp">2. User     </span> <span class="cm">→ ~/.claude/CLAUDE.md               (suas preferencias)</span>
+<span class="cg">3. Project  </span> <span class="cm">→ &lt;projeto&gt;/CLAUDE.md               (esse projeto)</span>
+<span class="cc">4. Directory</span> <span class="cm">→ &lt;subpasta&gt;/CLAUDE.md              (subdiretorio)</span>
+<span class="cr">5. Flag     </span> <span class="cm">→ claude --instructions &lt;arquivo&gt;   (sessao especifica)</span></span>
+          </div>
+          <div class="card" style="border-left:3px solid var(--au);padding:var(--s4);margin-bottom:var(--s7)">
+            <p style="font-size:var(--t-sm);color:var(--t2);margin:0"><strong style="color:var(--t1)">Em conflito:</strong> o nivel mais profundo vence. Ex: instrucao de projeto sobrescreve user, que sobrescreve system.</p>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">A hierarquia em Codex</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Codex usa <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">AGENTS.md</code> em <strong style="color:var(--t1)">2 niveis principais</strong>:</p>
+          <div class="code" style="margin-bottom:var(--s4)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cp">1. Global   </span> <span class="cm">→ ~/.codex/AGENTS.md          (suas preferencias)</span>
+<span class="cg">2. Project  </span> <span class="cm">→ &lt;projeto&gt;/AGENTS.md         (esse projeto)</span></span>
+          </div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s7)">Mais simples, mas equivalente em poder. <strong style="color:var(--t1)">Project vence global.</strong></p>
+
+          <div class="sh" style="margin-bottom:var(--s4)">O que vai em cada nivel</div>
+          <div style="overflow-x:auto;margin-bottom:var(--s7)">
+            <table class="mt">
+              <thead><tr><th>Nivel</th><th>Conteudo tipico</th><th>Tamanho</th></tr></thead>
+              <tbody>
+                <tr><td><strong style="color:var(--t1)">System / Admin</strong></td><td>Politicas org (Claude Code only)</td><td>Curto, raramente muda</td></tr>
+                <tr><td><strong style="color:var(--t1)">User / Global</strong></td><td>Preferencias pessoais (idioma, tom, estilo)</td><td>20-50 linhas</td></tr>
+                <tr><td><strong style="color:var(--t1)">Project</strong></td><td>Stack, convencoes, decisoes, restricoes do projeto</td><td>100-300 linhas</td></tr>
+                <tr><td><strong style="color:var(--t1)">Directory</strong></td><td>Especifico de uma subpasta (Claude Code only)</td><td>Raro, casos especiais</td></tr>
+                <tr><td><strong style="color:var(--t1)">Flag</strong></td><td>Instrucao temporaria pra sessao especifica</td><td>Inline ou arquivo</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Padroes avancados pra projeto</div>
+
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)"><strong style="color:var(--t1)">Padrao 1 — Sections com headers fortes:</strong></p>
+          <div class="code" style="margin-bottom:var(--s5)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="ch"># Project: [Nome]</span>
+
+<span class="cg">## CRITICAL RULES (read first)</span>
+<span class="cc">- NUNCA fazer X</span>
+<span class="cc">- NUNCA modificar Y</span>
+<span class="cc">- SEMPRE verificar Z antes de commit</span>
+
+<span class="cg">## Stack</span>
+<span class="cc">...</span>
+
+<span class="cg">## Conventions</span>
+<span class="cc">...</span>
+
+<span class="cg">## Architecture decisions</span>
+<span class="cc">...</span>
+
+<span class="cg">## Common patterns to follow</span>
+<span class="cc">...</span>
+
+<span class="cg">## Anti-patterns to avoid</span>
+<span class="cc">...</span></span>
+          </div>
+
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)"><strong style="color:var(--t1)">Padrao 2 — Inclusao de outros arquivos:</strong></p>
+          <div class="code" style="margin-bottom:var(--s5)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cg">## Importantes referencias</span>
+<span class="cc">- Ver `/docs/architecture.md` pra decisoes</span>
+<span class="cc">- Ver `/docs/api-conventions.md` pra padroes de endpoint</span>
+<span class="cc">- Ver `/scripts/check-commit.sh` pra validacoes pre-commit</span></span>
+          </div>
+
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)"><strong style="color:var(--t1)">Padrao 3 — Comandos rapidos no topo:</strong></p>
+          <div class="code" style="margin-bottom:var(--s6)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cg">## Quick commands</span>
+<span class="cc">- Setup: `npm install &amp;&amp; npm run setup`</span>
+<span class="cc">- Run: `npm run dev`</span>
+<span class="cc">- Test: `npm test`</span>
+<span class="cc">- Build: `npm run build`</span>
+<span class="cc">- Deploy: `./scripts/deploy.sh`</span></span>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">O que NAO colocar</div>
+          <div class="card" style="border-left:3px solid var(--err);padding:var(--s4);margin-bottom:var(--s4)">
+            <ul style="font-size:var(--t-sm);color:var(--t2);padding-left:var(--s5);line-height:2;margin:0">
+              <li>Documentacao pesada de API (use README.md ou /docs/)</li>
+              <li>Historico de mudanca (use CHANGELOG.md)</li>
+              <li>Onboarding completo (use ONBOARDING.md ou Notion)</li>
+            </ul>
+          </div>
+          <p style="font-size:var(--t-sm);color:var(--t2)">CLAUDE.md/AGENTS.md e <strong style="color:var(--t1)">briefing operacional</strong> — curto, direto, alto-impacto.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SUB 2 — settings.json / config.toml                       -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="subpage" id="sub-settings">
+      <div class="W">
+        <div class="reveal">
+          <div class="ey">Sub-aba 2</div>
+          <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s6)">settings.json / config.toml</div>
+
+          <div class="g2" style="margin-bottom:var(--s7)">
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s3)">Claude Code — settings.json</div>
+              <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Localizacao: <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">~/.claude/settings.json</code> (global) ou <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">&lt;projeto&gt;/.claude/settings.json</code> (local).</p>
+              <div class="code">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cc">{</span>
+  <span class="ch">"model"</span>: <span class="cg">"claude-opus-4-7"</span>,
+  <span class="ch">"max_tokens"</span>: <span class="cp">8192</span>,
+  <span class="ch">"temperature"</span>: <span class="cp">0.7</span>,
+  <span class="ch">"tools"</span>: {
+    <span class="ch">"filesystem"</span>: { <span class="ch">"enabled"</span>: <span class="cg">true</span> },
+    <span class="ch">"shell"</span>: {
+      <span class="ch">"enabled"</span>: <span class="cg">true</span>,
+      <span class="ch">"allowed_commands"</span>: [<span class="cg">"npm"</span>, <span class="cg">"git"</span>, <span class="cg">"python"</span>]
+    },
+    <span class="ch">"web"</span>: { <span class="ch">"enabled"</span>: <span class="cr">false</span> }
+  },
+  <span class="ch">"hooks"</span>: {
+    <span class="ch">"PreToolUse"</span>: <span class="cg">".claude/hooks/validate.sh"</span>,
+    <span class="ch">"PostToolUse"</span>: <span class="cg">".claude/hooks/log.sh"</span>
+  },
+  <span class="ch">"skills"</span>: {
+    <span class="ch">"auto_load"</span>: <span class="cg">true</span>,
+    <span class="ch">"search_paths"</span>: [
+      <span class="cg">"~/.claude/skills"</span>,
+      <span class="cg">".claude/skills"</span>
+    ]
+  }
+<span class="cc">}</span></span>
+              </div>
+            </div>
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s3)">Codex — config.toml</div>
+              <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Localizacao: <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">~/.codex/config.toml</code>.</p>
+              <div class="code">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cg">[model]</span>
+<span class="ch">default</span> = <span class="cp">"gpt-5.4"</span>
+<span class="ch">reasoning</span> = <span class="cp">"medium"</span>
+
+<span class="cg">[sandbox]</span>
+<span class="ch">mode</span> = <span class="cp">"on-request"</span>  <span class="cm"># untrusted | on-request | never</span>
+
+<span class="cg">[agents]</span>
+<span class="ch">max_threads</span> = <span class="cp">4</span>
+
+<span class="cg">[mcp]</span>
+<span class="ch">enabled</span> = <span class="cg">true</span>
+<span class="ch">servers</span> = [<span class="cp">"filesystem"</span>, <span class="cp">"github"</span>, <span class="cp">"memory"</span>]
+
+<span class="cg">[profiles.work]</span>
+<span class="ch">model</span> = <span class="cp">"gpt-5.4"</span>
+<span class="ch">sandbox</span> = <span class="cp">"on-request"</span>
+
+<span class="cg">[profiles.research]</span>
+<span class="ch">model</span> = <span class="cp">"gpt-5.4"</span>
+<span class="ch">reasoning</span> = <span class="cp">"high"</span>
+<span class="ch">sandbox</span> = <span class="cp">"never"</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left:3px solid var(--cdx);padding:var(--s4)">
+            <p style="font-size:var(--t-sm);color:var(--t2);margin:0"><strong style="color:var(--t1)">Profiles em Codex:</strong> voce pode ter perfis nomeados e ativar via <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">codex --profile work</code>. Util pra alternar entre contextos — trabalho serio vs experimentacao livre.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SUB 3 — MCP                                               -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="subpage" id="sub-mcp">
+      <div class="W">
+        <div class="reveal">
+          <div class="ey">Sub-aba 3</div>
+          <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s4)">MCP — Model Context Protocol</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)"><strong style="color:var(--t1)">Padrao aberto</strong> que conecta agentes a ferramentas externas (bancos, APIs, filesystem, GitHub) via protocolo unificado. Em vez do agente "achar" dados na internet, ele consulta direto a fonte autenticada.</p>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)"><strong style="color:var(--t1)">Suportado nativamente</strong> por Claude Code, Codex, Cursor, Aider.</p>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Como funciona</div>
+          <div class="flow" style="margin-bottom:var(--s7)">
+            <div class="fb" style="color:var(--au1)">Agente</div>
+            <div class="fa2">→</div>
+            <div class="fb">MCP Client</div>
+            <div class="fa2">→</div>
+            <div class="fb">MCP Server</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--cg)">Servico externo</div>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Servers populares (que valem instalar)</div>
+          <div style="overflow-x:auto;margin-bottom:var(--s7)">
+            <table class="mt">
+              <thead><tr><th>Server</th><th>Pra que</th><th>Quando usar</th></tr></thead>
+              <tbody>
+                <tr><td><strong style="color:var(--t1)">filesystem</strong></td><td>Acesso a arquivos locais</td><td>Sempre (basico)</td></tr>
+                <tr><td><strong style="color:var(--t1)">github</strong></td><td>API do GitHub</td><td>Quem usa GitHub</td></tr>
+                <tr><td><strong style="color:var(--t1)">gitlab</strong></td><td>API do GitLab</td><td>Quem usa GitLab</td></tr>
+                <tr><td><strong style="color:var(--t1)">memory</strong></td><td>Memoria persistente entre sessoes</td><td>Projetos longos (ver Sub-aba 10)</td></tr>
+                <tr><td><strong style="color:var(--t1)">slack</strong></td><td>Integracao Slack</td><td>Time que vive no Slack</td></tr>
+                <tr><td><strong style="color:var(--t1)">postgresql</strong></td><td>Query em Postgres</td><td>Projetos com banco</td></tr>
+                <tr><td><strong style="color:var(--t1)">duckdb</strong></td><td>Analise local de dados</td><td>Analise de planilhas/CSVs</td></tr>
+                <tr><td><strong style="color:var(--t1)">notion</strong></td><td>Notion como context source</td><td>Quem usa Notion</td></tr>
+                <tr><td><strong style="color:var(--t1)">obsidian</strong></td><td>Vault do Obsidian</td><td>Quem versiona conhecimento ali</td></tr>
+                <tr><td><strong style="color:var(--t1)">playwright</strong></td><td>Controle de browser</td><td>Automacao web, testes E2E</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Setup</div>
+          <div class="g2" style="margin-bottom:var(--s7)">
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s3)">Claude Code — settings.json</div>
+              <div class="code">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cc">{</span>
+  <span class="ch">"mcp_servers"</span>: {
+    <span class="ch">"filesystem"</span>: {
+      <span class="ch">"command"</span>: <span class="cg">"npx"</span>,
+      <span class="ch">"args"</span>: [<span class="cg">"-y"</span>, <span class="cg">"@modelcontextprotocol/server-filesystem"</span>, <span class="cg">"/path/to/allowed"</span>]
+    },
+    <span class="ch">"github"</span>: {
+      <span class="ch">"command"</span>: <span class="cg">"npx"</span>,
+      <span class="ch">"args"</span>: [<span class="cg">"-y"</span>, <span class="cg">"@modelcontextprotocol/server-github"</span>],
+      <span class="ch">"env"</span>: { <span class="ch">"GITHUB_TOKEN"</span>: <span class="cg">"ghp_..."</span> }
+    }
+  }
+<span class="cc">}</span></span>
+              </div>
+            </div>
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s3)">Codex — config.toml</div>
+              <div class="code">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cg">[mcp.servers.filesystem]</span>
+<span class="ch">command</span> = <span class="cp">"npx"</span>
+<span class="ch">args</span> = [<span class="cp">"-y"</span>, <span class="cp">"@modelcontextprotocol/server-filesystem"</span>, <span class="cp">"/path/to/allowed"</span>]
+
+<span class="cg">[mcp.servers.github]</span>
+<span class="ch">command</span> = <span class="cp">"npx"</span>
+<span class="ch">args</span> = [<span class="cp">"-y"</span>, <span class="cp">"@modelcontextprotocol/server-github"</span>]
+<span class="ch">env</span> = { <span class="cp">GITHUB_TOKEN</span> = <span class="cp">"ghp_..."</span> }</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Cuidados de seguranca</div>
+          <div class="card" style="border-left:3px solid var(--err);padding:var(--s4)">
+            <ul style="font-size:var(--t-sm);color:var(--t2);padding-left:var(--s5);line-height:2;margin:0">
+              <li><strong style="color:var(--t1)">Filesystem:</strong> sempre limita o path (nao da acesso a <code style="font-family:var(--f-mono);font-size:11px;color:var(--cr)">/</code>)</li>
+              <li><strong style="color:var(--t1)">GitHub/GitLab:</strong> use token com escopo minimo necessario</li>
+              <li><strong style="color:var(--t1)">Postgres:</strong> usuario read-only se possivel</li>
+              <li><strong style="color:var(--t1)">Servers desconhecidos:</strong> roda em sandbox antes de habilitar</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SUB 4 — Subagents                                         -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="subpage" id="sub-subagents">
+      <div class="W">
+        <div class="reveal">
+          <div class="ey">Sub-aba 4</div>
+          <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s4)">Subagents</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Subagent e uma <strong style="color:var(--t1)">sub-sessao</strong> que o agente principal abre pra resolver tarefa especifica sem poluir o contexto principal. Pensa nele como <strong style="color:var(--t1)">estagiario focado</strong>: voce delega, ele trabalha, retorna resumo.</p>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Quando usar</div>
+          <div class="g2" style="margin-bottom:var(--s7)">
+            <div class="card" style="border-top:3px solid var(--au);padding:var(--s5)">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s3)">Tarefa pesada de contexto</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Ex: ler 50 arquivos. Subagent carrega o contexto, processa e retorna so o resultado. Principal nao polui.</p>
+            </div>
+            <div class="card" style="border-top:3px solid var(--spc);padding:var(--s5)">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--spc);margin-bottom:var(--s3)">Tarefas paralelas independentes</div>
+              <p style="font-size:var(--t-sm);color:var(--t2)">Ex: pesquisar 3 abordagens diferentes. Cada subagent trabalha sua hipotese, principal compara.</p>
+            </div>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Claude Code — Agent Teams</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Claude Code permite <strong style="color:var(--t1)">subagents coordenados</strong> com roles especificas e task list compartilhada:</p>
+          <div class="code" style="margin-bottom:var(--s7)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cm"># Em CLAUDE.md</span>
+<span class="cg">## Agents</span>
+
+<span class="ch">### frontend-specialist</span>
+<span class="cc">- Foco em React, CSS, UX</span>
+<span class="cc">- Le apenas /src/components, /src/pages</span>
+<span class="cc">- Output: codigo + screenshot mental do resultado</span>
+
+<span class="ch">### backend-specialist</span>
+<span class="cc">- Foco em API, banco, performance</span>
+<span class="cc">- Le apenas /src/api, /src/db</span>
+<span class="cc">- Output: codigo + endpoints documentados</span>
+
+<span class="ch">### reviewer</span>
+<span class="cc">- Le tudo, nao escreve nada</span>
+<span class="cc">- Foco: bugs, seguranca, padroes</span></span>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Codex — Cloud Workers</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Codex Cloud roda <strong style="color:var(--t1)">containers paralelos isolados</strong>. Voce delega N tarefas, todas rodam ao mesmo tempo, voce revisa os PRs no fim:</p>
+          <div class="code" style="margin-bottom:var(--s7)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cm"># Delegar 3 tarefas em paralelo</span>
+<span class="cg">codex cloud delegate</span> <span class="cp">"implementa endpoint /users"</span> --branch users
+<span class="cg">codex cloud delegate</span> <span class="cp">"implementa endpoint /posts"</span> --branch posts
+<span class="cg">codex cloud delegate</span> <span class="cp">"implementa endpoint /comments"</span> --branch comments
+
+<span class="cm"># Voltar mais tarde e revisar</span>
+<span class="cg">codex cloud status</span>
+<span class="cg">codex cloud review</span> users</span>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Trade-offs entre as duas abordagens</div>
+          <div style="overflow-x:auto">
+            <table class="mt">
+              <thead><tr><th></th><th>Claude Code (Agent Teams)</th><th>Codex (Cloud Workers)</th></tr></thead>
+              <tbody>
+                <tr><td><strong style="color:var(--t1)">Agentes se comunicam?</strong></td><td><span style="color:var(--ok)">Sim, via task list compartilhada</span></td><td>Nao, isolados</td></tr>
+                <tr><td><strong style="color:var(--t1)">Roda em paralelo?</strong></td><td>Limitado (multi-thread local)</td><td><span style="color:var(--ok)">Sim, totalmente</span></td></tr>
+                <tr><td><strong style="color:var(--t1)">Coordenacao</strong></td><td><span style="color:var(--ok)">Forte (dependencies rastreadas)</span></td><td>Fraca (cada um sozinho)</td></tr>
+                <tr><td><strong style="color:var(--t1)">Ideal pra</strong></td><td>Refactor com sub-tarefas dependentes</td><td>Features independentes em paralelo</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SUB 5 — Hooks                                             -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="subpage" id="sub-hooks">
+      <div class="W">
+        <div class="reveal">
+          <div class="ey">Sub-aba 5</div>
+          <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s4)">Hooks</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Hooks sao <strong style="color:var(--t1)">scripts disparados em eventos do lifecycle do agente</strong>. Voce define o que roda antes/depois de cada acao do agente.</p>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Principais eventos (Claude Code)</div>
+          <div style="overflow-x:auto;margin-bottom:var(--s7)">
+            <table class="mt">
+              <thead><tr><th>Evento</th><th>Quando dispara</th><th>Uso tipico</th></tr></thead>
+              <tbody>
+                <tr><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">PreToolUse</code></td><td>Antes de qualquer tool ser usada</td><td>Validacao, bloqueio</td></tr>
+                <tr><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">PostToolUse</code></td><td>Depois de tool ser usada</td><td>Logging, auditoria</td></tr>
+                <tr><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">PreFileWrite</code></td><td>Antes de escrever arquivo</td><td>Lint, format check</td></tr>
+                <tr><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">PostFileWrite</code></td><td>Depois de escrever arquivo</td><td>Auto-format, test runner</td></tr>
+                <tr><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">PreShellCommand</code></td><td>Antes de comando shell</td><td>Bloquear comandos perigosos</td></tr>
+                <tr><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">PostShellCommand</code></td><td>Depois de comando shell</td><td>Logging</td></tr>
+                <tr><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">PreSessionStart</code></td><td>Antes da sessao comecar</td><td>Setup ambiente</td></tr>
+                <tr><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">PostSessionEnd</code></td><td>Quando sessao termina</td><td>Cleanup, sync</td></tr>
+                <tr><td><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">OnError</code></td><td>Quando ha erro</td><td>Notificacao, retry</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Exemplo: hook que bloqueia comandos perigosos</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)"><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">.claude/hooks/pre-shell.sh</code>:</p>
+          <div class="code" style="margin-bottom:var(--s5)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cg">#!/bin/bash</span>
+<span class="ch">COMMAND</span>=<span class="cp">"$1"</span>
+
+<span class="cm"># Bloqueia rm -rf /</span>
+<span class="cr">if</span> echo <span class="cp">"$COMMAND"</span> | grep -qE <span class="cg">'rm -rf /(\s|$)'</span>; <span class="cr">then</span>
+  echo <span class="cp">"BLOQUEADO: rm -rf / detectado"</span> &gt;&amp;2
+  exit 1
+<span class="cr">fi</span>
+
+<span class="cm"># Bloqueia delecao em producao</span>
+<span class="cr">if</span> echo <span class="cp">"$COMMAND"</span> | grep -q <span class="cg">'DROP TABLE'</span>; <span class="cr">then</span>
+  echo <span class="cp">"BLOQUEADO: DROP TABLE detectado em ambiente production"</span> &gt;&amp;2
+  exit 1
+<span class="cr">fi</span>
+
+exit 0</span>
+          </div>
+
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Em <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">~/.claude/settings.json</code>:</p>
+          <div class="code" style="margin-bottom:var(--s7)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cc">{</span>
+  <span class="ch">"hooks"</span>: {
+    <span class="ch">"PreShellCommand"</span>: <span class="cg">".claude/hooks/pre-shell.sh"</span>
+  }
+<span class="cc">}</span></span>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Codex — equivalente: sandbox kernel-level</div>
+          <div class="card" style="border-left:3px solid var(--cdx);padding:var(--s4)">
+            <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Codex <strong style="color:var(--t1)">nao tem</strong> sistema granular de hooks. Em vez disso, usa <strong style="color:var(--t1)">sandbox em nivel de kernel</strong> (Seatbelt no macOS, Landlock + seccomp no Linux):</p>
+            <ul style="font-size:var(--t-sm);color:var(--t2);padding-left:var(--s5);line-height:2;margin:0">
+              <li><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">untrusted</code> — nada permitido alem de leitura</li>
+              <li><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">on-request</code> — pede permissao pra cada acao critica</li>
+              <li><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">never</code> — sem sandbox (so use em ambiente isolado)</li>
+            </ul>
+            <p style="font-size:var(--t-sm);color:var(--t3);margin:var(--s3) 0 0"><strong>Trade-off:</strong> menos flexivel que hooks programaveis, mas mais simples e seguro por default.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SUB 6 — Custom skills                                     -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="subpage" id="sub-customskills">
+      <div class="W">
+        <div class="reveal">
+          <div class="ey">Sub-aba 6</div>
+          <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s4)">Custom skills</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Aprofunda o que foi visto na Aba 5.</p>
+          <div class="card" style="border-left:3px solid var(--au);padding:var(--s4);margin-bottom:var(--s7)">
+            <p style="font-size:var(--t-sm);color:var(--t2);margin:0"><strong style="color:var(--t1)">Criterio simples:</strong> voce ja repetiu 3 vezes? Se sim, vira skill. Se nao, fica prompt.</p>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Skill com scripts (poder maximo)</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)"><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">.claude/skills/parse-receita-cnpj/SKILL.md</code>:</p>
+          <div class="code" style="margin-bottom:var(--s5)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cm">---</span>
+<span class="ch">name</span>: parse-receita-cnpj
+<span class="ch">description</span>: Parseia arquivo de CNPJ da Receita Federal e gera resumo estatistico
+<span class="cm">---</span>
+
+<span class="cg"># Parse Receita CNPJ</span>
+
+Quando o usuario pedir analise de arquivo CNPJ:
+
+<span class="cp">1.</span> Confirma com usuario o caminho do arquivo
+<span class="cp">2.</span> Roda `scripts/parse.py &lt;arquivo&gt;`
+<span class="cp">3.</span> Apresenta o resumo gerado em `output.md`
+<span class="cp">4.</span> Pergunta se quer aprofundar alguma area
+
+<span class="cg">## Inputs esperados</span>
+- Arquivo CSV ou TXT da Receita Federal
+
+<span class="cg">## Outputs garantidos</span>
+- Resumo estatistico em markdown
+- Top 10 maiores empresas por capital
+- Distribuicao por CNAE
+- Distribuicao por estado</span>
+          </div>
+
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)"><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">.claude/skills/parse-receita-cnpj/scripts/parse.py</code>:</p>
+          <div class="code" style="margin-bottom:var(--s7)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cr">import</span> sys
+<span class="cr">import</span> duckdb
+
+<span class="cr">def</span> <span class="ch">parse</span>(filepath):
+    conn = duckdb.connect()
+    conn.execute(<span class="cg">f"CREATE TABLE cnpjs AS SELECT * FROM read_csv_auto('{filepath}')"</span>)
+
+    <span class="cm"># Top 10 por capital</span>
+    top_capital = conn.execute(<span class="cg">"""
+        SELECT razao_social, capital_social
+        FROM cnpjs
+        ORDER BY capital_social DESC
+        LIMIT 10
+    """</span>).fetchall()
+
+    <span class="cm"># Por CNAE</span>
+    por_cnae = conn.execute(<span class="cg">"""
+        SELECT cnae_principal, COUNT(*) as count
+        FROM cnpjs
+        GROUP BY cnae_principal
+        ORDER BY count DESC
+        LIMIT 20
+    """</span>).fetchall()
+
+    <span class="cm"># ... gera output.md</span>
+
+<span class="cr">if</span> __name__ == <span class="cg">"__main__"</span>:
+    parse(sys.argv[<span class="cp">1</span>])</span>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Boas praticas pra skills com scripts</div>
+          <div class="faq">
+            <div class="fi"><button class="fq" onclick="tf(this)"><span>1. Descricao clara (input/output)</span><span class="ficon">+</span></button><div class="fa">Documente no SKILL.md o que o script recebe e o que retorna. O agente vai ler isso.</div></div>
+            <div class="fi"><button class="fq" onclick="tf(this)"><span>2. Caminho relativo</span><span class="ficon">+</span></button><div class="fa">Use <code style="font-family:var(--f-mono);font-size:11px">scripts/foo.py</code>, nunca <code style="font-family:var(--f-mono);font-size:11px">/Users/.../foo.py</code>. Portabilidade.</div></div>
+            <div class="fi"><button class="fq" onclick="tf(this)"><span>3. Trate erros no script</span><span class="ficon">+</span></button><div class="fa">O agente le stderr. Se o script quebra sem mensagem clara, o agente nao sabe o que fazer.</div></div>
+            <div class="fi"><button class="fq" onclick="tf(this)"><span>4. Output estruturado</span><span class="ficon">+</span></button><div class="fa">JSON ou markdown bem formado. Evite output verboso sem estrutura — agente vai ter dificuldade de parsear.</div></div>
+            <div class="fi"><button class="fq" onclick="tf(this)"><span>5. Idempotente</span><span class="ficon">+</span></button><div class="fa">Rodar 2x nao pode quebrar. Agentes as vezes repetem por seguranca.</div></div>
+            <div class="fi"><button class="fq" onclick="tf(this)"><span>6. Documenta dependencias</span><span class="ficon">+</span></button><div class="fa">Escreve no SKILL.md: "requer Python 3.11+ e duckdb". Quem instalar sua skill precisa saber.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SUB 7 — Performance                                       -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="subpage" id="sub-perf">
+      <div class="W">
+        <div class="reveal">
+          <div class="ey">Sub-aba 7</div>
+          <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s6)">Performance</div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Eficiencia de tokens — comparativo</div>
+          <div style="overflow-x:auto;margin-bottom:var(--s7)">
+            <table class="mt">
+              <thead><tr><th>Cenario</th><th>Claude Code</th><th>Codex</th></tr></thead>
+              <tbody>
+                <tr><td><strong style="color:var(--t1)">Tarefa simples (~30 min)</strong></td><td>50-100k tokens</td><td>15-40k tokens</td></tr>
+                <tr><td><strong style="color:var(--t1)">Tarefa media (~2h)</strong></td><td>300-600k tokens</td><td>80-200k tokens</td></tr>
+                <tr><td><strong style="color:var(--t1)">Refactor grande (~1 dia)</strong></td><td>2-4M tokens</td><td>500k-1.5M tokens</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s7)"><strong style="color:var(--t1)">Codex consome 2-4x menos tokens</strong> em tarefas equivalentes. <strong style="color:var(--t1)">Claude Code produz output mais minucioso</strong> — vence 67% das avaliacoes cegas em qualidade.</p>
+
+          <div class="sh" style="margin-bottom:var(--s4)">7 tecnicas pra economizar tokens</div>
+          <div class="faq" style="margin-bottom:var(--s7)">
+            <div class="fi"><button class="fq" onclick="tf(this)"><span>1. Global enxuto (regra de ouro)</span><span class="ficon">+</span></button><div class="fa">Skills no global so se voce usa em 80% dos projetos. O resto e local. Ver Aba 2.</div></div>
+            <div class="fi"><button class="fq" onclick="tf(this)"><span>2. CLAUDE.md/AGENTS.md curto e potente</span><span class="ficon">+</span></button><div class="fa">Maximo 300 linhas. Mais que isso, voce esta colocando documentacao no lugar de briefing operacional.</div></div>
+            <div class="fi"><button class="fq" onclick="tf(this)"><span>3. Referencias em vez de duplicar contexto</span><span class="ficon">+</span></button><div class="fa">Em vez de colar 200 linhas de codigo no prompt, escreve "Le <code style="font-family:var(--f-mono);font-size:11px">src/foo.ts</code>" e deixa o agente puxar.</div></div>
+            <div class="fi"><button class="fq" onclick="tf(this)"><span>4. Limpa contexto entre tarefas grandes</span><span class="ficon">+</span></button><div class="fa"><code style="font-family:var(--f-mono);font-size:11px">/clear</code> ou Ctrl+L entre tarefas independentes. Sessao acumula contexto que nao serve pra proxima tarefa.</div></div>
+            <div class="fi"><button class="fq" onclick="tf(this)"><span>5. Use subagents pra tarefas pesadas</span><span class="ficon">+</span></button><div class="fa">Subagent tem contexto proprio. Roda pesquisa, retorna resumo, principal nao polui.</div></div>
+            <div class="fi"><button class="fq" onclick="tf(this)"><span>6. Quebra tarefas grandes em pequenas</span><span class="ficon">+</span></button><div class="fa">Tarefa de 4h em 8 sub-tarefas de 30 min. Cada uma com prompt focado, resultado tangivel.</div></div>
+            <div class="fi"><button class="fq" onclick="tf(this)"><span>7. Skills em vez de prompts longos</span><span class="ficon">+</span></button><div class="fa">Padrao repetido vira skill. 1500 tokens de prompt viram 50 tokens de invocacao.</div></div>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Tecnicas exclusivas por agente</div>
+          <div class="g2">
+            <div class="card" style="border-top:3px solid var(--au);padding:var(--s5)">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s4)">Claude Code</div>
+              <ul style="font-size:var(--t-sm);color:var(--t2);padding-left:var(--s5);line-height:2;margin:0">
+                <li><code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">/effort</code> flag pra controlar profundidade</li>
+                <li>Plan Mode antes de execucao (planejar e mais barato que refazer)</li>
+                <li>Think modes (<code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">think</code>, <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">think hard</code>, <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">think harder</code>)</li>
+              </ul>
+            </div>
+            <div class="card" style="border-top:3px solid var(--cdx);padding:var(--s5)">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s4)">Codex</div>
+              <ul style="font-size:var(--t-sm);color:var(--t2);padding-left:var(--s5);line-height:2;margin:0">
+                <li>Reasoning levels (<code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">low</code>, <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">medium</code>, <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">high</code>)</li>
+                <li>Auto-review mode (revisao em background)</li>
+                <li>Cloud workers (delega pra container, nao consome contexto local)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SUB 8 — CI/CD                                             -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="subpage" id="sub-cicd">
+      <div class="W">
+        <div class="reveal">
+          <div class="ey">Sub-aba 8</div>
+          <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s4)">CI/CD</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)">Tanto Claude Code quanto Codex podem rodar em <strong style="color:var(--t1)">modo headless</strong> (nao-interativo) dentro de pipelines CI/CD.</p>
+
+          <div class="sh" style="margin-bottom:var(--s4)">GitHub Actions</div>
+          <div class="g2" style="margin-bottom:var(--s7)">
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s3)">Claude Code</div>
+              <div class="code">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="ch">name</span>: Claude Code Review
+
+<span class="ch">on</span>: [pull_request]
+
+<span class="ch">jobs</span>:
+  <span class="cg">review</span>:
+    <span class="ch">runs-on</span>: ubuntu-latest
+    <span class="ch">steps</span>:
+      - <span class="ch">uses</span>: actions/checkout@v4
+      - <span class="ch">name</span>: Run Claude review
+        <span class="ch">run</span>: |
+          npx @anthropic-ai/claude-code \
+            --headless \
+            --instructions <span class="cp">"Revise o diff. Foco: bugs, seguranca, performance."</span> \
+            --output review.md
+        <span class="ch">env</span>:
+          <span class="ch">ANTHROPIC_API_KEY</span>: ${{ secrets.ANTHROPIC_API_KEY }}
+      - <span class="ch">name</span>: Comment on PR
+        <span class="ch">uses</span>: marocchino/sticky-pull-request-comment@v2
+        <span class="ch">with</span>:
+          <span class="ch">path</span>: review.md</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--cdx);margin-bottom:var(--s3)">Codex</div>
+              <div class="code">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="ch">name</span>: Codex Review
+
+<span class="ch">on</span>: [pull_request]
+
+<span class="ch">jobs</span>:
+  <span class="cg">review</span>:
+    <span class="ch">runs-on</span>: ubuntu-latest
+    <span class="ch">steps</span>:
+      - <span class="ch">uses</span>: actions/checkout@v4
+      - <span class="ch">name</span>: Run Codex review
+        <span class="ch">run</span>: |
+          npx @openai/codex \
+            --non-interactive \
+            --profile review \
+            --output review.md
+        <span class="ch">env</span>:
+          <span class="ch">OPENAI_API_KEY</span>: ${{ secrets.OPENAI_API_KEY }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Casos de uso em CI/CD</div>
+          <div class="g2" style="margin-bottom:var(--s7)">
+            <div class="card" style="padding:var(--s4)"><div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);margin-bottom:var(--s2)">01</div><strong style="color:var(--t1)">Auto-review em PRs</strong><p style="font-size:var(--t-sm);color:var(--t2);margin:var(--s2) 0 0">Agente revisa diff, comenta no PR automaticamente</p></div>
+            <div class="card" style="padding:var(--s4)"><div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);margin-bottom:var(--s2)">02</div><strong style="color:var(--t1)">Changelog automatico</strong><p style="font-size:var(--t-sm);color:var(--t2);margin:var(--s2) 0 0">Gera CHANGELOG.md a partir de commits semanticos</p></div>
+            <div class="card" style="padding:var(--s4)"><div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);margin-bottom:var(--s2)">03</div><strong style="color:var(--t1)">Documentacao automatica</strong><p style="font-size:var(--t-sm);color:var(--t2);margin:var(--s2) 0 0">Atualiza /docs quando codigo muda</p></div>
+            <div class="card" style="padding:var(--s4)"><div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);margin-bottom:var(--s2)">04</div><strong style="color:var(--t1)">Testes generativos</strong><p style="font-size:var(--t-sm);color:var(--t2);margin:var(--s2) 0 0">Gera testes pra codigo sem cobertura</p></div>
+            <div class="card" style="padding:var(--s4)"><div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--au);margin-bottom:var(--s2)">05</div><strong style="color:var(--t1)">Triagem de issues</strong><p style="font-size:var(--t-sm);color:var(--t2);margin:var(--s2) 0 0">Categoriza issues novas, sugere labels</p></div>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Cuidados</div>
+          <div class="card" style="border-left:3px solid var(--err);padding:var(--s4)">
+            <ul style="font-size:var(--t-sm);color:var(--t2);padding-left:var(--s5);line-height:2;margin:0">
+              <li><strong style="color:var(--t1)">Custo escalavel:</strong> cada PR consome tokens. Define orcamento mensal.</li>
+              <li><strong style="color:var(--t1)">Falsos positivos:</strong> agente pode reclamar de coisa proposital. Nao bloqueia merge sem revisao humana.</li>
+              <li><strong style="color:var(--t1)">Secrets:</strong> nunca passa secret real no prompt. Usa env vars.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SUB 9 — Troubleshooting                                   -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="subpage" id="sub-trouble">
+      <div class="W">
+        <div class="reveal">
+          <div class="ey">Sub-aba 9</div>
+          <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s6)">Troubleshooting</div>
+
+          <div class="faq">
+            <div class="fi">
+              <button class="fq" onclick="tf(this)">
+                <span>Problema 1 — Agente "se perde" no meio da tarefa</span>
+                <span class="ficon">+</span>
+              </button>
+              <div class="fa">
+                <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Sintomas:</strong> comeca bem, depois esquece o que estava fazendo, refaz coisas, contradiz decisao anterior.</p>
+                <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Causa mais provavel:</strong> contexto inchado (Globalzao). Agente esta carregando tanto contexto que nao consegue manter foco.</p>
+                <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Diagnostico:</strong> quantas skills no global? (mais que 10 = demais). CLAUDE.md tem mais que 300 linhas? Sessao com mais que 4h sem /clear?</p>
+                <p style="margin:0"><strong style="color:var(--t1)">Solucao:</strong> ver Aba 2 (Metodo) — global enxuto, local especifico.</p>
+              </div>
+            </div>
+            <div class="fi">
+              <button class="fq" onclick="tf(this)">
+                <span>Problema 2 — Agente faz coisa que voce nao pediu</span>
+                <span class="ficon">+</span>
+              </button>
+              <div class="fa">
+                <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Sintomas:</strong> voce pediu A, ele entregou A + B + C. Adicionou dependencia, mudou arquivos nao relacionados.</p>
+                <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Causa:</strong> restricoes nao explicitas no prompt ou CLAUDE.md/AGENTS.md.</p>
+                <p style="margin:0"><strong style="color:var(--t1)">Solucao:</strong> adiciona secao "O que NAO fazer" no CLAUDE.md/AGENTS.md. No prompt, explicita escopo: "Nao toque em outros arquivos. Nao adicione dep nova."</p>
+              </div>
+            </div>
+            <div class="fi">
+              <button class="fq" onclick="tf(this)">
+                <span>Problema 3 — Skills nao sao invocadas automaticamente</span>
+                <span class="ficon">+</span>
+              </button>
+              <div class="fa">
+                <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Sintomas:</strong> voce criou skill, mas agente nao usa quando relevante.</p>
+                <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Causa:</strong> descricao da skill esta vaga.</p>
+                <p style="margin:0"><strong style="color:var(--t1)">Solucao:</strong> reescreve descricao com palavras-gatilho que voce realmente usaria no prompt. Confirma que skill aparece em <code style="font-family:var(--f-mono);font-size:11px">/skills list</code>. Ver Aba 5.</p>
+              </div>
+            </div>
+            <div class="fi">
+              <button class="fq" onclick="tf(this)">
+                <span>Problema 4 — MCP server nao conecta</span>
+                <span class="ficon">+</span>
+              </button>
+              <div class="fa">
+                <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Sintomas:</strong> agente nao consegue acessar GitHub/banco/filesystem via MCP.</p>
+                <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Diagnostico:</strong> server esta no settings.json/config.toml com path correto? Token/credencial valida? Permissao de filesystem inclui o path?</p>
+                <p style="margin:0"><strong style="color:var(--t1)">Solucao:</strong> roda o MCP server isoladamente pra ver erro real. <code style="font-family:var(--f-mono);font-size:11px">npx &lt;server&gt;</code> standalone funciona?</p>
+              </div>
+            </div>
+            <div class="fi">
+              <button class="fq" onclick="tf(this)">
+                <span>Problema 5 — Performance degradada (lento)</span>
+                <span class="ficon">+</span>
+              </button>
+              <div class="fa">
+                <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Sintomas:</strong> agente demora pra responder. Sessoes ficaram pesadas.</p>
+                <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Causa:</strong> acumulo de contexto + skills demais.</p>
+                <p style="margin:0"><strong style="color:var(--t1)">Solucao:</strong> <code style="font-family:var(--f-mono);font-size:11px">/clear</code> entre tarefas. Reinicia agente. Audita skills globais. Verifica se ha hooks pesados rodando em todo PreToolUse.</p>
+              </div>
+            </div>
+            <div class="fi">
+              <button class="fq" onclick="tf(this)">
+                <span>Problema 6 — Agente "aluciou" (inventou API/funcao)</span>
+                <span class="ficon">+</span>
+              </button>
+              <div class="fa">
+                <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Sintomas:</strong> agente sugere metodo ou API que nao existe.</p>
+                <p style="margin-bottom:var(--s3)"><strong style="color:var(--t1)">Causa:</strong> modelo preencheu lacuna sem verificar.</p>
+                <p style="margin:0"><strong style="color:var(--t1)">Prevencao:</strong> no prompt: "Se nao tiver certeza que API existe, verifica primeiro". Use MCP filesystem pra confirmar imports. Sempre roda o codigo antes de aceitar diff.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SUB 10 — Memoria (NOVO)                                   -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="subpage" id="sub-memoria">
+      <div class="W">
+        <div class="reveal">
+          <div class="ey">Sub-aba 10 &nbsp;<span class="badge b-new">NOVO</span></div>
+          <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s4)">Memoria</div>
+          <div class="card" style="border-left:3px solid var(--err);padding:var(--s4);margin-bottom:var(--s6)">
+            <p style="font-size:var(--t-sm);color:var(--t2);margin:0"><strong style="color:var(--t1)">O problema:</strong> agente perde contexto entre sessoes. Voce trabalha 3 dias num projeto, no quarto dia abre o agente, ele "esqueceu" decisoes do dia anterior. Voce explica de novo. E de novo.</p>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">As duas solucoes no radar</div>
+          <div class="g2" style="margin-bottom:var(--s7)">
+            <div class="card" style="border-top:3px solid var(--ok);background:rgba(66,153,89,.06);padding:var(--s5)">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--ok);margin-bottom:var(--s2)">CloudMem</div>
+              <div class="badge b-req" style="margin-bottom:var(--s4)">Validado em producao</div>
+              <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Servidor MCP que armazena observacoes do agente em banco vetorial. Agente consulta antes de cada tarefa, recupera memorias relevantes, mantem continuidade sem precisar reler tudo.</p>
+              <p style="font-size:var(--t-sm);color:var(--t2);margin:0"><strong style="color:var(--ok)">Recomendado pelo Get It Easy pra producao.</strong></p>
+            </div>
+            <div class="card" style="border-top:3px solid var(--au);background:var(--aubg);padding:var(--s5)">
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s2)">MemPalace</div>
+              <div class="badge b-new" style="margin-bottom:var(--s4)">Em observacao</div>
+              <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Usa semantica + grafos de conhecimento pra mapear relacoes entre conceitos do projeto. Lancado em abril 2026. Promissor, mas ainda nao validado pra producao — pouca doc, casos de borda nao mapeados, quebras de compat entre versoes.</p>
+              <p style="font-size:var(--t-sm);color:var(--t2);margin:0"><strong style="color:var(--au)">Acompanhe pra validar quando estabilizar.</strong></p>
+            </div>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Como o CloudMem funciona</div>
+          <div class="flow" style="margin-bottom:var(--s6)">
+            <div class="fb">Durante sessao</div>
+            <div class="fa2">→</div>
+            <div class="fb">Agente registra observacoes</div>
+            <div class="fa2">→</div>
+            <div class="fb">Indexadas com embeddings</div>
+            <div class="fa2">→</div>
+            <div class="fb" style="color:var(--cg)">Recuperadas em nova sessao</div>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Setup — CloudMem</div>
+          <div class="code" style="margin-bottom:var(--s5)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cm">// Em ~/.claude/settings.json</span>
+<span class="cc">{</span>
+  <span class="ch">"mcp_servers"</span>: {
+    <span class="ch">"memory"</span>: {
+      <span class="ch">"command"</span>: <span class="cg">"npx"</span>,
+      <span class="ch">"args"</span>: [<span class="cg">"-y"</span>, <span class="cg">"@cloudmem/server"</span>],
+      <span class="ch">"env"</span>: {
+        <span class="ch">"MEMORY_STORE"</span>: <span class="cg">"~/cloudmem-data"</span>
+      }
+    }
+  }
+<span class="cc">}</span></span>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Skill complementar pra invocar memoria</div>
+          <div class="code" style="margin-bottom:var(--s7)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cm">---</span>
+<span class="ch">name</span>: memoria
+<span class="ch">description</span>: Salva ou consulta memorias persistentes do projeto via CloudMem
+<span class="cm">---</span>
+
+<span class="cg"># Memoria</span>
+
+<span class="cg">## Quando salvar</span>
+<span class="cc">- Apos decisao arquitetural importante</span>
+<span class="cc">- Apos descoberta de padrao do cliente</span>
+<span class="cc">- Apos resolver bug nao-trivial</span>
+
+<span class="cg">## Quando consultar</span>
+<span class="cc">- Inicio de cada sessao em projeto longo</span>
+<span class="cc">- Ao retomar projeto apos pausa</span>
+<span class="cc">- Quando perdido sobre decisao anterior</span></span>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">CloudMemSemantic Inject (avancado)</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Opcao que <strong style="color:var(--t1)">injeta automaticamente</strong> observacoes semanticamente relevantes no contexto, sem voce pedir. Desativado por padrao. Ativar em projetos longos onde voce quer continuidade total.</p>
+          <div class="code">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cc">{</span>
+  <span class="ch">"mcp_servers"</span>: {
+    <span class="ch">"memory"</span>: {
+      <span class="ch">"command"</span>: <span class="cg">"npx"</span>,
+      <span class="ch">"args"</span>: [<span class="cg">"-y"</span>, <span class="cg">"@cloudmem/server"</span>, <span class="cg">"--semantic-inject"</span>],
+      <span class="ch">"env"</span>: {
+        <span class="ch">"MEMORY_STORE"</span>: <span class="cg">"~/cloudmem-data"</span>,
+        <span class="ch">"SEMANTIC_THRESHOLD"</span>: <span class="cg">"0.85"</span>
+      }
+    }
+  }
+<span class="cc">}</span></span>
+          </div>
+          <p style="font-size:var(--t-sm);color:var(--t3);margin-top:var(--s3)">Com threshold baixo, pode injetar ruido. Comeca com 0.85 e ajusta.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SUB 11 — Plugins & Marketplace (NOVO)                     -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="subpage" id="sub-plugins">
+      <div class="W">
+        <div class="reveal">
+          <div class="ey">Sub-aba 11 &nbsp;<span class="badge b-new">NOVO</span></div>
+          <div class="sh" style="font-size:var(--t-xl);margin-bottom:var(--s4)">Plugins &amp; Marketplace</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s6)"><strong style="color:var(--t1)">Plugin</strong> e uma <strong style="color:var(--t1)">skill (ou conjunto de skills) empacotada</strong> pra instalacao via comando, com versioning, atualizacao e dependencias resolvidas automaticamente. Voce instala com 1 comando, atualiza via reload, e distribui publicamente ou privatamente.</p>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Anatomia de um plugin</div>
+          <div class="code" style="margin-bottom:var(--s7)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="ch">meu-plugin/</span>
+<span class="cg">├── plugin.json</span>          <span class="cm">← metadata</span>
+<span class="cc">├── skills/</span>              <span class="cm">← skills empacotadas</span>
+<span class="cc">│   ├── skill-1/</span>
+<span class="cc">│   │   └── SKILL.md</span>
+<span class="cc">│   └── skill-2/</span>
+<span class="cc">│       └── SKILL.md</span>
+<span class="cc">├── agents/</span>              <span class="cm">← (opcional) agentes</span>
+<span class="cc">├── hooks/</span>               <span class="cm">← (opcional) hooks</span>
+<span class="cc">└── README.md</span></span>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">plugin.json — metadata</div>
+          <div class="code" style="margin-bottom:var(--s7)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cc">{</span>
+  <span class="ch">"name"</span>: <span class="cg">"blueworld-toolkit"</span>,
+  <span class="ch">"version"</span>: <span class="cg">"1.0.0"</span>,
+  <span class="ch">"description"</span>: <span class="cg">"Toolkit pra projetos de comercial intelligence (Blue World pattern)"</span>,
+  <span class="ch">"author"</span>: <span class="cg">"Otavio / Nucleo Mundial"</span>,
+  <span class="ch">"license"</span>: <span class="cg">"MIT"</span>,
+  <span class="ch">"skills"</span>: [<span class="cg">"lead-scoring"</span>, <span class="cg">"cnpj-enrichment"</span>, <span class="cg">"dashboard-html"</span>],
+  <span class="ch">"dependencies"</span>: {
+    <span class="ch">"duckdb"</span>: <span class="cg">"^0.9.0"</span>,
+    <span class="ch">"python"</span>: <span class="cg">">=3.11"</span>
+  },
+  <span class="ch">"compatibility"</span>: {
+    <span class="ch">"claude-code"</span>: <span class="cg">">=2.1.0"</span>,
+    <span class="ch">"codex"</span>: <span class="cg">">=1.5.0"</span>
+  }
+<span class="cc">}</span></span>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Criar e instalar plugins</div>
+          <div class="g2" style="margin-bottom:var(--s7)">
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s3)">Criar (Claude Code)</div>
+              <div class="code">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cm"># Cria estrutura</span>
+<span class="cg">cloud code create-plugin</span> meu-plugin
+<span class="cc">cd meu-plugin</span>
+
+<span class="cm"># Publica no marketplace</span>
+<span class="cg">cloud code publish</span>
+
+<span class="cm"># Empacota local</span>
+<span class="cg">cloud code pack</span>
+<span class="cm"># Gera meu-plugin-1.0.0.tar.gz</span></span>
+              </div>
+            </div>
+            <div>
+              <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--spc);margin-bottom:var(--s3)">Instalar</div>
+              <div class="code">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cm"># Plugin publico</span>
+<span class="cg">cloud code install</span> figma-toolkit
+
+<span class="cm"># Plugin de URL (privado)</span>
+<span class="cg">cloud code install</span> https://github.com/empresa/plugin
+
+<span class="cm"># Plugin local (tarball)</span>
+<span class="cg">cloud code install</span> ./meu-plugin-1.0.0.tar.gz
+
+<span class="cm"># Listar e atualizar</span>
+<span class="cg">cloud code list-plugins</span>
+<span class="cg">cloud code reload-plugins</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Marketplace proprio</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Voce pode manter um <strong style="color:var(--t1)">repositorio central com indice + apontamentos</strong> pra repositorios dos plugins individuais:</p>
+          <div class="g2" style="margin-bottom:var(--s5)">
+            <div>
+              <p style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t3);margin-bottom:var(--s2)">marketplace.json</p>
+              <div class="code">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cc">{</span>
+  <span class="ch">"name"</span>: <span class="cg">"Get It Easy Marketplace"</span>,
+  <span class="ch">"version"</span>: <span class="cg">"1.0.0"</span>,
+  <span class="ch">"plugins_dir"</span>: <span class="cg">"./plugins"</span>
+<span class="cc">}</span></span>
+              </div>
+            </div>
+            <div>
+              <p style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--t3);margin-bottom:var(--s2)">plugins/gsp.json</p>
+              <div class="code">
+                <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+                <span class="code-body"><span class="cc">{</span>
+  <span class="ch">"name"</span>: <span class="cg">"gsp"</span>,
+  <span class="ch">"repository"</span>: <span class="cg">"https://github.com/get-it-easy/gsp-plugin"</span>,
+  <span class="ch">"version_constraint"</span>: <span class="cg">"^1.0.0"</span>
+<span class="cc">}</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="code" style="margin-bottom:var(--s7)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cm"># Usuario registra o marketplace</span>
+<span class="cg">cloud code add-marketplace</span> https://github.com/get-it-easy/marketplace
+
+<span class="cm"># Agora encontra os plugins do catalogo</span>
+<span class="cg">cloud code install</span> gsp</span>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Plugins privados (caso enterprise)</div>
+          <div class="card" style="border-left:3px solid var(--cdx);padding:var(--s4);margin-bottom:var(--s5)">
+            <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s3)">Repositorio Git privado + marketplace privado da empresa. Codigo proprietario protegido, acesso por chave SSH, audit trail de quem instalou o que.</p>
+            <div class="code" style="background:var(--bg0)">
+              <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+              <span class="code-body"><span class="cg">cloud code add-marketplace</span> git@github.com:empresa/marketplace-privado.git
+<span class="cg">cloud code install</span> plugin-cliente-x</span>
+            </div>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Codex — equivalente</div>
+          <p style="font-size:var(--t-sm);color:var(--t2);margin-bottom:var(--s4)">Codex tambem suporta plugins com <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">.codex-plugin.toml</code> em vez de <code style="font-family:var(--f-mono);font-size:11px;color:var(--au1)">plugin.json</code>. Conceito identico, sintaxe diferente.</p>
+          <div class="code" style="margin-bottom:var(--s7)">
+            <button class="cpbtn" onclick="cpCode(this)">Copiar</button>
+            <span class="code-body"><span class="cg">codex install</span> plugin-name
+<span class="cg">codex list-plugins</span>
+<span class="cg">codex update-plugins</span></span>
+          </div>
+
+          <div class="sh" style="margin-bottom:var(--s4)">Boas praticas pra plugins</div>
+          <div class="g2">
+            <div class="card" style="padding:var(--s4)"><strong style="color:var(--t1)">Semver rigoroso</strong><p style="font-size:var(--t-sm);color:var(--t2);margin:var(--s2) 0 0">Quebra de API = major version. Usuarios precisam confiar no versionamento.</p></div>
+            <div class="card" style="padding:var(--s4)"><strong style="color:var(--t1)">CHANGELOG.md</strong><p style="font-size:var(--t-sm);color:var(--t2);margin:var(--s2) 0 0">Usuarios precisam saber o que mudou em cada versao.</p></div>
+            <div class="card" style="padding:var(--s4)"><strong style="color:var(--t1)">Testes</strong><p style="font-size:var(--t-sm);color:var(--t2);margin:var(--s2) 0 0">Skills do plugin devem ter testes basicos. Nao distribui skill que voce nao testou.</p></div>
+            <div class="card" style="padding:var(--s4)"><strong style="color:var(--t1)">Sem segredos no codigo</strong><p style="font-size:var(--t-sm);color:var(--t2);margin:var(--s2) 0 0">Nada de token ou key hardcoded. Nunca.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── CTA FINAL ─────────────────────────────────────────────── -->
+    <div class="W">
+      <div class="reveal">
+        <div class="div"></div>
+        <div class="sh" style="margin-bottom:var(--s4)">Voce viu o avancado. Onde vai agora?</div>
+        <div class="g2">
+          <div class="card" style="padding:var(--s5);cursor:pointer;border-top:3px solid var(--au)" onclick="pg('setup',document.querySelector('[data-tab=setup]'))">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--au);margin-bottom:var(--s2)">Aba 7</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Setup Personalizado</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Quer setup automatico com tudo isso configurado?</p>
+            <div style="margin-top:var(--s3);color:var(--au);font-size:var(--t-sm)">Ir pro Quiz &rarr;</div>
+          </div>
+          <div class="card" style="padding:var(--s5);cursor:pointer;border-top:3px solid var(--sup)" onclick="pg('cola',document.querySelector('[data-tab=cola]'))">
+            <div style="font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--sup);margin-bottom:var(--s2)">Aba 8</div>
+            <div class="sh" style="margin-bottom:var(--s2)">Cola &amp; Dicas Pro</div>
+            <p style="font-size:var(--t-sm);color:var(--t2)">Quer organizar o dia a dia com atalhos?</p>
+            <div style="margin-top:var(--s3);color:var(--sup);font-size:var(--t-sm)">Ir pra Cola &rarr;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-spacer"></div>
+
+  </div>
   <div id="page-setup" class="page" role="tabpanel"></div>
   <div id="page-cola" class="page" role="tabpanel"></div>
   <div id="page-custos" class="page" role="tabpanel"></div>
@@ -3712,6 +4757,15 @@ function cpCode(btn){
 
 /* ========== FAQ TOGGLE ========== */
 function tf(el){el.closest('.fi').classList.toggle('open')}
+
+/* ========== SUB-TAB SWITCHER (Aba 6) ========== */
+function subtab(id,btn){
+  var parent=btn.closest('.page');
+  parent.querySelectorAll('.subpage').forEach(function(p){p.classList.remove('active')});
+  parent.querySelectorAll('.subtab').forEach(function(b){b.classList.remove('active')});
+  parent.querySelector('#sub-'+id).classList.add('active');
+  btn.classList.add('active');
+}
 
 /* ========== SEARCH ========== */
 function openSearch(){
